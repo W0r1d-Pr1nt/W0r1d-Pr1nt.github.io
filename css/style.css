@@ -1222,7 +1222,7 @@ photos img {
   transform: rotate(0deg);
   border-radius: 50%;
   color: #fff;
-  box-shadow: 0 2px 12px #e67249;
+  box-shadow: 0 2px 12px #e9b3af;
   position: relative;
 }
 #nexmoe-header .nexmoe-count .nexmoe-count-item .item-radius {
@@ -1243,7 +1243,7 @@ photos img {
 }
 #nexmoe-header .nexmoe-list .nexmoe-list-item.active {
   background-color: #fab9b5;
-  box-shadow: 0 2px 12px #e67249;
+  box-shadow: 0 2px 12px #e9b3af;
 }
 #nexmoe-header .nexmoe-search input {
   width: 100%;
@@ -1257,7 +1257,7 @@ photos img {
   background-color: #fff;
   border-radius: 15px;
   overflow: auto;
-  box-shadow: 0 2px 12px #e67249;
+  box-shadow: 0 2px 12px #e9b3af;
   animation: anim 0.5s;
   max-height: 200px;
 }
@@ -1352,7 +1352,7 @@ photos img {
 }
 #nexmoe-pendant .nexmoe-pd .clock {
   border: solid 2.8vh #fab9b5;
-  box-shadow: 0 1.4vh 2.8vh #e67249;
+  box-shadow: 0 1.4vh 2.8vh #e9b3af;
 }
 #nexmoe-pendant .nexmoe-pd .clock .memory {
   background-color: #a50e00 !important;
@@ -1362,7 +1362,7 @@ photos img {
 }
 #nexmoe-pendant .nexmoe-pd .qweather #he-plugin-standard {
   border: 2px solid #fab9b5;
-  box-shadow: 0 1px 0 0 #e67249, 0 1px 2px 0 #e67249;
+  box-shadow: 0 1px 0 0 #e9b3af, 0 1px 2px 0 #e9b3af;
 }
 #nexmoe-pendant .nexmoe-pd .qweather #he-plugin-standard .wv-lt-refresh {
   display: none;
@@ -1378,7 +1378,7 @@ article a {
 }
 article h2:after {
   background: #fab9b5;
-  box-shadow: 0 2px 12px #e67249;
+  box-shadow: 0 2px 12px #e9b3af;
 }
 article h4:before,
 article h5:before,
