@@ -31,7 +31,7 @@
   
     <link rel="stylesheet" href="//at.alicdn.com/t/font_2421060_8z08qcz5sq3.css">
   
-  <link rel="stylesheet" href="/css/style.css?v=1700483485094">
+  <link rel="stylesheet" href="/css/style.css?v=1700670954607">
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -219,26 +219,39 @@
   </div>
   <div id="nexmoe-content">
     <div class="nexmoe-primary">
-        <section class="nexmoe-posts">
+        <!-- 用于显示文章列表的区域 -->
+<section class="nexmoe-posts">
+    <!-- 遍历每一篇文章 -->
     
+    <!-- 每篇文章的容器 -->
     <div class="nexmoe-post">
+        <!-- 文章链接 -->
         <a href="/2023/10/23/learn/">
+            <!-- 如果文章有自定义封面图 -->
             
+                <!-- 显示封面图容器，高度根据封面图宽高比动态计算 -->
                 <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 54.58333333333333%;">
+                    <!-- 封面图 -->
                     <img data-src="/images/post/theworld.jpg" data-sizes="auto" alt="学习方法" class="lazyload">
+                    <!-- 文章标题 -->
                     <h1>学习方法</h1>
                 </div>
             
         </a>
+        <!-- 如果文章被置顶 -->
         
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2023年10月23日</a>
-            <a><i class="nexmoefont icon-areachart"></i>1k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
-        </div>
+            <!-- 文章元信息，如发布日期、字数、阅读时间 -->
+            <div class="nexmoe-post-meta nexmoe-rainbow">
+                <a><i class="nexmoefont icon-calendar-fill"></i>2023年10月23日</a>
+                <a><i class="nexmoefont icon-areachart"></i>1k 字</a>
+                <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
+            </div>
         
+        <!-- 文章内容，显示摘要或全文 -->
         <article>
+            <!-- 如果有摘要 -->
             
+                <!-- 显示摘要 -->
                 <h1 id="学习方法摘录"><a href="#学习方法摘录" class="headerlink" title="学习方法摘录"></a>学习方法摘录</h1><blockquote>
 <p>摘自魏书生先生著作《好学生，好学法》并基于本人自身理解进行部分修改,与原著并不完全相同.（感谢闻校借我这本书让我能了解这些）</p>
 </blockquote>
@@ -247,6 +260,7 @@
     </div>
     
 </section>
+<!-- 分页器，用于翻页 -->
 
 
         <div class="nexmoe-post-right">
@@ -961,7 +975,7 @@
 <script src="/lib/fancybox/js/jquery.fancybox.min.js"></script>
 
 
-<script src="/js/app.js?v=1700483485095"></script>
+<script src="/js/app.js?v=1700670954610"></script>
 
 <script src="https://lib.baomitu.com/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
 <script>
@@ -978,12 +992,6 @@
 
 
 <!-- hexo injector body_end start -->
-<script src="/js/clock.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
-<script src="/js/search.js"></script>
-
 <script src="https://lib.baomitu.com/clipboard.js/2.0.8/clipboard.min.js"></script>
 
 <script src="/lib/codeBlock/codeBlockFuction.js"></script>
@@ -995,6 +1003,12 @@
 <script src="/lib/codeBlock/codeShrink.js"></script>
 
 <link rel="stylesheet" href="/lib/codeBlock/matery.css">
+
+<script src="/js/clock.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script src="/js/search.js"></script>
 
 <script src="/js/webapp.js"></script>
 <!-- hexo injector body_end end --></body>
