@@ -5,7 +5,7 @@
 <head>
   
   <meta name="baidu-site-verification" content="code-J1Qg17G6wT" />
-  <title>资源中心 - pr1nt&#39;s_blog</title>
+  <title>从0到1，RCEmap开发之旅 - pr1nt&#39;s_blog</title>
   <meta charset="UTF-8">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -16,17 +16,21 @@
     <meta name="baidu-site-verification" content="code-J1Qg17G6wT" />
 
   <link rel="shortcut icon" href="/images/head/oni.png" type="image/png" />
-  <meta name="description" content="这里有各种软件,后缀都是zip,无密码无加密,解压即用1.这是burpsuite专业版 burp2.这是010editor破解版 010editor3.这是windows版IDA pro IDA pro 注释：别试了这三个现在一个都下不了，太大了推到网上不好推，等我整百度网盘吧需要别的软件可以在下面留言">
-<meta property="og:type" content="website">
-<meta property="og:title" content="资源中心">
-<meta property="og:url" content="https://w0r1d-pr1nt.github.io/download.html">
+  <meta name="description" content="计划使用Golang与python进行开发，2024年3月4日立项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从0到1，RCEmap开发之旅">
+<meta property="og:url" content="https://w0r1d-pr1nt.github.io/2024/03/04/RCEmap/index.html">
 <meta property="og:site_name" content="pr1nt&#39;s_blog">
-<meta property="og:description" content="这里有各种软件,后缀都是zip,无密码无加密,解压即用1.这是burpsuite专业版 burp2.这是010editor破解版 010editor3.这是windows版IDA pro IDA pro 注释：别试了这三个现在一个都下不了，太大了推到网上不好推，等我整百度网盘吧需要别的软件可以在下面留言">
+<meta property="og:description" content="计划使用Golang与python进行开发，2024年3月4日立项">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-25T15:14:19.769Z">
-<meta property="article:modified_time" content="2023-09-25T15:14:19.769Z">
+<meta property="og:image" content="https://w0r1d-pr1nt.github.io/images/zhaopian/GUI.png">
+<meta property="article:published_time" content="2024-03-04T14:50:12.000Z">
+<meta property="article:modified_time" content="2024-03-04T16:48:14.504Z">
 <meta property="article:author" content="pr1nt">
+<meta property="article:tag" content="开发">
+<meta property="article:tag" content="RCE">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://w0r1d-pr1nt.github.io/images/zhaopian/GUI.png">
   <link rel="stylesheet" href="https://lib.baomitu.com/highlight.js/9.15.8/styles/atom-one-dark.min.css" crossorigin>
   <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css">
   <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
@@ -35,7 +39,7 @@
   
     <link rel="stylesheet" href="//at.alicdn.com/t/font_2421060_8z08qcz5sq3.css">
   
-  <link rel="stylesheet" href="/css/style.css?v=1709571024629">
+  <link rel="stylesheet" href="/css/style.css?v=1709571024632">
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -232,16 +236,15 @@
     <div class="nexmoe-primary">
         <div class="nexmoe-post">
     
-        <div class="nexmoe-post-cover"
-             style="padding-bottom: 44.27083333333333%;">
-            <img data-src="/images/background/111.png" data-sizes="auto" alt="资源中心" class="lazyload">
-            <h1>资源中心</h1>
+        <div class="nexmoe-post-cover" style="padding-bottom: 44.88017429193899%;">
+            <img data-src="/images/post/RCEmap.png" data-sizes="auto" alt="从0到1，RCEmap开发之旅" class="lazyload">
+            <h1>从0到1，RCEmap开发之旅</h1>
         </div>
     
 
         <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
-    <a><i class="nexmoefont icon-calendar-fill"></i>2023年09月25日</a>
-    <a><i class="nexmoefont icon-areachart"></i>91 字</a>
+    <a><i class="nexmoefont icon-calendar-fill"></i>2024年03月04日</a>
+    <a><i class="nexmoefont icon-areachart"></i>179 字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
 </div>
 
@@ -250,8 +253,27 @@
         </div>
 
         <article>
-            <h2 id="这里有各种软件-后缀都是zip-无密码无加密-解压即用"><a href="#这里有各种软件-后缀都是zip-无密码无加密-解压即用" class="headerlink" title="这里有各种软件,后缀都是zip,无密码无加密,解压即用"></a>这里有各种软件,后缀都是zip,无密码无加密,解压即用</h2><p>1.<em><strong>这是burpsuite专业版</strong></em> <a href="/burp.zip">burp</a><br>2.<em><strong>这是010editor破解版</strong></em> <a href="/010editor.zip">010editor</a><br>3.<em><strong>这是windows版IDA pro</strong></em> <a href="/IDA.zip">IDA pro</a></p>
-<h3 id="注释：别试了这三个现在一个都下不了，太大了推到网上不好推，等我整百度网盘吧"><a href="#注释：别试了这三个现在一个都下不了，太大了推到网上不好推，等我整百度网盘吧" class="headerlink" title="注释：别试了这三个现在一个都下不了，太大了推到网上不好推，等我整百度网盘吧"></a>注释：别试了这三个现在一个都下不了，太大了推到网上不好推，等我整百度网盘吧</h3><h1 id="需要别的软件可以在下面留言"><a href="#需要别的软件可以在下面留言" class="headerlink" title="需要别的软件可以在下面留言"></a>需要别的软件可以在下面留言</h1>
+            <blockquote>
+<p>计划使用Golang与python进行开发，2024年3月4日立项</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="从0到1，RCEmap开发之旅"><a href="#从0到1，RCEmap开发之旅" class="headerlink" title="从0到1，RCEmap开发之旅"></a>从0到1，RCEmap开发之旅</h2><h3 id="灵感来源：sqlmap"><a href="#灵感来源：sqlmap" class="headerlink" title="灵感来源：sqlmap"></a>灵感来源：sqlmap</h3><p>前置学习任务：  </p>
+<ol>
+<li>go，python的基础</li>
+<li>图形化制作</li>
+<li>sqlmap源码分析，运行逻辑分析</li>
+<li>RCE绕过方法全解（详见我的RCE全解）</li>
+<li>反序列化（因为我想整个自动化反序列化）</li>
+</ol>
+<p>目标：  </p>
+<ol>
+<li>支持多语言RCE题目，如php, java，的过滤绕过与自动执行指定命令</li>
+<li>各框架（如thinkPHP）RCE漏洞自动打poc</li>
+</ol>
+<p>GUI大致思路（借鉴xray）：<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./images/zhaopian/GUI.png" alt="GUI" class="lazyload"></p>
+<h4 id="多个阶段"><a href="#多个阶段" class="headerlink" title="多个阶段"></a>多个阶段</h4><p>第一阶段： 无GUI的php版RCEmap<br>第二阶段： 有GUI版本<br>第三阶段： 带Java的版本<br>最终阶段： 带各框架漏洞的自动化RCE工具</p>
+
         </article>
 
         
@@ -259,7 +281,7 @@
   <div class="nexmoe-post-copyright">
     <strong>本文作者：</strong>pr1nt<br>
     
-    <strong>本文链接：</strong><a href="https://w0r1d-pr1nt.github.io/download.html" title="https:&#x2F;&#x2F;w0r1d-pr1nt.github.io&#x2F;download.html" target="_blank" rel="noopener">https:&#x2F;&#x2F;w0r1d-pr1nt.github.io&#x2F;download.html</a><br>
+    <strong>本文链接：</strong><a href="https://w0r1d-pr1nt.github.io/2024/03/04/RCEmap/" title="https:&#x2F;&#x2F;w0r1d-pr1nt.github.io&#x2F;2024&#x2F;03&#x2F;04&#x2F;RCEmap&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;w0r1d-pr1nt.github.io&#x2F;2024&#x2F;03&#x2F;04&#x2F;RCEmap&#x2F;</a><br>
 
     
        
@@ -271,6 +293,10 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow">
     
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E4%BB%8E0%E5%88%B01/">从0到1</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/RCE/" rel="tag">RCE</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a>
     
 </div>
 
@@ -1003,7 +1029,7 @@
 <script src="/lib/fancybox/js/jquery.fancybox.min.js"></script>
 
 
-<script src="/js/app.js?v=1709571024630"></script>
+<script src="/js/app.js?v=1709571024633"></script>
 
 <script src="https://lib.baomitu.com/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
 <script>
