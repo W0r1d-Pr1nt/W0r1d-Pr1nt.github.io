@@ -31,31 +31,6 @@
     
     
     <entry>
-      <title>mac相关环境配置教程及常见报错解决方法</title>
-      <link href="/2024/03/06/mac%E7%8E%AF%E5%A2%83/"/>
-      <url>/2024/03/06/mac%E7%8E%AF%E5%A2%83/</url>
-      
-        <content type="html"><![CDATA[<blockquote><p>当时配置mac环境时出了不少问题，找解决方法找半天，于是决定写一个文章把这些都写全，以后换新机不用再痛苦找解决方法了</p></blockquote><span id="more"></span><h2 id="ntfs"><a href="#ntfs" class="headerlink" title="ntfs"></a>ntfs</h2><p>首先第一个要说的就是ntfs，u盘如果是win的ntfs格式放在mac上只能读不能写，这令想要往里面传资料的我很头疼，上网找了一大堆东西，发现除了Mount别的都要钱，于是只好搞这个,然后就出现了问题,他需要我安装ntfs-3g,但是我安装时出现报错,报错如下</p><blockquote><p>我真记不住当时的报错了牢弟，我RCE还没写完呢，go语言还没学呢，这个配环境的问题真没时间整了，在这撂着吧</p></blockquote>]]></content>
-      
-      
-      <categories>
-          
-          <category> 教程 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 教程 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>从0到1，RCEmap开发之旅</title>
       <link href="/2024/03/04/RCEmap/"/>
       <url>/2024/03/04/RCEmap/</url>
