@@ -21,8 +21,9 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://w0r1d-pr1nt.github.io/images/zhaopian/rcemap/GUI.png">
 <meta property="og:image" content="https://w0r1d-pr1nt.github.io/images/zhaopian/rcemap/%E9%A2%84%E8%A7%88.png">
+<meta property="og:image" content="https://w0r1d-pr1nt.github.io/images/zhaopian/rcemap/%E9%A2%84%E8%A7%882.png">
 <meta property="article:published_time" content="2024-03-04T14:19:37.673Z">
-<meta property="article:modified_time" content="2024-03-14T16:52:24.803Z">
+<meta property="article:modified_time" content="2024-03-15T16:48:53.668Z">
 <meta property="article:author" content="pr1nt">
 <meta property="article:tag" content="开发">
 <meta property="article:tag" content="rce">
@@ -36,7 +37,7 @@
   
     <link rel="stylesheet" href="//at.alicdn.com/t/font_2421060_8z08qcz5sq3.css">
   
-  <link rel="stylesheet" href="/css/style.css?v=1710435157624">
+  <link rel="stylesheet" href="/css/style.css?v=1710521362896">
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -234,7 +235,7 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
     <a><i class="nexmoefont icon-calendar-fill"></i>2024年03月04日</a>
-    <a><i class="nexmoefont icon-areachart"></i>286 字</a>
+    <a><i class="nexmoefont icon-areachart"></i>412 字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
 </div>
 
@@ -263,7 +264,7 @@
 </ol>
 <p>GUI大致思路（借鉴xray）：<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./images/zhaopian/rcemap/GUI.png" alt="GUI" class="lazyload"></p>
 <h4 id="多个阶段"><a href="#多个阶段" class="headerlink" title="多个阶段"></a>多个阶段</h4><p>第一阶段： 无GUI的php版RCEmap<br>第二阶段： 有GUI版本<br>第三阶段： 带Java的版本<br>最终阶段： 带各框架漏洞的自动化RCE工具</p>
-<h1 id="开发日记"><a href="#开发日记" class="headerlink" title="开发日记"></a>开发日记</h1><p>3月13日晚，正式动手编写，计划三月内实现第一阶段。<br>今天实现了logo的输出和访问url并查找过滤的功能，但并未去除html标签，需要goquery这个第三方库，还没整，明天回来继续。<br>3月14日我新机箱到了，安机箱来着，没整，明天周五回来得学习学校知识，周六的吧<br>效果预览：<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./images/zhaopian/rcemap/%E9%A2%84%E8%A7%88.png" alt="first day" class="lazyload"></p>
+<h1 id="开发日记"><a href="#开发日记" class="headerlink" title="开发日记"></a>开发日记</h1><p>3月13日晚，正式动手编写，计划三月内实现第一阶段。<br>今天实现了logo的输出和访问url并查找过滤的功能，但并未去除html标签，需要goquery这个第三方库，还没整，明天回来继续。<br>3月14日我新机箱到了，安机箱来着，没整，明天周五回来得学习学校知识，周六的吧<br>效果预览：<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./images/zhaopian/rcemap/%E9%A2%84%E8%A7%88.png" alt="1" class="lazyload"><br>3月15日晚，太无聊了也没学学校的东西，兴趣使然更新了点东西，能够初步识别无数字字母过滤，后面还有一大堆东西，比如针对无数字字母进阶版，以及其他的一些小过滤，还有需要自己fuzz的过滤，以及对php版本的识别，一般来讲可以使用Wappalyzer直接查看php版本，但是代码里还没法实现，等我后面再学学<br>效果预览2：<br><img data-fancybox="gallery" data-sizes="auto" data-src="/./images/zhaopian/rcemap/%E9%A2%84%E8%A7%882.png" alt="2" class="lazyload"></p>
 
         </article>
 
@@ -1020,7 +1021,7 @@
 <script src="/lib/fancybox/js/jquery.fancybox.min.js"></script>
 
 
-<script src="/js/app.js?v=1710435157625"></script>
+<script src="/js/app.js?v=1710521362897"></script>
 
 <script src="https://lib.baomitu.com/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
 <script>
