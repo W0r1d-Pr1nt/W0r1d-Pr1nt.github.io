@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>从0到1，RCEmap开发之旅 - Pr1nt&#39;s_blog</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/images/head/oni.png" type="image/png" />
+<meta name="description" content="使用Golang进行开发，2024年3月4日立项,3月13日开始">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从0到1，RCEmap开发之旅">
+<meta property="og:url" content="http://w0r1d-pr1nt.github.io/2024/03/04/RCEmap/index.html">
+<meta property="og:site_name" content="Pr1nt&#39;s_blog">
+<meta property="og:description" content="使用Golang进行开发，2024年3月4日立项,3月13日开始">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/rcemap/GUI.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/rcemap/%E9%A2%84%E8%A7%88.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/rcemap/%E9%A2%84%E8%A7%882.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/rcemap/%E9%A2%84%E8%A7%883.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/rcemap/%E9%A2%84%E8%A7%884.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/rcemap/%E9%A2%84%E8%A7%885.png">
+<meta property="article:published_time" content="2024-03-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-10T16:00:00.000Z">
+<meta property="article:author" content="Pr1nt">
+<meta property="article:tag" content="开发">
+<meta property="article:tag" content="rce">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/rcemap/GUI.png">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1715437197713">
+
+<link rel="stylesheet" href="/css/style.css?v=1715437197713">
+
+
+
+
+    
+        <link rel="stylesheet" href="/custom.css?v=1715437197713">
+    
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1715437197713"></script>
+
+ 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<meta name="generator" content="Hexo 7.2.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/images/background/background.png)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="Pr1nt"><img src="/images/head/onimai.png" alt="Pr1nt"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Pr1nt">
+            <img src="/images/head/onimai.png" alt="Pr1nt" alt="Pr1nt">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>10</div>
+        <div><span>标签</span>8</div>
+        <div><span>分类</span>4</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archives.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于Pr1nt">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于Pr1nt
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/friend.html" title="友情链接">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                友情链接
+            </div>
+        </a>
+        
+    </div>
+    
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+
+
+	<script async src="/js/search.js?v=1715437197714"></script>
+
+
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://qm.qq.com/q/8up8m0lXc4"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ'}"
+			style="
+				color: rgb(249, 174, 8);
+				background-color: rgba(249, 174, 8, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/632631573"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/W0r1d-Pr1nt/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Try-Hack-Me/">Try Hack Me</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/WriteUp/">WriteUp</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/从0到1/">从0到1</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/CTF/" style="font-size: 10px;">CTF</a> <a href="/tags/THM/" style="font-size: 20px;">THM</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/rce/" style="font-size: 15px;">rce</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">学习</a> <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="font-size: 10px;">年度总结</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a>
+    </div>
+    
+  </div>
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+   
+    <div class="nexmoe-copyright">
+        &copy; 2024 Pr1nt
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br>
+<br>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">
+  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<br>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+    </div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 31.23543123543124%;"> 
+            <img src="/images/post/RCEmap.png" alt="从0到1，RCEmap开发之旅" loading="lazy">
+            <h1>从0到1，RCEmap开发之旅</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2024年03月04日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E4%BB%8E0%E5%88%B01/">从0到1</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <blockquote>
+<p>使用Golang进行开发，2024年3月4日立项,3月13日开始</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="从0到1，RCEmap开发之旅"><a href="#从0到1，RCEmap开发之旅" class="headerlink" title="从0到1，RCEmap开发之旅"></a>从0到1，RCEmap开发之旅</h2><h3 id="灵感来源：sqlmap"><a href="#灵感来源：sqlmap" class="headerlink" title="灵感来源：sqlmap"></a>灵感来源：sqlmap</h3><p>前置学习任务：  </p>
+<ol>
+<li>go，python的基础</li>
+<li>图形化制作</li>
+<li>sqlmap源码分析，运行逻辑分析</li>
+<li>RCE绕过方法全解（详见我的RCE全解）</li>
+<li>反序列化（因为我想整个自动化反序列化）</li>
+</ol>
+<p>目标：  </p>
+<ol>
+<li>支持多语言RCE题目，如php, java，的过滤绕过与自动执行指定命令</li>
+<li>各框架（如thinkPHP）RCE漏洞自动打poc</li>
+</ol>
+<p>GUI大致思路（借鉴xray）：<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/rcemap/GUI.png" alt="GUI" data-caption="GUI" loading="lazy"></p>
+<h4 id="多个阶段"><a href="#多个阶段" class="headerlink" title="多个阶段"></a>多个阶段</h4><p>第一阶段： 无GUI的php版RCEmap<br>第二阶段： 有GUI版本<br>第三阶段： 带Java的版本<br>最终阶段： 带各框架漏洞的自动化RCE工具</p>
+<ol>
+<li><a href="#%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0">开发日记</a><ol>
+<li><a href="#%E4%B8%89%E6%9C%88">三月</a><ol>
+<li><a href="#3%E6%9C%8813%E6%97%A5%E6%99%9A">3月13日晚</a></li>
+<li><a href="#3%E6%9C%8814%E6%97%A5">3月14日</a></li>
+<li><a href="#3%E6%9C%8815%E6%97%A5%E6%99%9A">3月15日晚</a></li>
+<li><a href="#3%E6%9C%8816%E6%97%A5">3月16日</a></li>
+<li><a href="#3%E6%9C%8817%E6%97%A5">3月17日</a></li>
+<li><a href="#3%E6%9C%8821%E6%97%A5">3月21日</a></li>
+<li><a href="#3%E6%9C%8827%E6%97%A5">3月27日</a></li>
+</ol>
+</li>
+<li><a href="#%E5%9B%9B%E6%9C%88">四月</a><ol>
+<li><a href="#4%E6%9C%881%E6%97%A5">4月1日</a></li>
+<li><a href="#4%E6%9C%889%E6%97%A5%E6%B2%A1%E6%9C%89%E6%9B%B4%E6%96%B0%E6%98%AF%E6%80%9D%E8%80%83">4月9日(没有更新，是思考)</a></li>
+<li><a href="#4%E6%9C%8815%E6%97%A5">4月15日</a></li>
+<li><a href="#4%E6%9C%8817%E6%97%A5">4月17日</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD">开发笔记（未完待续）</a><ol>
+<li><a href="#%E8%B5%B7%E5%9B%A0">起因</a></li>
+<li><a href="#%E8%B5%B7%E6%AD%A5%E9%98%B6%E6%AE%B5">起步阶段</a><ol>
+<li><a href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE">环境变量设置</a></li>
+<li><a href="#%E5%89%8D%E7%BD%AE%E9%97%AE%E9%A2%98">前置问题</a></li>
+<li><a href="#%E7%BC%96%E5%86%99%E4%B8%BB%E7%A8%8B%E5%BA%8F">编写主程序</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h1 id="开发日记"><a href="#开发日记" class="headerlink" title="开发日记"></a>开发日记</h1><p><a target="_blank" rel="noopener" href="https://github.com/W0r1d-Pr1nt/RCEmap">项目指路</a>  </p>
+<h2 id="三月"><a href="#三月" class="headerlink" title="三月"></a>三月</h2><h3 id="3月13日晚"><a href="#3月13日晚" class="headerlink" title="3月13日晚"></a>3月13日晚</h3><p>正式动手编写，计划三月内实现第一阶段。<br>今天实现了logo的输出和访问url并查找过滤的功能，但并未去除html标签，需要goquery这个第三方库，还没整，明天回来继续。  </p>
+<h3 id="3月14日"><a href="#3月14日" class="headerlink" title="3月14日"></a>3月14日</h3><p>我新机箱到了，安机箱来着，没整，明天周五回来得学习学校知识，周六的吧<br>效果预览：<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/rcemap/%E9%A2%84%E8%A7%88.png" alt="1" data-caption="1" loading="lazy"></p>
+<h3 id="3月15日晚"><a href="#3月15日晚" class="headerlink" title="3月15日晚"></a>3月15日晚</h3><p>太无聊了也没学学校的东西，兴趣使然更新了点东西，能够初步识别无数字字母过滤，后面还有一大堆东西，比如针对无数字字母进阶版，以及其他的一些小过滤，还有需要自己fuzz的过滤，以及对php版本的识别，一般来讲可以使用Wappalyzer直接查看php版本，但是代码里还没法实现，等我后面再学学<br>效果预览2：<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/rcemap/%E9%A2%84%E8%A7%882.png" alt="2" data-caption="2" loading="lazy"></p>
+<h3 id="3月16日"><a href="#3月16日" class="headerlink" title="3月16日"></a>3月16日</h3><p>实现了在php7.x环境下的无数字字母rce进阶版，能够在用户输入url，参数点，命令的情况下自动返回结果，可用字符：<code>(</code> <code>)</code> <code>;</code> <code>~</code>，只要这四个没被过滤，就可以执行任意命令<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/rcemap/%E9%A2%84%E8%A7%883.png" alt="3" data-caption="3" loading="lazy"><br>已将初代版本上传到github，点点star谢谢喵，还会不断更新的喵</p>
+<h3 id="3月17日"><a href="#3月17日" class="headerlink" title="3月17日"></a>3月17日</h3><p>v0.2诞生，已更新完毕，能在system的情况下利用bashfuck工具rce，优化代码结构，内置取反函数，不用再下载一个qufan.py了（这里不贴图了感兴趣自己测吧），最最最重要的更新！！！彩色信息！！！（图示执行结果为空因为我是win环境，如果是linux环境就会显示ls结果）<br>两日一更，代码量由200多增加到500多行，感觉要去世了，一杯茶一支烟，一个bug修一天。<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/rcemap/%E9%A2%84%E8%A7%884.png" alt="4" data-caption="4" loading="lazy"></p>
+<h3 id="3月21日"><a href="#3月21日" class="headerlink" title="3月21日"></a>3月21日</h3><p>v0.3发布，已更新完毕，具体内容去github看吧，也没啥东西<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/rcemap/%E9%A2%84%E8%A7%885.png" alt="5" data-caption="5" loading="lazy"></p>
+<h3 id="3月27日"><a href="#3月27日" class="headerlink" title="3月27日"></a>3月27日</h3><p>v0.4<br>(4月1日：到这里已经懒得不想说别的了，因为确实没有什么大更新，就是新增了函数什么的，就很敷衍)</p>
+<h2 id="四月"><a href="#四月" class="headerlink" title="四月"></a>四月</h2><h3 id="4月1日"><a href="#4月1日" class="headerlink" title="4月1日"></a>4月1日</h3><p>其实我本来想写的是开发中的实际感受什么的，但是一开发起来就会发现根本没法下手，全都是感受，比如：</p>
+<ol>
+<li>一大堆的bug（有的是代码问题，有的是逻辑问题，代码问题好办，使用正确语法就行，但逻辑问题通常需要调试好久）</li>
+<li>本地搭环境一次次测试</li>
+<li>为了不写出屎山代码的优化方案</li>
+<li>找一个花括号闭合找两分钟</li>
+<li>与和或弄错</li>
+<li>写黑名单过滤部分整一晚上愣是没想明白该怎么写，最后放弃挣扎选择注释掉所有代码让别人写</li>
+<li>还有需要不断更新的技术，例如以为要写完了突然发现利用环境变量构造函数那里还没写，于是赶紧又整了个函数（虽然还没填充内容）</li>
+<li>而且明白为什么别人的项目中main部分都是调用别的函数，要我我也这么写，方便</li>
+</ol>
+<blockquote>
+<p>写完之后预览这一部分发现容易看花眼，所以才加了序号</p>
+</blockquote>
+<p>本来想的是三月内把v1.0写出来，现在看来是写不完了，截至今日还有fuzzpro函数和调用环境变量的pwd函数没有写，而这两个函数也是极为复杂的，不是简简单单的逻辑问题，需要额外编写脚本，我这项目相当于一个集成了一大堆脚本的项目</p>
+<p>心得：<br>经过这次开发之后，我学到了：1.chatGPT的熟练使用 2.Ctrl+c和Ctrl+v的熟练运用（没错我打这里的时候甚至也是把+c那个复制过来改成v的，要懒死了）</p>
+<h3 id="4月9日-没有更新，是思考"><a href="#4月9日-没有更新，是思考" class="headerlink" title="4月9日(没有更新，是思考)"></a>4月9日(没有更新，是思考)</h3><p>心血来潮开始了开发，信誓旦旦预计二十天完成v0.1，真正上手才发现难度.<br>RCE，这个类型的题目古往今来都没有一个像sqlmap一样的自动化脚本，为什么，因为题目类型实在是太多太复杂了，我的代码现在的逻辑是进行遍历和fuzz，遇到对劲的就对劲，不对劲的就没办法，但是这只能解决一些谁都会的题，比如实现起来最简单的无数字字母，因为是无数字字母，限制的太死了，所以解法也就那一种，被人研究出来也就都知道了，很少会考察<br>而且，还有很多限制字符数的，给个\和&gt;就能在7个字符以内写入文件，13个字符可以选择$_GET[1],为什么这不是13个字符,因为还有换行的%0a,还有注释后面的%23,例如</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">eval</span>(<span class="hljs-string">&#x27;#man, &#x27;</span>.<span class="hljs-variable">$cmd</span>.<span class="hljs-string">&#x27; ,manba,out&#x27;</span>);<br></code></pre></td></tr></table></figure>
+<p>就这个玩意,你就得先换行绕第一个注释,然后用注释注释掉后面的废物,就正好13个字符了<br><strong>那么:</strong> 大抵是要换脚本思路了,要让脚本像人一样思考,拟人化,但是人的大脑可以任意思考,而脚本是固定的,所以无法拟人,矛盾就来了</p>
+<h3 id="4月15日"><a href="#4月15日" class="headerlink" title="4月15日"></a>4月15日</h3><p>更新了一个全新的项目fuzzpro（x其实是rcemap中fuzz部分分出来然后额外写成的），而且学习了引用包方法，以后终于不用把一大堆乱七八糟的函数放在这一个main文件中了<br>记个学习笔记：<br>Go111modules最好设置为auto，虽然具体作用还不知道<br>引用包的方法：</p>
+<ol>
+<li>首先要<code>go mod init xxxx</code>,这里的xxxx是模块名称，例如为main  </li>
+<li>然后在最主要的文件，例如 1.go &amp;&amp; package main 的情况下，import(“main&#x2F;2”)  </li>
+<li>另一个子包文件要package 2，这里所有的名字都是例子，而这个package 2的文件名可以任意，但必须在文件夹2下  </li>
+<li>接下来，你的VScode可能会报错<code>could not import main/2 (current file is not included in a workspace module)</code>,这个不用管，因为最后执行会正常执行，编译也会正常编译</li>
+</ol>
+<h3 id="4月17日"><a href="#4月17日" class="headerlink" title="4月17日"></a>4月17日</h3><p>发布v0.5，抛去更新了fuzzpro这个脚本以外就是优化了代码结构，而且对未来的更新计划有了更全面更专业的见识，过几天这里会更新上开发以来的一些心得和一些笔记</p>
+<h1 id="开发笔记（未完待续）"><a href="#开发笔记（未完待续）" class="headerlink" title="开发笔记（未完待续）"></a>开发笔记（未完待续）</h1><h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>那天在学校，突然想开发个<del>世界级</del>项目，于是想题材，想到了世界级项目sqlmap，并且之前出现过一款ssti的自动化工具fenjing（这个也在不断更新，推广一下） <a target="_blank" rel="noopener" href="https://github.com/Marven11/Fenjing">工具在这https://github.com/Marven11/Fenjing</a>，而且ctf中rce的题目很多且并没有一个很好的脚本能够梭，于是决定了要开发的项目RCEmap（写到突然想起来，sqlmap是世界级项目的原因还有就是在渗透测试中也是梭sql注入的洞，而我想开发的RCEmap也是打算在后面的版本中更新出对于渗透测试中rce漏洞的检测与漏洞利用）</p>
+<h2 id="起步阶段"><a href="#起步阶段" class="headerlink" title="起步阶段"></a>起步阶段</h2><p>因为看过目前各互联网大厂的招聘要求，方便了解未来风向，然后看到一个没了解过的golang，在长亭的招聘要求中是python与go熟练其一，我一想居然与python相提并论的语言，那考虑一下（因为sqlmap之类的好多脚本都是用python开发的）最后也是用的golang开发哈哈<br>接着确立了目标方向与前置技能并设置了不同阶段，接着从0学习Golang，其中最重要的工具是chatGPT(u1s1,没有chatGPT还真没办法这么轻易入门一门语言)<br>到了编写代码阶段，用gpt是完全可以的，但是对于前置的golang环境配置过程，gpt就相对无力了，这里简单写下自己的环境变量与前置问题</p>
+<h3 id="环境变量设置"><a href="#环境变量设置" class="headerlink" title="环境变量设置"></a>环境变量设置</h3><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dts">GO111MODULE：auto  <br>GOPATH：E:\Go\Go project  <br><span class="hljs-symbol">GOPROXY:</span> https:<span class="hljs-comment">//goproxy.io  </span><br><span class="hljs-symbol">GOROOT:</span> E:\Go\  <br><span class="hljs-symbol">PATH:</span> E:\Go\bin  <br></code></pre></td></tr></table></figure>
+<p>对于这些变量，我为什么是这么设置的，我不记得了（毕竟代码能跑就行，探索的过程单纯是为了到达终点，代码不报错就不管了）<br>什么盘设置为自己的就行，Go project是自带的还是我设置的我也忘了，我也就普通的分享一下，自己要是遇到问题了再想办法解决吧</p>
+<h3 id="前置问题"><a href="#前置问题" class="headerlink" title="前置问题"></a>前置问题</h3><p>不管你的项目是什么，一定都会遇到的一个问题，在python中，我们可以直接import依赖，可以使用pip直接安装，但是在golang中，这些极为简单的东西会变得稍微繁琐一点，对于安装依赖来说，我们最好是模块化自己的项目，然后使用go get 来获取依赖  </p>
+<p>依赖的问题解决了，接下来就是引用包了，在python中我们可以自定义一个名为src（例子）的文件夹，接着在这个文件夹下写其他文件，然后在main.py中去调用这个其他文件里的函数，但是在go中不是这样的，我们第一次接触go都知道开头要写package main，这里其实就是包，如果模块化了一个名称，那么就可以按import 名称&#x2F;包这样的格式来引用其他的函数  </p>
+<p>简单阐述可能会不理解，那么我们借助一个例子来说明<br>就用我的项目，我的主程序的文件名其实不重要，我这里是rcemap.go,但是当我使用<code>go mod init RCEmap</code>后，<strong>RCEmap</strong>这个名字就有了意义，接着，我新建了一个名为<strong>script</strong>的文件夹，里面存放了我暂时写完了无需更改的脚本，当我对bashfuck这个工具进行二开的时候我就想利用调用函数的方式实现，但是当时没搞明白，只是在我的主程序中嵌套了这个函数，现在，我可以写任一文件并调用其中函数，但是要求，<strong>package script</strong>(这里要根据这个文件夹来设置，如果文件夹名称为script但package了script2就不行)，且要被调用的函数一定要首字母大写，这样就可以解释新手第一行输出代码<code>fmt.Println(&quot;helloworld&quot;)</code>为什么一定要大写P了<br>还有就是在包中的脚本，例如script&#x2F;1.go这个文件，文件名是不重要的，自己能看懂就行，如果在这个文件中要调用script&#x2F;2.go这个文件中的函数，那么无需<code>import RCEmap/script</code>,只需要直接调用就行  </p>
+<p>这里写下go get的帮助的翻译版</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-type">Get将其命令行参数解析为特定模块版本的包，</span><br>更新go.mod以要求这些版本，并将源代码下载到<br>模块缓存<span class="hljs-operator">。</span><br>要添加包的依赖项或将其升级到最新版本，请执行以下操作：<br>go <span class="hljs-keyword">get</span> example.com<span class="hljs-operator">/</span>pkg<br>要将包升级或降级到特定版本，请执行以下操作：<br>go <span class="hljs-keyword">get</span> example.com<span class="hljs-operator">/</span>pkg<span class="hljs-meta">@v1</span>.<span class="hljs-number">2.3</span><br>要删除对模块的依赖项并降级需要它的模块，请执行以下操作：<br>go <span class="hljs-keyword">get</span> example.com<span class="hljs-operator">/</span>mod<span class="hljs-meta">@none</span><br>要将最低要求的<span class="hljs-type">Go版本升级到最新发布的Go版本，请执行以下操作：</span><br>go <span class="hljs-keyword">get</span> go<span class="hljs-meta">@latest</span><br>要将<span class="hljs-type">Go工具链升级到当前Go工具链的最新补丁版本，请执行以下操作：</span><br>go <span class="hljs-keyword">get</span> toolchain<span class="hljs-meta">@patch</span><br>看见https:<span class="hljs-comment">//golang.org/ref/mod#go-获取详细信息。</span><br>在早期版本的<span class="hljs-type">Go中，</span>“<span class="hljs-type">Go</span><span class="hljs-operator">-</span><span class="hljs-keyword">get</span>”用于构建和安装程序包<span class="hljs-operator">。</span><br>现在，“go<span class="hljs-operator">-</span><span class="hljs-keyword">get</span>”专门用于调整go.mod中的依赖项去安装&#x27;<br>可以用来构建和安装命令<span class="hljs-operator">。</span>当指定了版本时，<br>“go install”以模块感知模式运行，并忽略中的go.mod文件<br>当前目录<span class="hljs-operator">。</span>例如<br>go install example.com<span class="hljs-operator">/</span>pkg<span class="hljs-meta">@v1</span>.<span class="hljs-number">2.3</span><br>go install example.com<span class="hljs-operator">/</span>pkg<span class="hljs-meta">@latest</span><br>请参阅“转到帮助安装”或https:<span class="hljs-comment">//golang.org/ref/mod#go-有关详细信息，请安装。</span><br>“go<span class="hljs-operator">-</span><span class="hljs-keyword">get</span>”接受以下标志<span class="hljs-operator">。</span><br><span class="hljs-operator">-</span>t标志指示<span class="hljs-keyword">get</span>考虑构建测试所需的模块<br>在命令行上指定的包<span class="hljs-operator">。</span><br><span class="hljs-operator">-</span>u标志指示<span class="hljs-keyword">get</span>更新提供依赖关系的模块<br>在命令行上命名以使用较新的次要程序包或修补程序的程序包的数目<br>可用时发布<span class="hljs-operator">。</span><br><span class="hljs-operator">-</span>u<span class="hljs-operator">=</span>patch标志（不是<span class="hljs-operator">-</span>u patch）还指示<span class="hljs-keyword">get</span>更新依赖项，<br>但将默认设置更改为选择补丁版本<span class="hljs-operator">。</span><br>当<span class="hljs-operator">-</span>t和<span class="hljs-operator">-</span>u标志一起使用时，<span class="hljs-keyword">get</span>将更新<br>测试依赖关系<span class="hljs-operator">。</span><br><span class="hljs-operator">-</span>x标志在命令执行时打印命令<span class="hljs-operator">。</span>这对<br>直接下载模块时调试版本控制命令<br>来自存储库<span class="hljs-operator">。</span><br>有关模块的更多信息，请参阅https:<span class="hljs-comment">//golang.org/ref/mod.</span><br>有关使用“go <span class="hljs-keyword">get</span>”更新最低go版本的更多信息，以及<br>建议使用<span class="hljs-type">Go工具链，请参阅https</span>:<span class="hljs-comment">//go.dev/doc/toolchain.</span><br>有关指定程序包的详细信息，请参阅“转到帮助程序包”<span class="hljs-operator">。</span><br>本文描述了使用模块管理源代码的行为<br>代码和依赖关系<span class="hljs-operator">。</span>如果go命令在<span class="hljs-type">GOPATH中运行</span><br>模式下，<span class="hljs-keyword">get</span>的标志和效果的细节会发生变化，“go help <span class="hljs-keyword">get</span>”也会发生变化<span class="hljs-operator">。</span><br>请参阅“去帮助gopath <span class="hljs-keyword">get</span>”<span class="hljs-operator">。</span><br>另请参阅：go build, go install, go clean, go mod<span class="hljs-operator">。</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="编写主程序"><a href="#编写主程序" class="headerlink" title="编写主程序"></a>编写主程序</h3><p>在解决了一系列前置问题之后，就到了主体部分，也就是真正的开发，在这里，你可以见到：  </p>
+<ol>
+<li>不断与人工智障对线</li>
+<li>一个逻辑报错修一下午</li>
+<li>好不容易写了一大堆代码出来发现还没实现自己想要的功能但写都写了于是只好全部注释掉留给未来的自己或别人</li>
+</ol>
+<p>代码结构：  </p>
+<p>设立func target接受目标，用这个函数记录一下flag函数内容<br><code>flag.StringVar(&amp;i, &quot;i&quot;, &quot;&quot;, &quot;参数点&quot;)</code><br>接收参数i，默认为空，意义是参数点，&amp;是对变量取地址，需要提前声明变量，一般建议var全局声明<br>这里为什么不用<code>url := flag.String(&quot;u&quot;, &quot;&quot;, &quot;target url&quot;)</code>这种写法呢,这个url是一个指针,以后每次使用都需要 *url取值,而且对一些其他的运算什么的也不清楚有没有其他的问题,所以没有选用<br>结尾要用<code>flag.Parse()</code>解析一下</p>
+
+    
+  </article>
+
+  
+      
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/rce/" rel="tag">rce</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%BC%80%E5%8F%91/" rel="tag">开发</a>
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1715437197601"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          请在你的配置文件中设置 slotComment
+
+      </div>
+  
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E0%E5%88%B01%EF%BC%8CRCEmap%E5%BC%80%E5%8F%91%E4%B9%8B%E6%97%85"><span class="toc-number">1.</span> <span class="toc-text">从0到1，RCEmap开发之旅</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%81%B5%E6%84%9F%E6%9D%A5%E6%BA%90%EF%BC%9Asqlmap"><span class="toc-number">1.1.</span> <span class="toc-text">灵感来源：sqlmap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">多个阶段</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0"><span class="toc-number"></span> <span class="toc-text">开发日记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%9C%88"><span class="toc-number">1.</span> <span class="toc-text">三月</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8813%E6%97%A5%E6%99%9A"><span class="toc-number">1.1.</span> <span class="toc-text">3月13日晚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8814%E6%97%A5"><span class="toc-number">1.2.</span> <span class="toc-text">3月14日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8815%E6%97%A5%E6%99%9A"><span class="toc-number">1.3.</span> <span class="toc-text">3月15日晚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8816%E6%97%A5"><span class="toc-number">1.4.</span> <span class="toc-text">3月16日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8817%E6%97%A5"><span class="toc-number">1.5.</span> <span class="toc-text">3月17日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8821%E6%97%A5"><span class="toc-number">1.6.</span> <span class="toc-text">3月21日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8827%E6%97%A5"><span class="toc-number">1.7.</span> <span class="toc-text">3月27日</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E6%9C%88"><span class="toc-number">2.</span> <span class="toc-text">四月</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%881%E6%97%A5"><span class="toc-number">2.1.</span> <span class="toc-text">4月1日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%889%E6%97%A5-%E6%B2%A1%E6%9C%89%E6%9B%B4%E6%96%B0%EF%BC%8C%E6%98%AF%E6%80%9D%E8%80%83"><span class="toc-number">2.2.</span> <span class="toc-text">4月9日(没有更新，是思考)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%8815%E6%97%A5"><span class="toc-number">2.3.</span> <span class="toc-text">4月15日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%8817%E6%97%A5"><span class="toc-number">2.4.</span> <span class="toc-text">4月17日</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%EF%BC%88%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">开发笔记（未完待续）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E6%AD%A5%E9%98%B6%E6%AE%B5"><span class="toc-number">2.</span> <span class="toc-text">起步阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">环境变量设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E9%97%AE%E9%A2%98"><span class="toc-number">2.2.</span> <span class="toc-text">前置问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%BB%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.3.</span> <span class="toc-text">编写主程序</span></a></li></ol></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+</div></body></html>

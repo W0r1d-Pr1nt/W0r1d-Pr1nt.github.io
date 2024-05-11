@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>THM3 Agent Sudo - Pr1nt&#39;s_blog</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/images/head/oni.png" type="image/png" />
+<meta name="description" content="easy是你的谎言(于3月4日完结)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="THM3 Agent Sudo">
+<meta property="og:url" content="http://w0r1d-pr1nt.github.io/2024/02/29/thm3/index.html">
+<meta property="og:site_name" content="Pr1nt&#39;s_blog">
+<meta property="og:description" content="easy是你的谎言(于3月4日完结)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/thm-agent/1.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/thm-agent/R.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/thm-agent/C.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/thm-agent/nmap.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/thm-agent/hydra.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/thm-agent/png.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/thm-agent/binwalk.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/thm-agent/hash.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/thm-agent/john.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/thm-agent/base64.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/thm-agent/ssh.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/thm-agent/flag1.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/thm-agent/root.png">
+<meta property="article:published_time" content="2024-02-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-03-08T13:53:57.328Z">
+<meta property="article:author" content="Pr1nt">
+<meta property="article:tag" content="THM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/thm-agent/1.png">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1715437197721">
+
+<link rel="stylesheet" href="/css/style.css?v=1715437197721">
+
+
+
+
+    
+        <link rel="stylesheet" href="/custom.css?v=1715437197721">
+    
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1715437197721"></script>
+
+ 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<meta name="generator" content="Hexo 7.2.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/images/background/background.png)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="Pr1nt"><img src="/images/head/onimai.png" alt="Pr1nt"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Pr1nt">
+            <img src="/images/head/onimai.png" alt="Pr1nt" alt="Pr1nt">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>10</div>
+        <div><span>标签</span>8</div>
+        <div><span>分类</span>4</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archives.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于Pr1nt">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于Pr1nt
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/friend.html" title="友情链接">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                友情链接
+            </div>
+        </a>
+        
+    </div>
+    
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+
+
+	<script async src="/js/search.js?v=1715437197722"></script>
+
+
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://qm.qq.com/q/8up8m0lXc4"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ'}"
+			style="
+				color: rgb(249, 174, 8);
+				background-color: rgba(249, 174, 8, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/632631573"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/W0r1d-Pr1nt/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Try-Hack-Me/">Try Hack Me</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/WriteUp/">WriteUp</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/从0到1/">从0到1</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/CTF/" style="font-size: 10px;">CTF</a> <a href="/tags/THM/" style="font-size: 20px;">THM</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/rce/" style="font-size: 15px;">rce</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">学习</a> <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="font-size: 10px;">年度总结</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a>
+    </div>
+    
+  </div>
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+   
+    <div class="nexmoe-copyright">
+        &copy; 2024 Pr1nt
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br>
+<br>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">
+  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<br>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+    </div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 20%;"> 
+            <img src="/images/post/agent.png" alt="THM3 Agent Sudo" loading="lazy">
+            <h1>THM3 Agent Sudo</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2024年02月29日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/Try-Hack-Me/">Try Hack Me</a>
+        
+        
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <blockquote>
+<p>easy是你的谎言(于3月4日完结) </p>
+</blockquote>
+<span id="more"></span>
+
+<h1 id="Agent-Sudo"><a href="#Agent-Sudo" class="headerlink" title="Agent Sudo"></a>Agent Sudo</h1><ol>
+<li><a href="#agent-sudo">Agent Sudo</a><ol>
+<li><a href="#ftp">ftp</a></li>
+<li><a href="#flag1">Flag1</a></li>
+<li><a href="#flag2">Flag2</a></li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ol>
+</li>
+</ol>
+<p>题目如下<br>改变user-agent试试</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/thm-agent/1.png" alt="timu" data-caption="timu" loading="lazy">  </p>
+<p>当user-agent为R的时候，上面出现了一句话(意为：”你在做什么？你是25名员工中的一员吗？如果没有，我将报告这一事件” )  </p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/thm-agent/R.png" alt="r" data-caption="r" loading="lazy">  </p>
+<p>提示25人,算上R一共26个,正好对应26个字母,于是从A开始测试,A与B未出现变化,但当输入C的时候,显示变了<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/thm-agent/C.png" alt="c" data-caption="c" loading="lazy">  </p>
+<p>提示弱口令,同时发现用户名chris<br>老规矩nmap扫端口  </p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/thm-agent/nmap.png" alt="nmap" data-caption="nmap" loading="lazy">  </p>
+<h2 id="ftp"><a href="#ftp" class="headerlink" title="ftp"></a>ftp</h2><p>出现了一个以前题目没出现过的21端口,那就先对ftp进行爆破<br><code>hydra -l chris -P E:\gongju\fuzzDicts-master\passwordDict\top500.txt 10.10.226.232 ftp</code>  </p>
+<p>爆破成功,ftp上去下载文件  </p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/thm-agent/hydra.png" alt="ftp" data-caption="ftp" loading="lazy"><br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/thm-agent/png.png" alt="file" data-caption="file" loading="lazy">   </p>
+<p>三个文件,.txt文件内容与显示一样,对两个照片下手,首先考虑隐写,使用binwalk看看</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/thm-agent/binwalk.png" alt="binwalk" data-caption="binwalk" loading="lazy">  </p>
+<p>出现zip,解压需要密码,使用zip2john获取hash值准备爆破,使用john爆破出密码,用7z解压获得文件  </p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/thm-agent/hash.png" alt="hash" data-caption="hash" loading="lazy"><br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/thm-agent/john.png" alt="john" data-caption="john" loading="lazy">  </p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">Agent C,<br><br>We need <span class="hljs-built_in">to</span> <span class="hljs-built_in">send</span> <span class="hljs-keyword">the</span> picture <span class="hljs-built_in">to</span> <span class="hljs-string">&#x27;QXJlYTUx&#x27;</span> <span class="hljs-keyword">as</span> soon <span class="hljs-keyword">as</span> possible!<br><br>By,<br>Agent R<br></code></pre></td></tr></table></figure>
+<p>使用cyberchef对莫名字符串解密,发现是base64编码  </p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/thm-agent/base64.png" alt="base" data-caption="base" loading="lazy">  </p>
+<p>获得密码<code>Area51</code>,但是光有这个并不知道他的用途是什么,于是对ftp下载下来的另一个jpg文件下手,使用steghide工具发现另一个人的用户名与登录密码<code>hackerrules!</code>(这里我用hackerrules试了半天一直提示密码错误,哪个小逆天教你这么写密码的)</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/thm-agent/ssh.png" alt="ssh" data-caption="ssh" loading="lazy">  </p>
+<h2 id="Flag1"><a href="#Flag1" class="headerlink" title="Flag1"></a>Flag1</h2><p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/thm-agent/flag1.png" alt="flag1" data-caption="flag1" loading="lazy">  </p>
+<p>find一下发现没有可以提权的东西,使用scp下载目录里的另一张照片, 其中一个问题是<code>照片中的事件叫什么？</code>, 通过OSINT发现事件名叫<code>Roswell alien autopsy</code> (事实上,这个事件名与提权拿第二个flag一点关系都没有,纯nt,我还研究半天这个事件怎么看出来CVE的)  </p>
+<h2 id="Flag2"><a href="#Flag2" class="headerlink" title="Flag2"></a>Flag2</h2><p>接下来是经典提权</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs elixir">james<span class="hljs-variable">@agent</span>-<span class="hljs-symbol">sudo:</span>~<span class="hljs-variable">$ </span>sudo -l<br>[sudo] password <span class="hljs-keyword">for</span> <span class="hljs-symbol">james:</span><br><span class="hljs-title class_">Matching</span> <span class="hljs-title class_">Defaults</span> entries <span class="hljs-keyword">for</span> james on agent-<span class="hljs-symbol">sudo:</span><br>    env_reset, mail_badpass, secure_path=/usr/local/sbin\<span class="hljs-symbol">:/usr/local/bin</span>\<span class="hljs-symbol">:/usr/sbin</span>\<span class="hljs-symbol">:/usr/bin</span>\<span class="hljs-symbol">:/sbin</span>\<span class="hljs-symbol">:/bin</span>\<span class="hljs-symbol">:/snap/bin</span><br><br><span class="hljs-title class_">User</span> james may run the following commands on agent-<span class="hljs-symbol">sudo:</span><br>    (<span class="hljs-title class_">ALL</span>, !root) /bin/bash<br></code></pre></td></tr></table></figure>
+<p>(ALL, !root) &#x2F;bin&#x2F;bash 这条规则授予了所有非 root 用户在任何主机上运行 Bash Shell 的权限<br>搜索<code>(ALL, !root) /bin/bash CVE</code>,发现有一个CVE-2019-14287:  </p>
+<blockquote>
+<p>在 1.8.28 之前的 Sudo 中，有权访问 Runas ALL sudoer 帐户的攻击者可以通过使用精心设计的用户 ID 调用 sudo 来绕过某些策略黑名单​​和会话 PAM 模块，并可能导致错误的日志记录。例如，对于“sudo -u #$((0xffffffff))”命令，这允许绕过 !root 配置和 USER&#x3D; 日志记录。</p>
+</blockquote>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">james</span>@agent-sudo:~$ sudo --version<br><span class="hljs-attribute">Sudo</span> version <span class="hljs-number">1</span>.<span class="hljs-number">8</span>.<span class="hljs-number">21</span>p2<br><span class="hljs-attribute">Sudoers</span> policy plugin version <span class="hljs-number">1</span>.<span class="hljs-number">8</span>.<span class="hljs-number">21</span>p2<br><span class="hljs-attribute">Sudoers</span> file grammar version <span class="hljs-number">46</span><br><span class="hljs-attribute">Sudoers</span> I/O plugin version <span class="hljs-number">1</span>.<span class="hljs-number">8</span>.<span class="hljs-number">21</span>p2<br></code></pre></td></tr></table></figure>
+<p>正好合适,存在这个漏洞,使用exp提权<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/thm-agent/root.png" alt="root" data-caption="root" loading="lazy">  </p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>要不是一些有点nt的问题这个还挺有意思的,需要了解各种爆破和最后一个CVE提权,学习到很多，接下来要去学习go语言和开发项目了，THM将告一段落</p>
+
+    
+  </article>
+
+  
+      
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/THM/" rel="tag">THM</a>
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1715437197601"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          请在你的配置文件中设置 slotComment
+
+      </div>
+  
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Agent-Sudo"><span class="toc-number">1.</span> <span class="toc-text">Agent Sudo</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#ftp"><span class="toc-number">1.1.</span> <span class="toc-text">ftp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flag1"><span class="toc-number">1.2.</span> <span class="toc-text">Flag1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Flag2"><span class="toc-number">1.3.</span> <span class="toc-text">Flag2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+</div></body></html>

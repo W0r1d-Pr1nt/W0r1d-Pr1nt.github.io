@@ -1,0 +1,19 @@
+:root {
+  --gutter: 24px;
+  --radius: 13px;
+  --color-primary: #fff;
+  --color2: #fff;
+  --color3: #fff;
+  --color4: #fff;
+  --color5: #fff;
+  --color6: #fff;
+  --color7: #fff;
+  --color-primary-bg: #eee;
+  --color2-bg: #eee;
+  --color3-bg: #eee;
+  --color4-bg: #eee;
+  --color5-bg: #eee;
+  --color6-bg: #eee;
+  --color7-bg: #eee;
+  --color-shadow: #eee;
+}
