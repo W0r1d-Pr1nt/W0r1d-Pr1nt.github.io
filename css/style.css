@@ -9,12 +9,12 @@
   --color6: #1a98ff;
   --color7: #9090ff;
   --color-primary-bg: #000;
-  --color2-bg: #ff761e;
-  --color3-bg: #ffb900;
-  --color4-bg: #33d57a;
-  --color5-bg: #00dbff;
-  --color6-bg: #1a98ff;
-  --color7-bg: #9090ff;
+  --color2-bg: rgba(255,118,30,0.15);
+  --color3-bg: rgba(255,185,0,0.15);
+  --color4-bg: rgba(51,213,122,0.15);
+  --color5-bg: rgba(0,219,255,0.15);
+  --color6-bg: rgba(26,152,255,0.15);
+  --color7-bg: rgba(144,144,255,0.15);
   --color-shadow: rgba(228,226,232,0.4);
   --color-card: #fff;
   --color-text-1: #111;
@@ -673,7 +673,7 @@ font.douyin {
 #nexmoe-background .mdui-appbar img {
   width: 100%;
 }
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1024px) {
   #nexmoe-background .mdui-appbar {
     display: block !important;
   }
@@ -1471,7 +1471,7 @@ a {
   text-decoration: none;
 }
 body.mdui-drawer-body-left {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: auto !important;
 }
 .medium-zoom-overlay {

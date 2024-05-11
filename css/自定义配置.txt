@@ -1,2 +1,3 @@
 改颜色见style.styl
+改主体宽度见style.styl
 改背景见_partial/background.styl
