@@ -31,15 +31,15 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1717240925686">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1718984701575">
 
-<link rel="stylesheet" href="/css/style.css?v=1717240925686">
+<link rel="stylesheet" href="/css/style.css?v=1718984701575">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1717240925686">
+        <link rel="stylesheet" href="/custom.css?v=1718984701575">
     
 
 
@@ -49,7 +49,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1717240925686"></script>
+<script async src="/js/app.js?v=1718984701575"></script>
 
  
 
@@ -125,7 +125,7 @@
 </div>
 
 
-	<script async src="/js/search.js?v=1717240925687"></script>
+	<script async src="/js/search.js?v=1718984701575"></script>
 
 
 
@@ -282,8 +282,8 @@
             <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E4%BB%8E0%E5%88%B01/">从0到1</a>
         
         
-    <a><i class="nexmoefont icon-areachart"></i>约3.9k字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要14分钟</a>
+    <a><i class="nexmoefont icon-areachart"></i>约5.1k字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要18分钟</a>
 
     </div>
     
@@ -342,6 +342,10 @@
 <li><a href="#%E7%BC%96%E5%86%99%E4%B8%BB%E7%A8%8B%E5%BA%8F">编写主程序</a></li>
 </ol>
 </li>
+<li><a href="#gui%E9%83%A8%E5%88%86">GUI部分</a><ol>
+<li><a href="#%E5%BC%80%E5%A4%B4%E6%9D%82%E8%B0%88">开头杂谈</a></li>
+</ol>
+</li>
 </ol>
 </li>
 </ol>
@@ -398,6 +402,22 @@
 </ol>
 <p>代码结构：  </p>
 <p>设立func target接受目标，用这个函数记录一下flag函数内容<br><code>flag.StringVar(&amp;i, &quot;i&quot;, &quot;&quot;, &quot;参数点&quot;)</code><br>接收参数i，默认为空，意义是参数点，&amp;是对变量取地址，需要提前声明变量，一般建议var全局声明<br>这里为什么不用<code>url := flag.String(&quot;u&quot;, &quot;&quot;, &quot;target url&quot;)</code>这种写法呢,这个url是一个指针,以后每次使用都需要 *url取值,而且对一些其他的运算什么的也不清楚有没有其他的问题,所以没有选用<br>结尾要用<code>flag.Parse()</code>解析一下</p>
+<h2 id="GUI部分"><a href="#GUI部分" class="headerlink" title="GUI部分"></a>GUI部分</h2><h3 id="开头杂谈"><a href="#开头杂谈" class="headerlink" title="开头杂谈"></a>开头杂谈</h3><blockquote>
+<p>一开始是毫无进展，6月20号写了50行，有了个开头，6月21号写了100行，总共150行，小有感悟，于是赶忙写下此文</p>
+</blockquote>
+<p>主程序部分还没写完就写上GUI了，从0学fyne开发，GPT3.5告诉我这是golang各GUI库中对新手最友好的一个了，我就决定从这个上手，配置环境配置一天（别问，问就是我是傻逼）<br>然后网络上关于fyne的视频教程不多，golang对于python，c这种的语言就是要冷门一些更何况是众多GUI库中的一个fyne了，自己也决定就是看着文档一点点cv呗，当个CtrlCV工程师,然后就到了卡了最久的部分:  </p>
+<p><strong>文档看不懂</strong>  不是英文看不懂,有大佬搞了个中文版的,就是,上面每一个字我都认识,但是连起来就不认识了,一度想过换一个库,但是看来看去别的库连个能看的文档都没有,于是只好回头重新看文档</p>
+<p>比如一开始我想左右分割吗,用split分割,然后我看文档组件里面有split,于是我寻思找实例,直接抄过来改,这里也是被狠狠教育了,以后看文档可不能直接cv了,得自己体悟,但是我不知道,我新手啊,我开发都头一次,之前写的也都是命令行,GUI也是头一次搞,然后傻逼GPT3.5真是解决不了一点问题,净给我那个过时被舍弃了的函数根本执行不了,问了三次全是傻逼3.5自以为是自己编出来的函数,后来才写出来第一个容器  </p>
+<p><strong>第一个容器</strong>  这里删删改改,忘了是GPT还是csdn还是官方的youtube视频了,反正教会了我使用container,widget等选择自己想要的部分如,container.NewVBox整个左右贯通的容器,各种文档中的组件都在widget里,这时候才明白,文档给的很详细,只是我看不懂而已(之前还说呢傻逼文档不明不白连示例都没有)但是,有一说一,他们对于新手第一次开发的教学确实不是很到位,demo里各种功能也都是一些乱七八糟的函数,根本看不懂  </p>
+<p><strong>小试牛刀</strong>  </p>
+<blockquote>
+<p>3.5就是废物,真人工智能还得是4o</p>
+</blockquote>
+<p>写出来第一个容器之后也算是摸到门了,自己想要实现一个什么东西,就去文档里面看是什么组件或者是什么”容器和布局”,还是那句话,官方文档里面的示例就是一个示例,不具备任何学习价值,这里自己可以乱写一些代码,然后让4o给你改,然后复制它改好的放进demo里执行一下看看什么效果,然后再写进自己的main文件中,然后就是看vscode光标放上去出现的提示以及<a target="_blank" rel="noopener" href="https://pkg.go.dev/fyne.io/fyne/v2@v2.4.5/">https://pkg.go.dev/fyne.io/fyne/v2@v2.4.5/</a> 中的函数用法就知道这是一个什么类型的函数以及需要输入什么变量,然后就能慢慢摸索着开发了,代码本身不会报错(这种低级错误自己看vscode自己审代码缺啥玩意自己改就好了),但是逻辑会出bug,这种的就得问GPT,还是那样,让它给你一个代码,然后扔进demo调试,别直接往自己项目里写那玩意给的代码不靠谱,得自己测,但是一点开发经验都没有的小伙你先别惦记GUI哈,你先搞点最简单的开发再来搞GUI。</p>
+<p>羡慕有学长带的，羡慕有4.0的，但也只是羡慕而已，自己搞出来这玩意能分泌多少多巴胺没试过的根本不知道，啥也不会的时候坐牢是真坐牢，自己研究出来的时候爽是真爽<br>这下大学还没毕业直接就三年开发经验了😋，而且还有自己的项目，遥遥领先同行，希望我的研究经过能给更多还没入门GUI开发的新手启发，以后不需要什么大爹了，官方文档和gpt4o就是我爹</p>
+<blockquote>
+<p>再次表达对3.5的不满，3.5就是傻逼<br>啥你问我这部分文章有啥干货？没有啊这就是水文，我刚会写两天能给你什么顶级干货，标题就说了这是杂谈，记录自己从0到0.1的过程而已，<strong>巨大突破！(bushi)</strong></p>
+</blockquote>
 
     
   </article>
@@ -415,7 +435,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1717240925495"></script>
+    <script async src="/js/copy-codeblock.js?v=1718984701404"></script>
   
 
   
@@ -448,7 +468,7 @@
             <button class="mdui-fab catalog" style="overflow:unset;">
                 <i class="nexmoefont icon-i-catalog"></i>
                 <div class="nexmoe-toc">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E0%E5%88%B01%EF%BC%8CRCEmap%E5%BC%80%E5%8F%91%E4%B9%8B%E6%97%85"><span class="toc-number">1.</span> <span class="toc-text">从0到1，RCEmap开发之旅</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%81%B5%E6%84%9F%E6%9D%A5%E6%BA%90%EF%BC%9Asqlmap"><span class="toc-number">1.1.</span> <span class="toc-text">灵感来源：sqlmap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">多个阶段</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0"><span class="toc-number"></span> <span class="toc-text">开发日记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%9C%88"><span class="toc-number">1.</span> <span class="toc-text">三月</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8813%E6%97%A5%E6%99%9A"><span class="toc-number">1.1.</span> <span class="toc-text">3月13日晚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8814%E6%97%A5"><span class="toc-number">1.2.</span> <span class="toc-text">3月14日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8815%E6%97%A5%E6%99%9A"><span class="toc-number">1.3.</span> <span class="toc-text">3月15日晚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8816%E6%97%A5"><span class="toc-number">1.4.</span> <span class="toc-text">3月16日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8817%E6%97%A5"><span class="toc-number">1.5.</span> <span class="toc-text">3月17日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8821%E6%97%A5"><span class="toc-number">1.6.</span> <span class="toc-text">3月21日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8827%E6%97%A5"><span class="toc-number">1.7.</span> <span class="toc-text">3月27日</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E6%9C%88"><span class="toc-number">2.</span> <span class="toc-text">四月</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%881%E6%97%A5"><span class="toc-number">2.1.</span> <span class="toc-text">4月1日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%889%E6%97%A5-%E6%B2%A1%E6%9C%89%E6%9B%B4%E6%96%B0%EF%BC%8C%E6%98%AF%E6%80%9D%E8%80%83"><span class="toc-number">2.2.</span> <span class="toc-text">4月9日(没有更新，是思考)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%8815%E6%97%A5"><span class="toc-number">2.3.</span> <span class="toc-text">4月15日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%8817%E6%97%A5"><span class="toc-number">2.4.</span> <span class="toc-text">4月17日</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%EF%BC%88%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">开发笔记（未完待续）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E6%AD%A5%E9%98%B6%E6%AE%B5"><span class="toc-number">2.</span> <span class="toc-text">起步阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">环境变量设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E9%97%AE%E9%A2%98"><span class="toc-number">2.2.</span> <span class="toc-text">前置问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%BB%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.3.</span> <span class="toc-text">编写主程序</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E0%E5%88%B01%EF%BC%8CRCEmap%E5%BC%80%E5%8F%91%E4%B9%8B%E6%97%85"><span class="toc-number">1.</span> <span class="toc-text">从0到1，RCEmap开发之旅</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%81%B5%E6%84%9F%E6%9D%A5%E6%BA%90%EF%BC%9Asqlmap"><span class="toc-number">1.1.</span> <span class="toc-text">灵感来源：sqlmap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">多个阶段</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0"><span class="toc-number"></span> <span class="toc-text">开发日记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%9C%88"><span class="toc-number">1.</span> <span class="toc-text">三月</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8813%E6%97%A5%E6%99%9A"><span class="toc-number">1.1.</span> <span class="toc-text">3月13日晚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8814%E6%97%A5"><span class="toc-number">1.2.</span> <span class="toc-text">3月14日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8815%E6%97%A5%E6%99%9A"><span class="toc-number">1.3.</span> <span class="toc-text">3月15日晚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8816%E6%97%A5"><span class="toc-number">1.4.</span> <span class="toc-text">3月16日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8817%E6%97%A5"><span class="toc-number">1.5.</span> <span class="toc-text">3月17日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8821%E6%97%A5"><span class="toc-number">1.6.</span> <span class="toc-text">3月21日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8827%E6%97%A5"><span class="toc-number">1.7.</span> <span class="toc-text">3月27日</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E6%9C%88"><span class="toc-number">2.</span> <span class="toc-text">四月</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%881%E6%97%A5"><span class="toc-number">2.1.</span> <span class="toc-text">4月1日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%889%E6%97%A5-%E6%B2%A1%E6%9C%89%E6%9B%B4%E6%96%B0%EF%BC%8C%E6%98%AF%E6%80%9D%E8%80%83"><span class="toc-number">2.2.</span> <span class="toc-text">4月9日(没有更新，是思考)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%8815%E6%97%A5"><span class="toc-number">2.3.</span> <span class="toc-text">4月15日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%8817%E6%97%A5"><span class="toc-number">2.4.</span> <span class="toc-text">4月17日</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%EF%BC%88%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">开发笔记（未完待续）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E6%AD%A5%E9%98%B6%E6%AE%B5"><span class="toc-number">2.</span> <span class="toc-text">起步阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">环境变量设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E9%97%AE%E9%A2%98"><span class="toc-number">2.2.</span> <span class="toc-text">前置问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%BB%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.3.</span> <span class="toc-text">编写主程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GUI%E9%83%A8%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">GUI部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A4%B4%E6%9D%82%E8%B0%88"><span class="toc-number">3.1.</span> <span class="toc-text">开头杂谈</span></a></li></ol></li></ol>
                 </div>
             </button>
             
