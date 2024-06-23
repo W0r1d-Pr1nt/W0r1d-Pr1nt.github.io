@@ -19,6 +19,7 @@
 <meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/rcemap/%E9%A2%84%E8%A7%883.png">
 <meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/rcemap/%E9%A2%84%E8%A7%884.png">
 <meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/rcemap/%E9%A2%84%E8%A7%885.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/rcemap/GUI1.png">
 <meta property="article:published_time" content="2024-03-03T16:00:00.000Z">
 <meta property="article:modified_time" content="2024-05-10T16:00:00.000Z">
 <meta property="article:author" content="Pr1nt">
@@ -31,15 +32,15 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1718984701575">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1719145737308">
 
-<link rel="stylesheet" href="/css/style.css?v=1718984701575">
+<link rel="stylesheet" href="/css/style.css?v=1719145737308">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1718984701575">
+        <link rel="stylesheet" href="/custom.css?v=1719145737308">
     
 
 
@@ -49,7 +50,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1718984701575"></script>
+<script async src="/js/app.js?v=1719145737308"></script>
 
  
 
@@ -125,7 +126,7 @@
 </div>
 
 
-	<script async src="/js/search.js?v=1718984701575"></script>
+	<script async src="/js/search.js?v=1719145737309"></script>
 
 
 
@@ -282,8 +283,8 @@
             <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E4%BB%8E0%E5%88%B01/">从0到1</a>
         
         
-    <a><i class="nexmoefont icon-areachart"></i>约5.1k字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要18分钟</a>
+    <a><i class="nexmoefont icon-areachart"></i>约5.6k字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要20分钟</a>
 
     </div>
     
@@ -344,6 +345,7 @@
 </li>
 <li><a href="#gui%E9%83%A8%E5%88%86">GUI部分</a><ol>
 <li><a href="#%E5%BC%80%E5%A4%B4%E6%9D%82%E8%B0%88">开头杂谈</a></li>
+<li><a href="#%E6%B5%85%E6%B5%85%E5%B9%B2%E8%B4%A7">浅浅干货</a></li>
 </ol>
 </li>
 </ol>
@@ -418,6 +420,24 @@
 <blockquote>
 <p>再次表达对3.5的不满，3.5就是傻逼<br>啥你问我这部分文章有啥干货？没有啊这就是水文，我刚会写两天能给你什么顶级干货，标题就说了这是杂谈，记录自己从0到0.1的过程而已，<strong>巨大突破！(bushi)</strong></p>
 </blockquote>
+<h3 id="浅浅干货"><a href="#浅浅干货" class="headerlink" title="浅浅干货"></a>浅浅干货</h3><p>为什么写干货了，因为写了四天了（今天6月23日），成功浅浅实现小小目标，进度完成了二十分之一了吧估计</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/./images/zhaopian/rcemap/GUI1.png" alt="1" data-caption="1" loading="lazy"></p>
+<p>对原命令行版rcemap做了fyne的适配，虽然适配的不完全，但是现在自动模式能执行了，但是只有eval无数字字母，别的还没测试没适配，自动模式搞完还有手动模式，手动模式有四个模式，还有一些新脚本没写，然后就是对ffuf的移植，还一点没搞，代码还没审呢，但是从文档都看不懂到点击按钮能实现功能，只用4天，我真厉害（别骂我有能耐你四天搞出来，而且我才准高三，我有炫耀的资本）</p>
+<p>然后既然笔记嘛，得写知识点，该写正文了</p>
+<ul>
+<li><code>container.xxxxxx</code> 造容器的库</li>
+<li><code>widget.xxx</code> 造组件的库 (区分组件与容器去看文档)</li>
+<li>对其他已有函数的适配只需要<code>func (label *widget.label)&#123;&#125;</code>就可以,然后就可以调用或者set了</li>
+<li>中文字体设置: <code>os.Setenv(&quot;FYNE_FONT&quot;, path)</code> , path是字体路径,可以复制下面函数</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-comment">//设置中文字体</span><br>   fontPaths := findfont.List()<br>   <span class="hljs-keyword">for</span> _, path := <span class="hljs-keyword">range</span> fontPaths &#123;<br>      <span class="hljs-keyword">if</span> strings.Contains(path, <span class="hljs-string">&quot;msyhbd.ttf&quot;</span>) || strings.Contains(path, <span class="hljs-string">&quot;simhei.ttf&quot;</span>) || strings.Contains(path, <span class="hljs-string">&quot;simsun.ttc&quot;</span>) || strings.Contains(path, <span class="hljs-string">&quot;simkai.ttf&quot;</span>) || strings.Contains(path, <span class="hljs-string">&quot;simfang.ttf&quot;</span>) &#123;<br>         os.Setenv(<span class="hljs-string">&quot;FYNE_FONT&quot;</span>, path)<br>         <span class="hljs-keyword">break</span><br>      &#125;<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>修改默认字体大小,得自定义一个主题,同样复制即可</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> CustomTheme <span class="hljs-keyword">struct</span>&#123;&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c CustomTheme)</span></span> Color(name fyne.ThemeColorName, variant fyne.ThemeVariant) color.Color &#123;<br>	<span class="hljs-keyword">return</span> theme.DefaultTheme().Color(name, variant)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c CustomTheme)</span></span> Font(style fyne.TextStyle) fyne.Resource &#123;<br>	<span class="hljs-keyword">return</span> theme.DefaultTheme().Font(style)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c CustomTheme)</span></span> Icon(name fyne.ThemeIconName) fyne.Resource &#123;<br>	<span class="hljs-keyword">return</span> theme.DefaultTheme().Icon(name)<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c CustomTheme)</span></span> Size(name fyne.ThemeSizeName) <span class="hljs-type">float32</span> &#123;<br>	<span class="hljs-comment">// 修改默认字体大小</span><br>	<span class="hljs-keyword">if</span> name == theme.SizeNameText &#123;<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">16</span> <span class="hljs-comment">// 设置默认字体大小为16</span><br>	&#125;<br>	<span class="hljs-keyword">return</span> theme.DefaultTheme().Size(name)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>嗯,基本没啥了,我接着开发再有啥干货再加,你要是问我开发笔记啥的,🤔我上面的不就是笔记么</p>
 
     
   </article>
@@ -435,7 +455,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1718984701404"></script>
+    <script async src="/js/copy-codeblock.js?v=1719145737177"></script>
   
 
   
@@ -468,7 +488,7 @@
             <button class="mdui-fab catalog" style="overflow:unset;">
                 <i class="nexmoefont icon-i-catalog"></i>
                 <div class="nexmoe-toc">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E0%E5%88%B01%EF%BC%8CRCEmap%E5%BC%80%E5%8F%91%E4%B9%8B%E6%97%85"><span class="toc-number">1.</span> <span class="toc-text">从0到1，RCEmap开发之旅</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%81%B5%E6%84%9F%E6%9D%A5%E6%BA%90%EF%BC%9Asqlmap"><span class="toc-number">1.1.</span> <span class="toc-text">灵感来源：sqlmap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">多个阶段</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0"><span class="toc-number"></span> <span class="toc-text">开发日记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%9C%88"><span class="toc-number">1.</span> <span class="toc-text">三月</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8813%E6%97%A5%E6%99%9A"><span class="toc-number">1.1.</span> <span class="toc-text">3月13日晚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8814%E6%97%A5"><span class="toc-number">1.2.</span> <span class="toc-text">3月14日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8815%E6%97%A5%E6%99%9A"><span class="toc-number">1.3.</span> <span class="toc-text">3月15日晚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8816%E6%97%A5"><span class="toc-number">1.4.</span> <span class="toc-text">3月16日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8817%E6%97%A5"><span class="toc-number">1.5.</span> <span class="toc-text">3月17日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8821%E6%97%A5"><span class="toc-number">1.6.</span> <span class="toc-text">3月21日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8827%E6%97%A5"><span class="toc-number">1.7.</span> <span class="toc-text">3月27日</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E6%9C%88"><span class="toc-number">2.</span> <span class="toc-text">四月</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%881%E6%97%A5"><span class="toc-number">2.1.</span> <span class="toc-text">4月1日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%889%E6%97%A5-%E6%B2%A1%E6%9C%89%E6%9B%B4%E6%96%B0%EF%BC%8C%E6%98%AF%E6%80%9D%E8%80%83"><span class="toc-number">2.2.</span> <span class="toc-text">4月9日(没有更新，是思考)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%8815%E6%97%A5"><span class="toc-number">2.3.</span> <span class="toc-text">4月15日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%8817%E6%97%A5"><span class="toc-number">2.4.</span> <span class="toc-text">4月17日</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%EF%BC%88%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">开发笔记（未完待续）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E6%AD%A5%E9%98%B6%E6%AE%B5"><span class="toc-number">2.</span> <span class="toc-text">起步阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">环境变量设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E9%97%AE%E9%A2%98"><span class="toc-number">2.2.</span> <span class="toc-text">前置问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%BB%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.3.</span> <span class="toc-text">编写主程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GUI%E9%83%A8%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">GUI部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A4%B4%E6%9D%82%E8%B0%88"><span class="toc-number">3.1.</span> <span class="toc-text">开头杂谈</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E0%E5%88%B01%EF%BC%8CRCEmap%E5%BC%80%E5%8F%91%E4%B9%8B%E6%97%85"><span class="toc-number">1.</span> <span class="toc-text">从0到1，RCEmap开发之旅</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%81%B5%E6%84%9F%E6%9D%A5%E6%BA%90%EF%BC%9Asqlmap"><span class="toc-number">1.1.</span> <span class="toc-text">灵感来源：sqlmap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">多个阶段</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E6%97%A5%E8%AE%B0"><span class="toc-number"></span> <span class="toc-text">开发日记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%9C%88"><span class="toc-number">1.</span> <span class="toc-text">三月</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8813%E6%97%A5%E6%99%9A"><span class="toc-number">1.1.</span> <span class="toc-text">3月13日晚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8814%E6%97%A5"><span class="toc-number">1.2.</span> <span class="toc-text">3月14日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8815%E6%97%A5%E6%99%9A"><span class="toc-number">1.3.</span> <span class="toc-text">3月15日晚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8816%E6%97%A5"><span class="toc-number">1.4.</span> <span class="toc-text">3月16日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8817%E6%97%A5"><span class="toc-number">1.5.</span> <span class="toc-text">3月17日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8821%E6%97%A5"><span class="toc-number">1.6.</span> <span class="toc-text">3月21日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8827%E6%97%A5"><span class="toc-number">1.7.</span> <span class="toc-text">3月27日</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E6%9C%88"><span class="toc-number">2.</span> <span class="toc-text">四月</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%881%E6%97%A5"><span class="toc-number">2.1.</span> <span class="toc-text">4月1日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%889%E6%97%A5-%E6%B2%A1%E6%9C%89%E6%9B%B4%E6%96%B0%EF%BC%8C%E6%98%AF%E6%80%9D%E8%80%83"><span class="toc-number">2.2.</span> <span class="toc-text">4月9日(没有更新，是思考)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%8815%E6%97%A5"><span class="toc-number">2.3.</span> <span class="toc-text">4月15日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%8817%E6%97%A5"><span class="toc-number">2.4.</span> <span class="toc-text">4月17日</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E7%AC%94%E8%AE%B0%EF%BC%88%E6%9C%AA%E5%AE%8C%E5%BE%85%E7%BB%AD%EF%BC%89"><span class="toc-number"></span> <span class="toc-text">开发笔记（未完待续）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E6%AD%A5%E9%98%B6%E6%AE%B5"><span class="toc-number">2.</span> <span class="toc-text">起步阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">环境变量设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E9%97%AE%E9%A2%98"><span class="toc-number">2.2.</span> <span class="toc-text">前置问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%BB%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.3.</span> <span class="toc-text">编写主程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GUI%E9%83%A8%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">GUI部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A4%B4%E6%9D%82%E8%B0%88"><span class="toc-number">3.1.</span> <span class="toc-text">开头杂谈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%85%E6%B5%85%E5%B9%B2%E8%B4%A7"><span class="toc-number">3.2.</span> <span class="toc-text">浅浅干货</span></a></li></ol></li></ol>
                 </div>
             </button>
             
