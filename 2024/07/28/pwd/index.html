@@ -14,7 +14,7 @@
 <meta property="og:description" content="环境变量全解">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-28T12:29:12.000Z">
-<meta property="article:modified_time" content="2024-08-13T08:31:49.592Z">
+<meta property="article:modified_time" content="2024-08-13T10:08:22.467Z">
 <meta property="article:author" content="Pr1nt">
 <meta property="article:tag" content="rce">
 <meta property="article:tag" content="web">
@@ -24,15 +24,15 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723539244155">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723543734969">
 
-<link rel="stylesheet" href="/css/style.css?v=1723539244155">
+<link rel="stylesheet" href="/css/style.css?v=1723543734969">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1723539244155">
+        <link rel="stylesheet" href="/custom.css?v=1723543734969">
     
 
 
@@ -42,7 +42,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1723539244155"></script>
+<script async src="/js/app.js?v=1723543734969"></script>
 
  
 
@@ -118,7 +118,7 @@
 </div>
 
 
-	<script async src="/js/search.js?v=1723539244156"></script>
+	<script async src="/js/search.js?v=1723543734970"></script>
 
 
 
@@ -262,8 +262,8 @@
 </div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
   <article>
     
-        <div class="nexmoe-post-cover absolute" style="padding-top: 56.25%;"> 
-            <img src="/images/post/2.jpg" alt="从0到1,学习环境变量的利用方法" loading="lazy">
+        <div class="nexmoe-post-cover absolute" style="padding-top: 57.14285714285714%;"> 
+            <img src="/images/post/pwd.png" alt="从0到1,学习环境变量的利用方法" loading="lazy">
             <h1>从0到1,学习环境变量的利用方法</h1>
         </div>
     
@@ -288,6 +288,10 @@
 
     <h1 id="环境变量全解"><a href="#环境变量全解" class="headerlink" title="环境变量全解"></a>环境变量全解</h1><span id="more"></span>
 
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=true} -->
+
+<!-- code_chunk_output -->
+
 <ol>
 <li><a href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%85%A8%E8%A7%A3">环境变量全解</a><ol>
 <li><a href="#%E8%B5%B7%E5%9B%A0">起因</a></li>
@@ -306,6 +310,11 @@
 </ol>
 </li>
 </ol>
+<!-- /code_chunk_output -->
+
+
+
+
 <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>写这篇文章的原因是很久之前就卡在了ctfshow web入门第120关,也就是利用环境变量来构造,在我的rce全解那篇文章中虽然有所提到,但当时研究的不够深入,写的也不是很明白,所以这里另写一篇专门的环境变量内容</p>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs stata">在 Linux <span class="hljs-keyword">Shell</span> 中，环境变量是一种在操作系统环境中存储信息的机制。<br><br>这些变量包含了有关系统环境和当前会话的信息，可以影响程序的行为和操作系统的运行。<br><br>以下是关于 Linux <span class="hljs-keyword">Shell</span> 中环墨变量的详细讲解：<br><br>1. 环境变量的种类：<br><br>全局环境变量：对所有用户和进程都可见。<br><br>局部环境变量：只在当前 <span class="hljs-keyword">Shell</span> 会话中可见。<br><br>2. 常见环境变量：<br><br>PATH：包含可执行程序的路径，系统会在这些路径下查找可执行文件。<br><br>HOME：当前用户的主目录路径。<br><br>USER 或 USERNAME：当前登录的用户名。<br><br><span class="hljs-keyword">SHELL</span>：当前使用的 <span class="hljs-keyword">Shell</span> 解释器。<br><br><span class="hljs-keyword">PWD</span>：当前工作目录路径。<br><br>LANG：指定当前语言环境。<br><br>EDITOR：默认文本编辑器。<br><br>IFS: urldecode(<span class="hljs-string">&quot;%20%09%0A&quot;</span>)<br><br>等等...<br><br></code></pre></td></tr></table></figure>
 
@@ -350,7 +359,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1723539244002"></script>
+    <script async src="/js/copy-codeblock.js?v=1723543734829"></script>
   
 
   
