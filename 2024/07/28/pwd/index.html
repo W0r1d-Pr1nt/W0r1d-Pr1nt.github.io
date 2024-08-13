@@ -14,7 +14,7 @@
 <meta property="og:description" content="环境变量全解">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-28T12:29:12.000Z">
-<meta property="article:modified_time" content="2024-08-13T10:08:22.467Z">
+<meta property="article:modified_time" content="2024-08-13T10:37:13.801Z">
 <meta property="article:author" content="Pr1nt">
 <meta property="article:tag" content="rce">
 <meta property="article:tag" content="web">
@@ -24,15 +24,15 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723543734969">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723545465036">
 
-<link rel="stylesheet" href="/css/style.css?v=1723543734969">
+<link rel="stylesheet" href="/css/style.css?v=1723545465036">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1723543734969">
+        <link rel="stylesheet" href="/custom.css?v=1723545465036">
     
 
 
@@ -42,7 +42,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1723543734969"></script>
+<script async src="/js/app.js?v=1723545465037"></script>
 
  
 
@@ -118,7 +118,7 @@
 </div>
 
 
-	<script async src="/js/search.js?v=1723543734970"></script>
+	<script async src="/js/search.js?v=1723545465037"></script>
 
 
 
@@ -275,8 +275,8 @@
             <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E4%BB%8E0%E5%88%B01/">从0到1</a>
         
         
-    <a><i class="nexmoefont icon-areachart"></i>约945字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要4分钟</a>
+    <a><i class="nexmoefont icon-areachart"></i>约1.2k字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要5分钟</a>
 
     </div>
     
@@ -312,10 +312,9 @@
 </ol>
 <!-- /code_chunk_output -->
 
-
-
-
 <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>写这篇文章的原因是很久之前就卡在了ctfshow web入门第120关,也就是利用环境变量来构造,在我的rce全解那篇文章中虽然有所提到,但当时研究的不够深入,写的也不是很明白,所以这里另写一篇专门的环境变量内容</p>
+<h2 id="显示不全我也不知道是什么原因，base64自己解一下看吧"><a href="#显示不全我也不知道是什么原因，base64自己解一下看吧" class="headerlink" title="显示不全我也不知道是什么原因，base64自己解一下看吧"></a>显示不全我也不知道是什么原因，base64自己解一下看吧</h2><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">IyMg6LW35ZugDQoNCuWGmei<span class="hljs-regexp">/meevh+aWh+eroOeahOWOn+WboOaYr+W+iOS5heS5i+WJjeWwseWNoeWcqOS6hmN0ZnNob3cgd2Vi5YWl6Zeo56ysMTIw5YWzLOS5n+WwseaYr+WIqeeUqOeOr+Wig+WPmOmHj+adpeaehOmAoCzlnKjmiJHnmoRyY2Xlhajop6PpgqPnr4fmlofnq6DkuK3omb3nhLbmnInmiYDmj5DliLAs5L2G5b2T5pe256CU56m255qE5LiN5aSf5rex5YWlLOWGmeeahOS5n+S4jeaYr+W+iOaYjueZvSzmiYDku6Xov5nph4zlj6blhpnkuIDnr4fkuJPpl6jnmoTnjq/</span>looPlj5jph4<span class="hljs-regexp">/lhoXlrrkNCg0KIyMg5q2j5paHDQoNCiMjIyDnn6Xor4bngrkNCg0KYGBgDQrlnKggTGludXggU2hlbGwg5Lit77yM546v5aKD5Y+Y6YeP5piv5LiA56eN5Zyo5pON5L2c57O757uf546v5aKD5Lit5a2Y5YKo5L+h5oGv55qE5py65Yi244CCDQoNCui/m</span>eS6m+WPmOmHj+WMheWQq+S6huacieWFs+ezu+e7n+eOr+Wig+WSjOW9k+WJjeS8muivneeahOS<span class="hljs-regexp">/oeaBr++8jOWPr+S7peW9seWTjeeoi+W6j+eahOihjOS4uuWSjOaTjeS9nOezu+e7n+eahOi/</span>kOihjOOAgg0KDQrku6XkuIvmmK<span class="hljs-regexp">/lhbPkuo4gTGludXggU2hlbGwg5Lit546v5aKo5Y+Y6YeP55qE6K+m57uG6K6y6Kej77yaDQoNCjEuIOeOr+Wig+WPmOmHj+eahOenjeexu++8mg0KDQrlhajlsYDnjq/</span>looPlj5jph4<span class="hljs-regexp">/vvJrlr7nmiYDmnInnlKjmiLflkozov5vnqIvpg73lj6/</span>op4HjgIINCg0K5bGA6YOo546v5aKD5Y+Y6YeP77ya5Y+q5Zyo5b2T5YmNIFNoZWxsIOS8muivneS4reWPr+ingeOAgg0KDQoyLiDluLjop4Hnjq<span class="hljs-regexp">/looPlj5jph4/</span>vvJoNCg0KUEFUSO+<span class="hljs-number">8</span>muWMheWQq+WPr+aJp+ihjOeoi+W6j+eahOi3r+W+hO+<span class="hljs-number">8</span>jOezu+e7n+S8muWcqOi<span class="hljs-regexp">/meS6m+i3r+W+hOS4i+afpeaJvuWPr+aJp+ihjOaWh+S7tuOAgg0KDQpIT01F77ya5b2T5YmN55So5oi355qE5Li755uu5b2V6Lev5b6E44CCDQoNClVTRVIg5oiWIFVTRVJOQU1F77ya5b2T5YmN55m75b2V55qE55So5oi35ZCN44CCDQoNClNIRUxM77ya5b2T5YmN5L2/</span><span class="hljs-number">55</span>So55qEIFNoZWxsIOino+mHiuWZqOOAgg0KDQpQV0TvvJrlvZPliY3lt6XkvZznm67lvZXot6<span class="hljs-regexp">/lvoTjgIINCg0KTEFOR++8muaMh+WumuW9k+WJjeivreiogOeOr+Wig+OAgg0KDQpFRElUT1LvvJrpu5jorqTmlofmnKznvJbovpHlmajjgIINCg0KSUZTOiB1cmxkZWNvZGUoIiUyMCUwOSUwQSIpDQoNCuetieetiS4uLg0KDQpgYGANCg0K5Lul5LiK5p2l5rqQ5LqOZ3B0DQoNCuW9k+aehOmAoOWHumAke1BBVEg6fkF9YOaXtizmhI/</span>lkbPnnYDlj5ZQQVRI5Y+Y6YeP55qE5pyA5ZCO5LiA5L2N5a2X5q+NLOiAjFBBVEjkuIDoiKzmnaXorrLmmK8vYmluLOaJgOS7pei<span class="hljs-regexp">/memHjOWwseaYr24NCg0K6ICMUFdE5LiA6Iis5pivYC92YXIvd3d3L2h0bWxgLOaJgOS7peaIkeS7rOWPr+S7peWPllBXROeahOacgOWQjuS4gOS9jWzmnoTpgKBubOadpeivu+WPluaWh+S7tizljbNgJHtQV0Q6fkF9YA0KDQrlvZNgOn5g5ZCO6Z2i5piv5pWw5a2X5pe2LOS+i+WmgjAs5oSP5ZGz552A5Y+W5pyA5ZCO5LiA5L2NLOiAjOWmguaenOayoeaciWB+YCzliJnmmK/</span>nrKzkuIDkvY0s5bqP5YiX5piv5LuOMOW8gOWni+eul+eahCzlrZfmr43kuZ<span class="hljs-regexp">/kuIDmoLcsQeS7o+ihqOesrOS4gOS4qixD5Luj6KGo56ys5LiJ5LiqDQoNCui/m</span>emHjOi<span class="hljs-regexp">/mOacieS4gOS4quimgeihpeWFhSzljbMkeyNQV0R955qE5oSP5oCd5Li6UFdE55qE6ZW/</span><span class="hljs-number">5</span>bqmLOS+i+WmglBXROS4umAvdmFyL3d3dy9odG1sYCzliJnplb<span class="hljs-regexp">/luqbkuLoxNA0KDQrlr7nkuo7kuIrpnaLkuIDlpKfloIbluLjop4Hnjq/</span>looPlj5jph48s5oiR5Lus5pyJ5aSn6YOo5YiG5piv5LiN6IO955+l6YGT55qELOWPquaciVBXRCBQQVRIIFNITFZM6L+Z56eN5piv6L+R5LmO5Y+v5Lul56iz5a6a55+l6YGT55qE77yIU0hMVkzmmK<span class="hljs-regexp">/orrDlvZXlpJrkuKogQmFzaCDov5vnqIvlrp7kvovltYzlpZfmt7HluqbnmoTntK/</span>liqDlmags6L+b56iL56ys5LiA5qyh5omT5byAc2hlbGzml7YkU0hMVkw9Me+<span class="hljs-number">8</span>jOeEtuWQjuWcqOatpHNoZWxs5Lit5YaN5omT5byA5LiA5Liqc2hlbGzml7YkU0hMVkw9MuOAgu+<span class="hljs-number">8</span>iQ0KDQow77yaYCR7I31gDQoNCjHvvJpgJHsjU0hMVkx9PSR7IyN9PSR7Iz99PTFgDQoNCjLvvJpgJHtTSExWTH09MmAg77yIU0hMVkzmmK<span class="hljs-regexp">/orrDlvZXlpJrkuKogQmFzaCDov5vnqIvlrp7kvovltYzlpZfmt7HluqbnmoTntK/</span>liqDlmags6L+b56iL56ys5LiA5qyh5omT5byAc2hlbGzml7YkU0hMVkw9Me+<span class="hljs-number">8</span>jOeEtuWQjuWcqOatpHNoZWxs5Lit5YaN5omT5byA5LiA5Liqc2hlbGzml7YkU0hMVkw9MuOAgu+<span class="hljs-number">8</span>iQ0KDQoz77yaYCR7I0lGU309M2DjgILvvIhsaW51eOS4i+aYrzPvvIxtYWPph4zmmK8077yJDQoNClNITFZM5LiA6Iis5pivOiAyDQoNCiMjIyDkvovpopgxIGN0ZnNob3cgMTE5DQoNCuWboOS4ujogYCRQV0QgPSAvdmFyL3d3dy9odG1sYA0KDQrlr7nkuo7vvJpgL2Jpbi9jYXQgZmxhZy5waHBgDQoNCuWImeacie+<span class="hljs-number">8</span>mmAvPz8<span class="hljs-regexp">/Lz9hdCA/</span>bD8<span class="hljs-regexp">/Lj8/</span>P2ANCg0K6Iez5q2k5oiR5Lus5Y+v5LulOg0KDQpgYGANCiR7UFdEOiR7I306JHsjI319ID0gJHtQV0Q6MDoxfSA9IC8NCmBgYA0KDQrlhbbkuK3kuK3pl7Tlj6<span class="hljs-regexp">/ku6XnnIHnlaXlj5jmiJANCg0KYGBgDQogICR7UFdEOjokeyMjfX0gPT09PiAke1BXRDowOjF9ID09PT4gLyAgDQpgYGANCg0KYGBgDQoke1BXRDoke1NITFZMfTokeyNTSExWTH19ID0gJHtQV0Q6MjoxfSA9IGENCmBgYA0KDQpgYGANCiR7UFdEOn4ke1NITFZMfTokeyNTSExWTH19ID0gJHtQV0Q6LTI6MX0gPSB0DQpgYGANCg0KYGBgDQoke1BXRDp+QX0gPSDlj5bmnIDlkI7kuIDkvY0gPSBsDQpgYGANCg0KYGBgDQovYmluL2NhdCBmbGFnLnBocCA9PT0+ICR7UFdEOiR7I306JHsjI319Pz8/</span>JHtQV0Q6JHsjfTokeyMjfX0<span class="hljs-regexp">/JHtQV0Q6JHtTSExWTH06JHsjU0hMVkx9fSR7UFdEOn4ke1NITFZMfTokeyNTSExWTH19JElGUz8ke1BXRDp+QX0/</span>Py4<span class="hljs-regexp">/Pz8NCmBgYA0KDQojIyMg5L6L6aKYMiBjdGZzaG93IDEyMA0KDQrmupDnoIE6DQoNCmBgYHBocA0KPD9waHANCmVycm9yX3JlcG9ydGluZygwKTsNCmhpZ2hsaWdodF9maWxlKF9fRklMRV9fKTsNCmlmKGlzc2V0KCRfUE9TVFsnY29kZSddKSl7DQogICRjb2RlPSRfUE9TVFsnY29kZSddOw0KICBpZighcHJlZ19tYXRjaCgnL1x4MDl8XHgwYXxbYS16XXxbMC05XXxQQVRIfEJBU0h8SE9NRXxcL3xcKHxcKXxcW3xcXXxcXFxcfFwrfFwtfFwhfFw9fFxefFwqfFx4MjZ8XCV8XDx8XD58XCd8XCJ8XGB8XHx8XCwvJywgJGNvZGUpKXsgICANCiAgICBpZihzdHJsZW4oJGNvZGUpPjY1KXsNCiAgICAgIGVjaG8gJzxkaXYgYWxpZ249ImNlbnRlciI+Jy4neW91IGFyZSBzbyBsb25nICwgSSBkb250IGxpa2UgJy4nPC9kaXY+JzsNCiAgICB9ZWxzZXsNCiAgIAkgZWNobyAnPGRpdiBhbGlnbj0iY2VudGVyIj4nLnN5c3RlbSgkY29kZSkuJzwvZGl2Pic7DQogICAgfQ0KICB9DQogIGVsc2V7DQogICBlY2hvICc8ZGl2IGFsaWduPSJjZW50ZXIiPmV2aWwgaW5wdXQ8L2Rpdj4nOw0KICB9DQp9DQo/</span>Pg0KDQpgYGANCg0K5a+<span class="hljs-number">55</span>LqO5LiK5LiA6YGT6aKY55qEcGF5bG9hZOeyvueugOS4gOS4i+WPr+W+lw0KDQrmnoTpgKBgL2Jpbi9jYXQgPz8<span class="hljs-regexp">/Py4/</span>Pz9gDQoNClBXRD1gL3Zhci93d3cvaHRtbGANCg0K5omA5LulUFdE55qE56ys5LiA5L2N5bCx5pivLw0KDQpgYGANCiR7UFdEOjokeyMjfX0gPT09PiAke1BXRDowOjF9ID09PT4gLyAgDQpgYGANCg0K5omA5LulYCR7UFdEOjokeyMjfX0<span class="hljs-regexp">/Pz8ke1BXRDo6JHsjI319Pz90ID8/</span>Pz8uPz8<span class="hljs-regexp">/YA0KDQrov5nph4zkuLrkuobmm7Tnn63kuIDkupvlj6/</span>ku6XlsIZgJHsjU0hMVkx9YOaNouaIkGAkeyMjfWANCg0KYGBgDQoke1BXRDp+JHtTSExWTH06JHsjI319ID09PT4gdCAgDQpgYGANCg0K5omA5Lul5pyA57uIcGF5bG9hZDoNCg0KYGBgDQoke1BXRDo6JHsjI319Pz8<span class="hljs-regexp">/JHtQV0Q6OiR7IyN9fT8/</span>JHtQV0Q6fiR7U0hMVkx9OiR7IyN9fSA<span class="hljs-regexp">/Pz8/</span>Lj8<span class="hljs-regexp">/Pw0KYGBgDQoNCiMjIyDkvovpopgzIGN0ZnNob3cgMTIxDQoNCmBgYHBocA0KPD9waHANCmVycm9yX3JlcG9ydGluZygwKTsNCmhpZ2hsaWdodF9maWxlKF9fRklMRV9fKTsNCmlmKGlzc2V0KCRfUE9TVFsnY29kZSddKSl7DQogICRjb2RlPSRfUE9TVFsnY29kZSddOw0KICBpZighcHJlZ19tYXRjaCgnL1x4MDl8XHgwYXxbYS16XXxbMC05XXxGTEFHfFBBVEh8QkFTSHxIT01FfEhJU1RJR05PUkV8SElTVEZJTEVTSVpFfEhJU1RGSUxFfEhJU1RDTUR8VVNFUnxURVJNfEhPU1ROQU1FfEhPU1RUWVBFfE1BQ0hUWVBFfFBQSUR8U0hMVkx8RlVOQ05BTUV8XC98XCh8XCl8XFt8XF18XFxcXHxcK3xcLXxffH58XCF8XD18XF58XCp8XHgyNnxcJXxcPHxcPnxcJ3xcInxcYHxcfHxcLC8nLCAkY29kZSkpeyANCiAgICBpZihzdHJsZW4oJGNvZGUpPjY1KXsNCiAgICAgIGVjaG8gJzxkaXYgYWxpZ249ImNlbnRlciI+Jy4neW91IGFyZSBzbyBsb25nICwgSSBkb250IGxpa2UgJy4nPC9kaXY+JzsNCiAgICB9ZWxzZXsNCiAgICAJZWNobyAnPGRpdiBhbGlnbj0iY2VudGVyIj4nLnN5c3RlbSgkY29kZSkuJzwvZGl2Pic7DQogICAgfQ0KICB9DQogIGVsc2V7DQogICBlY2hvICc8ZGl2IGFsaWduPSJjZW50ZXIiPmV2aWwgaW5wdXQ8L2Rpdj4nOw0KICB9DQp9DQoNCj8+DQpgYGANCg0K6aaW5YWI5pivU0hMVkzlkox+6KKrYmFu5LqGLOaXoOazleS9v+eUqCzov5nph4zlj6/</span>ku6Xkvb<span class="hljs-regexp">/nlKhyZXYsYmFzZTY0LOaIluiAheS4gOenjeW+iOelnuWlh+eahOaehOmAoHTnmoTmlrnms5UNCg0KIyMjIyAvYmluL3Jldg0KDQpQV0Q9L3Zhci93d3cvaHRtbA0KDQrlj5bluo/</span>lj7fnrKzkuInkvY3lj6<span class="hljs-regexp">/lvpdyICANCg0KYGBgDQoke1BXRDokeyNJRlN9OiR7IyN9fSA9PT0+ICR7UFdEOjM6MX0gPT09PiByDQpgYGANCg0KYGBgDQoke0lGU30g5Y+Y6YeP5piv55So5LqO5a6a5LmJ5a2X5q615YiG6ZqU56ym55qE54m55q6K5Y+Y6YeP77yM6YCa5bi45YyF5ZCr56m65qC844CB5Yi26KGo56ym5ZKM5o2i6KGM56ym44CCDQoNCuWboOatpO+8jCR7I0lGU30g55qE57uT5p6c5Lya5pivICR7SUZTfSDlj5jph4/</span>kuK3lrZfnrKbnmoTplb<span class="hljs-regexp">/luqbjgILpgJrluLjmg4XlhrXkuIvvvIwke0lGU30g55qE6ZW/</span><span class="hljs-number">5</span>bqm5pivIDPvvIzlm6DkuLrlroPljIXlkKvkuobpu5jorqTnmoTnqbrmoLzjgIHliLbooajnrKblkozmjaLooYznrKbov5nkuInkuKrlrZfnrKbjgIINCg0KYGBgDQoNCuS4iumdouS7o+eggeWdl+mHjOadpeiHqmdwdA0KDQrov5nkuKrmlrnms5XnmoTpl67popjlnKjkuo7or7vlj5blh7rmnaXnmoRmbGFn55qE6YCG5bqPLOmcgOimgeiHquW3seWGjemAhuWbnuadpSzmnInngrnpurvng6YNCg0KIyMjIyAvYmluL2Jhc2U2NA0KDQrmnoTpgKA0LOS9v+eUqGAke1JBTkRPTX1g5Lya6ZqP5py655Sf5oiQ5LiA5Liq5pWwLOaMh+acm+S7luebtOaOpeeUn+aIkOS4gOS4qjTmpoLnjoflrp7lnKjmmK<span class="hljs-regexp">/lpKrkvY7kuoYs5LiN5aaC6YCJ5oup6ZW/</span><span class="hljs-number">5</span>bqm5Li6NCzljbMgYCR7I1JBTkRPV019YA0KDQrmiYDku6VwYXlsb2FkOmAvYmluL2Jhc2U2NCBmbGFnLnBocCA9PT0+IC8<span class="hljs-regexp">/Pz8vPz8/</span>Pz80ID8<span class="hljs-regexp">/Pz8uPz8/</span>ID09PT4gJHtQV0Q6OiR7IyN9fT8<span class="hljs-regexp">/PyR7UFdEOjokeyMjfX0/</span>Pz8<span class="hljs-regexp">/PyR7I1JBTkRPTX0gPz8/</span>Py4<span class="hljs-regexp">/Pz9gDQoNCueEtuWQjuWkmuivleWHoOasoeWwseiDveWHuuadpeS4gOS4qjTkvY3mlbDkuoYNCg0KIyMjIyAvYmluL2NhdA0KDQrmjLrmnInmhI/mg</span>J3nmoTmnoTpgKDms5UsdOWcqFBXROmHjOmdouaYr+W6j+WPt+esrDEw5L2NLOaJgOS7peWPr+aehOmAoDEwKOS4jeaYr+WNgSzmmK8x5ZKMMCks5Y2zYCR7IyN9JHsjfWANCg0KcGF5bG9hZDogYC9iaW4vY2F0ID8<span class="hljs-regexp">/Pz8uPz8/</span>ID09PT4gJHtQV0Q6OiR7IyN9fT8<span class="hljs-regexp">/PyR7UFdEOjokeyMjfX0/</span>PyR7UFdEOiR7IyN9JHsjfTokeyMjfX0gPz8<span class="hljs-regexp">/Py4/</span>Pz9g<br></code></pre></td></tr></table></figure>
+
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs stata">在 Linux <span class="hljs-keyword">Shell</span> 中，环境变量是一种在操作系统环境中存储信息的机制。<br><br>这些变量包含了有关系统环境和当前会话的信息，可以影响程序的行为和操作系统的运行。<br><br>以下是关于 Linux <span class="hljs-keyword">Shell</span> 中环墨变量的详细讲解：<br><br>1. 环境变量的种类：<br><br>全局环境变量：对所有用户和进程都可见。<br><br>局部环境变量：只在当前 <span class="hljs-keyword">Shell</span> 会话中可见。<br><br>2. 常见环境变量：<br><br>PATH：包含可执行程序的路径，系统会在这些路径下查找可执行文件。<br><br>HOME：当前用户的主目录路径。<br><br>USER 或 USERNAME：当前登录的用户名。<br><br><span class="hljs-keyword">SHELL</span>：当前使用的 <span class="hljs-keyword">Shell</span> 解释器。<br><br><span class="hljs-keyword">PWD</span>：当前工作目录路径。<br><br>LANG：指定当前语言环境。<br><br>EDITOR：默认文本编辑器。<br><br>IFS: urldecode(<span class="hljs-string">&quot;%20%09%0A&quot;</span>)<br><br>等等...<br><br></code></pre></td></tr></table></figure>
 
 <p>以上来源于gpt</p>
@@ -359,7 +358,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1723543734829"></script>
+    <script async src="/js/copy-codeblock.js?v=1723545464892"></script>
   
 
   
@@ -392,7 +391,7 @@
             <button class="mdui-fab catalog" style="overflow:unset;">
                 <i class="nexmoefont icon-i-catalog"></i>
                 <div class="nexmoe-toc">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%85%A8%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">环境变量全解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E6%96%87"><span class="toc-number">1.2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.2.1.</span> <span class="toc-text">知识点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%983-ctfshow-121"><span class="toc-number">1.2.2.</span> <span class="toc-text">例题3 ctfshow 121</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bin-rev"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">&#x2F;bin&#x2F;rev</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bin-base64"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">&#x2F;bin&#x2F;base64</span></a></li></ol></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%85%A8%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">环境变量全解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%85%A8%E6%88%91%E4%B9%9F%E4%B8%8D%E7%9F%A5%E9%81%93%E6%98%AF%E4%BB%80%E4%B9%88%E5%8E%9F%E5%9B%A0%EF%BC%8Cbase64%E8%87%AA%E5%B7%B1%E8%A7%A3%E4%B8%80%E4%B8%8B%E7%9C%8B%E5%90%A7"><span class="toc-number">1.2.</span> <span class="toc-text">显示不全我也不知道是什么原因，base64自己解一下看吧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E6%96%87"><span class="toc-number">1.3.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.3.1.</span> <span class="toc-text">知识点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%983-ctfshow-121"><span class="toc-number">1.3.2.</span> <span class="toc-text">例题3 ctfshow 121</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bin-rev"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">&#x2F;bin&#x2F;rev</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bin-base64"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">&#x2F;bin&#x2F;base64</span></a></li></ol></li></ol></li></ol></li></ol>
                 </div>
             </button>
             
