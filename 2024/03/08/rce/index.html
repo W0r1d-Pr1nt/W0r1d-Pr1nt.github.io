@@ -23,7 +23,7 @@
 <meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/akRCE/daxie.png">
 <meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/akRCE/payload.png">
 <meta property="article:published_time" content="2024-03-08T14:32:12.000Z">
-<meta property="article:modified_time" content="2024-05-11T15:17:13.296Z">
+<meta property="article:modified_time" content="2024-08-13T08:34:34.723Z">
 <meta property="article:author" content="Pr1nt">
 <meta property="article:tag" content="rce">
 <meta property="article:tag" content="web">
@@ -34,15 +34,15 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1719680636036">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723539244192">
 
-<link rel="stylesheet" href="/css/style.css?v=1719680636036">
+<link rel="stylesheet" href="/css/style.css?v=1723539244192">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1719680636036">
+        <link rel="stylesheet" href="/custom.css?v=1723539244192">
     
 
 
@@ -52,7 +52,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1719680636036"></script>
+<script async src="/js/app.js?v=1723539244192"></script>
 
  
 
@@ -75,7 +75,7 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div><span>文章</span>11</div>
+        <div><span>文章</span>12</div>
         <div><span>标签</span>8</div>
         <div><span>分类</span>4</div>
     </div>
@@ -128,7 +128,7 @@
 </div>
 
 
-	<script async src="/js/search.js?v=1719680636037"></script>
+	<script async src="/js/search.js?v=1723539244193"></script>
 
 
 
@@ -211,7 +211,7 @@
 
         <li class="category-list-item">
           <a class="category-list-link" href="/categories/从0到1/">从0到1</a>
-          <span class="category-list-count">2</span>
+          <span class="category-list-count">3</span>
         </li>
 
         
@@ -233,7 +233,7 @@
         
   <div class="nexmoe-widget-wrap">
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/THM/" style="font-size: 20px;">THM</a> <a href="/tags/WP/" style="font-size: 15px;">WP</a> <a href="/tags/rce/" style="font-size: 15px;">rce</a> <a href="/tags/web/" style="font-size: 10px;">web</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">学习</a> <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="font-size: 10px;">年度总结</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a>
+      <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/THM/" style="font-size: 20px;">THM</a> <a href="/tags/WP/" style="font-size: 15px;">WP</a> <a href="/tags/rce/" style="font-size: 20px;">rce</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">学习</a> <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="font-size: 10px;">年度总结</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a>
     </div>
     
   </div>
@@ -244,7 +244,7 @@
   <div class="nexmoe-widget-wrap">
     <h3 class="nexmoe-widget-title">文章归档</h3>
     <div class="nexmoe-widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">4</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">4</span></li></ul>
     </div>
   </div>
 
@@ -301,8 +301,6 @@
 </blockquote>
 <span id="more"></span>
 
-
-
 <ol>
 <li><a href="#%E6%BC%8F%E6%B4%9E%E6%A6%82%E8%BF%B0">漏洞概述</a></li>
 <li><a href="#%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E5%87%BD%E6%95%B0">常见漏洞函数</a><ol>
@@ -351,7 +349,7 @@
 <p>在Web应用开发中为了灵活性、简洁性等会让应用调用代码执行函数或系统命令执行函数处理，若应用对用户的输入过滤不严，容易产生远程代码执行漏洞或系统命令执行漏洞；</p>
 </blockquote>
 <h2 id="常见漏洞函数"><a href="#常见漏洞函数" class="headerlink" title="常见漏洞函数"></a>常见漏洞函数</h2><h3 id="系统命令执行函数"><a href="#系统命令执行函数" class="headerlink" title="系统命令执行函数"></a>系统命令执行函数</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-title function_ invoke__">system</span>()：能将字符串作为OS命令执行，且返回命令执行结果；  <br><span class="hljs-title function_ invoke__">exec</span>()：能将字符串作为OS命令执行，但是只返回执行结果的最后一行(约等于无回显)；  <br><span class="hljs-title function_ invoke__">shell_exec</span>()：能将字符串作为OS命令执行  <br><span class="hljs-title function_ invoke__">passthru</span>()：能将字符串作为OS命令执行，只调用命令不返回任何结果，但把命令的运行结果原样输出到标准输出设备上；  <br><span class="hljs-title function_ invoke__">popen</span>()：打开进程文件指针  <br><span class="hljs-title function_ invoke__">proc_open</span>()：与<span class="hljs-title function_ invoke__">popen</span>()类似  <br><span class="hljs-title function_ invoke__">pcntl_exec</span>()：在当前进程空间执行指定程序；  <br>反引号``：反引号``内的字符串会被解析为OS命令  <br></code></pre></td></tr></table></figure>
-<h3 id="bash命令"><a href="#bash命令" class="headerlink" title="bash命令"></a>bash命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs shell">more:一页一页的显示档案内容<br>less:与 more 类似<br>head:查看头几行<br>tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示<br>tail:查看尾几行<br>nl：显示的时候，顺便输出行号<br>od:以二进制的方式读取档案内容<br>vi:一种编辑器，这个也可以查看<br>vim:一种编辑器，这个也可以查看<br>sort:可以查看<br>uniq:可以查看<br>ls：查看目录<br>dir：查看目录<br></code></pre></td></tr></table></figure>
+<h3 id="bash命令"><a href="#bash命令" class="headerlink" title="bash命令"></a>bash命令</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs shell">more:一页一页的显示档案内容<br>less:与 more 类似<br>head:查看头几行<br>tac:从最后一行开始显示，可以看出 tac 是 cat 的反向显示<br>tail:查看尾几行<br>nl：显示的时候，顺便输出行号<br>od:以二进制的方式读取档案内容<br>vi:一种编辑器，这个也可以查看<br>vim:一种编辑器，这个也可以查看<br>sort:可以查看<br>uniq:可以查看<br>ls：查看目录<br>dir：查看目录<br>grep:<br>wget:<br>sed: <br>cut:<br>awk:<br>strings:<br>od:<br>curl:<br>scp:<br>xxd:<br>mv: <br>cp:<br>pwd:<br></code></pre></td></tr></table></figure>
 
 <h3 id="代码执行函数"><a href="#代码执行函数" class="headerlink" title="代码执行函数"></a>代码执行函数</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">eval</span>()：将字符串作为php代码执行；  <br><span class="hljs-title function_ invoke__">assert</span>()：将字符串作为php代码执行；  <br><span class="hljs-title function_ invoke__">preg_replace</span>()：正则匹配替换字符串；  <br><span class="hljs-title function_ invoke__">create_function</span>()：主要创建匿名函数；  <br><span class="hljs-title function_ invoke__">call_user_func</span>()：回调函数，第一个参数为函数名，第二个参数为函数的参数；  <br><span class="hljs-title function_ invoke__">call_user_func_array</span>()：回调函数，第一个参数为函数名，第二个参数为函数参数的数组；  <br>可变函数：若变量后有括号，该变量会被当做函数名为变量值(前提是该变量值是存在的函数名)的函数执行；  <br><br></code></pre></td></tr></table></figure>
 
@@ -369,7 +367,7 @@
 <td align="center">$IFS$9</td>
 <td align="center">${IFS}</td>
 <td align="center">$IFS</td>
-<td align="center"></td>
+<td align="center">%0d</td>
 </tr>
 </tbody></table>
 <h3 id="函数过滤"><a href="#函数过滤" class="headerlink" title="函数过滤:"></a>函数过滤:</h3><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs livescript">使用<span class="hljs-string">\绕过</span> 如:ca<span class="hljs-string">\t</span> fla<span class="hljs-string">\g</span><br>l<span class="hljs-string">\s</span><br>使用<span class="hljs-string">&#x27;&#x27;</span>绕过,如:<br>ca<span class="hljs-string">&#x27;&#x27;</span>t /flag<br></code></pre></td></tr></table></figure>
@@ -536,7 +534,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1719680635883"></script>
+    <script async src="/js/copy-codeblock.js?v=1723539244010"></script>
   
 
   

