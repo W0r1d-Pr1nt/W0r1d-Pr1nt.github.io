@@ -14,7 +14,7 @@
 <meta property="og:description" content="环境变量全解">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-28T12:29:12.000Z">
-<meta property="article:modified_time" content="2024-08-16T08:03:36.656Z">
+<meta property="article:modified_time" content="2024-08-18T06:53:52.512Z">
 <meta property="article:author" content="Pr1nt">
 <meta property="article:tag" content="rce">
 <meta property="article:tag" content="web">
@@ -24,15 +24,15 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723795549796">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723980321216">
 
-<link rel="stylesheet" href="/css/style.css?v=1723795549796">
+<link rel="stylesheet" href="/css/style.css?v=1723980321216">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1723795549796">
+        <link rel="stylesheet" href="/custom.css?v=1723980321216">
     
 
 
@@ -42,7 +42,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1723795549796"></script>
+<script async src="/js/app.js?v=1723980321216"></script>
 
  
 
@@ -118,7 +118,7 @@
 </div>
 
 
-	<script async src="/js/search.js?v=1723795549797"></script>
+	<script async src="/js/search.js?v=1723980321216"></script>
 
 
 
@@ -325,7 +325,7 @@
 <p>这里还有一个要补充,即 ${#PWD} 的意思为PWD的长度,例如PWD为<code>/var/www/html</code>,则长度为14</p>
 <p>对于上面一大堆常见环境变量,我们有大部分是不能知道的,只有PWD PATH SHLVL这种是近乎可以稳定知道的（SHLVL是记录多个 Bash 进程实例嵌套深度的累加器,进程第一次打开shell时$SHLVL=1，然后在此shell中再打开一个shell时$SHLVL=2。）</p>
 <p>0：<code>${#}</code></p>
-<p>1：<code>${#SHLVL}=${#{% raw %}#}{% endraw %}=${#?}=1</code></p>
+<p>1：<code>${#SHLVL}=${##}=${#?}=1</code></p>
 <p>2：<code>$&#123;SHLVL&#125;=2</code> （SHLVL是记录多个 Bash 进程实例嵌套深度的累加器,进程第一次打开shell时$SHLVL=1，然后在此shell中再打开一个shell时$SHLVL=2。）</p>
 <p>3：<code>${#IFS}=3</code>。（linux下是3，mac里是4）</p>
 <p>SHLVL一般是: 2</p>
@@ -390,7 +390,7 @@
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1723795549648"></script>
+    <script async src="/js/copy-codeblock.js?v=1723980321042"></script>
   
 
   
