@@ -32,15 +32,15 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1723982508997">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1724690082747">
 
-<link rel="stylesheet" href="/css/style.css?v=1723982508997">
+<link rel="stylesheet" href="/css/style.css?v=1724690082747">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1723982508997">
+        <link rel="stylesheet" href="/custom.css?v=1724690082747">
     
 
 
@@ -50,7 +50,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1723982508997"></script>
+<script async src="/js/app.js?v=1724690082748"></script>
 
  
 
@@ -126,7 +126,7 @@
 </div>
 
 
-	<script async src="/js/search.js?v=1723982508998"></script>
+	<script async src="/js/search.js?v=1724690082748"></script>
 
 
 
@@ -283,8 +283,8 @@
             <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E4%BB%8E0%E5%88%B01/">从0到1</a>
         
         
-    <a><i class="nexmoefont icon-areachart"></i>约7.1k字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要26分钟</a>
+    <a><i class="nexmoefont icon-areachart"></i>约8.1k字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要29分钟</a>
 
     </div>
     
@@ -456,9 +456,27 @@ Go111modules最好设置为auto，虽然具体作用还不知道<br>
 <li>一个逻辑报错修一下午</li>
 <li>好不容易写了一大堆代码出来发现还没实现自己想要的功能但写都写了于是只好全部注释掉留给未来的自己或别人</li>
 </ol>
-<p>代码结构：</p>
-<p>设立func target接受目标，用这个函数记录一下flag函数内容<code>flag.StringVar(&amp;i, &quot;i&quot;, &quot;&quot;, &quot;参数点&quot;)</code><br>
-接收参数i，默认为空，意义是参数点，&amp;是对变量取地址，需要提前声明变量，一般建议var全局声明这里为什么不用<code>url := flag.String(&quot;u&quot;, &quot;&quot;, &quot;target url&quot;)</code>这种写法呢,这个url是一个指针,以后每次使用都需要 *url取值,而且对一些其他的运算什么的也不清楚有没有其他的问题,所以没有选用结尾要用<code>flag.Parse()</code>解析一下</p>
+<p>首先第一点建议，如果你发现有的功能需要反复利用或者反复利用的同时需要设置一些变量，不妨将其写进一个函数中，然后通过传一个参数来控制后面的变量，这样就能通过反复调用这个函数来避免重复写相同代码，避免屎山的堆叠</p>
+<p>这部分其实也是后写的，GUI部分在后面，这里主要写各函数功能和自动模式的编写思路</p>
+<h4 id="自动模式">自动模式</h4>
+<p>我的自动模式主文件是script/rcemap.go，一开始的文件名也是这个，但是后来写fyneGUI的时候新建了main.go,后续就用main当主程序了</p>
+<p>经过不断的调整,我的rcemap.go文件里面含有三个函数,Test Damn GP</p>
+<p>Test这个函数负责实现获取题目源码与过滤,方便进行下一步操作<br>
+Damn这个函数你看名字就挺damn的,实际上这个就是主操作部分的一套函数,用于对于过滤的不同情况枚举出需要下一步执行的功能函数,也就是在写这个函数的时候,写到黑名单那里写不下去了,于是决定写在手动那边,自动模式实在是容易出现各种逻辑洞,直到现在各种判断也写的不够好不够完全,部分逻辑判断还是会失误,这个就留到后面慢慢改吧<br>
+GP这个函数非常简单,接收URL,接收参数,接收传参方式,接收命令,然后发包执行,就是这么简单的一个函数,但是其他部分在开发的时候经常要用到通过不同传参方式传的情况,所以简简单单的一个函数通过反复的调用真的能减少很多不必要的代码</p>
+<h4 id="手动模式">手动模式</h4>
+<p>我将在这个模式中写入大量自动无法实现或难以实现的功能,这里如果使用命令行的方式那么参数将相当的多,我并不希望当查看help的时候会出现一大堆乱七八糟的参数,所以我决定使用GUI,这样就会更美观简洁,提高使用效率</p>
+<p>这个板块的笔记里面会写上我script文件夹中各文件的分类与各函数的作用</p>
+<p>文件夹结构:</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs maxima"><br>script/<br>    ├── bashfuck.<span class="hljs-built_in">go</span><br>    ├── <span class="hljs-built_in">eval</span>.<span class="hljs-built_in">go</span><br>    ├── six2one.<span class="hljs-built_in">go</span><br>    ├── fuzzpro.<span class="hljs-built_in">go</span><br>    ├── misc.<span class="hljs-built_in">go</span><br>    └── <span class="hljs-built_in">system</span>.<span class="hljs-built_in">go</span><br><br></code></pre></td></tr></table></figure>
+<p><code>bashfuck.go</code> 这个文件主要是对探姬大佬的bashfuck脚本进行的go重构版以便在我的工具里使用</p>
+<p><code>eval.go</code> 这个文件里面写了对于源码中执行eval函数时的各种情况所需函数包括Qufan(取反) Zizeng(自增) Ff(使用%ff为变量的骚方法) Xor(异或) Or(无数字字母或) Noshuzievaljinjie(无数字的进阶版,主要是$被ban了之后的情况) Xorplus(异或在限制字符种类数量的情况)</p>
+<p><code>six2one.go  misc.go</code> 这两个文件一起说了,<code>six2one.go</code>这个文件里面一开始是想写对于手动模式下 <code>无数字字母RCE 黑名单绕过 少量字符RCE 环境变量构造</code> 这几个情况,但后来还有一些其他的东西没地方加就直接加这里了,包括 <code>preg_replace/e的利用 和 file_put_content的利用</code>,原名叫<code>four2one</code>,后来改了才叫这个的</p>
+<p>其中黑名单部分写的代码最多,贡献了283行代码,其中还有一些小函数被我放在了misc.go那个文件里面,那个文件里面塞了240行代码,所以总共算起来应该有500+行代码 (这里可能会有重复的屎山代码,但是改不过来了也懒得再写一个函数了就直接复制过去了)<br>
+然后额外目前是写了四个函数, Pwd(使用环境变量进行构造) Replace(preg_replace/e的利用) Fewchar(少量字符,未来7,5,4都会塞里面) File_put(如题,file_put_content的利用)</p>
+<p><code>fuzzpro.go</code> 这个文件里面就是自写的用来fuzz的脚本了,后续可能会更新,可能会废弃,不好说,里面也写了300行代码了</p>
+<p><code>system.go</code> 这个文件里面就是system函数时的各种函数了,但里面也只写了一个Bashfuck函数,因为还有其他的例如少量字符这种的扔six2one那里了,所以这里只有一个这个,用来调用bashfuck那个文件里面的其他函数,与原版bashfuck没一毛钱关系</p>
+<hr>
 <h2 id="GUI部分">GUI部分</h2>
 <h3 id="开头杂谈">开头杂谈</h3>
 <blockquote>
@@ -506,10 +524,11 @@ Go111modules最好设置为auto，虽然具体作用还不知道<br>
 <p>写写遇到的逻辑洞吧，比如识别<code>phpinfo()</code>和<code>system(whoami)</code>经常写死,比如<code>&quot;(&quot; + ff1 + &quot;^&quot; + ff2 + &quot;)&quot;</code>,ff1和2就是括号里面的内容,但是对于phpinfo()这种括号里面没东西的造出来的结果就变成了<code>(^)</code>,所以这里得加个判断,判断下括号里是否存在内容然后之前写个自增方法rce的只考虑了get方法,导致直接<code>?code=....$_GET[%ff]&amp;%ff=....</code>但是改成POST方式时还是用的<code>$_GET[%ff]</code>,而且传参是POST传的%ff,就导致无效,就得改为GET请求能<code>var bool string</code>,然后<code>func (bool string)&#123;&#125;</code>接着在func里赋值,然后<code>if bool==&quot;0&quot;&#123;&#125;</code>,就不要<code>bool := func () (bool) &#123;&#125;</code>,然后在func里面return false,这样会浪费return,而且是不必要的好像然后就没啥东西了,主要就是原代码的修改适配,关于GUI的容器部分自动模式这里是完事了的,再有知识点就得手动模式了,但是我估计我也写不到别的,现在就容器,button,entry,radio,select,可能还有split和scroll,就能用上这些组件,早都会用了,没啥知识点了</p>
 <p>现在开发就是稳步推进中,工作日晚上回来不是很有时间慢慢适配找bug,所以只能周末更,Blog已经很久没有新内容了(除了这个笔记以外),新买了一个m2,下个jetbrains的软件看看go的IDE和vscode比哪个好用吧,说是按tab自动补全,但是不知道具体有多智能,估计靠谱不到哪去(嘿,用完发现还行,而且打开速度很快,3500mb/s的读取速度5秒打开,果断放弃vscode)</p>
 <p>后面手动模式还得写个利用环境变量构造命令的函数,绕黑名单,绕7字符,就黑名单那玩意,正常ctf里简单的要死,但是写逻辑函数就贼费劲,而且一大堆乱七八糟的情况,命令多,过滤复杂,真烦死了,环境变量那个根本不知道怎么写函数,七字符我自己还没看明白呢,所以一直拖着进度很慢嗯,就这些</p>
-<h3 id="手动模式">手动模式</h3>
+<h3 id="手动模式-2">手动模式</h3>
 <p>首先是用了一阵子发现自己傻逼一样非得把url和端口分开，于是就合并了，没必要分开的根本，手动这边，参数点和执行命令是怎么的都得用的，所以就固定在了上面，phpVersion听说好像能探测出来，现在还不会，以后再看看有人跟我说要我内置个分析工具分析代码逻辑，我寻思做不到，这个得接入ai，直到今天github发现一个codeQLpy(一个基于codeQL开发的java代码审计工具，好像以后会加其他语言)，我寻思他这java都能代码审计了，咱基于codeQL写个php的自动化代码审计工具好像也不是做不到，之后再说吧现在不会完事有一个比较有意思的东西，就是通过不同的选择然后给一个字符串赋个值,最后START的时候switch这个字符串的不同值执行不同代码,也算是个小经验吧(可能大部分人都是这样的?)<br>
 还遇到个大哥,大哥对我这玩意十分看好,抱一百个期待,就冲这个大哥就得多加点功能进去</p>
-<p>9可以合并到无数字字母进阶版里面，10xml严格来讲跟我这没关系，67肝一肝应该能写个不完全的版本，5放弃，这个到时候扔反序列化那里面，人自己学自己搞吧我这暂时识别不了（前两天看到一个codeQL好像是能代码审计，但是没看懂，有人二开了一个java自动化代码审计工具，不知道效果），4跑跑脚本应该也能行，3这个严格来讲做不了，现在这个是nmap写文件，还可能出现那种直接eval的，还可能拿另一个能写文件的软件完事设置参数啥的，也挺费劲，2第一关不管了，第二关preg-replace能写，1做不了</p>
+<p>9可以合并到无数字字母进阶版里面，10xml严格来讲跟我这没关系，67肝一肝应该能写个不完全的版本，4跑跑脚本应该也能行，3这个严格来讲做不了，现在这个是nmap写文件，还可能出现那种直接eval的，还可能拿另一个能写文件的软件完事设置参数啥的，也挺费劲</p>
+<p>经手动统计, 已写80+440+303+248+266+335+97+549=2318行代码 (包含大量注释与换行,就算都去掉了,怎么的1800行也有了)</p>
 
     
   </article>
@@ -527,7 +546,7 @@ Go111modules最好设置为auto，虽然具体作用还不知道<br>
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1723982508828"></script>
+    <script async src="/js/copy-codeblock.js?v=1724690082528"></script>
   
 
   
@@ -560,7 +579,7 @@ Go111modules最好设置为auto，虽然具体作用还不知道<br>
             <button class="mdui-fab catalog" style="overflow:unset;">
                 <i class="nexmoefont icon-i-catalog"></i>
                 <div class="nexmoe-toc">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E0%E5%88%B01%EF%BC%8CRCEmap%E5%BC%80%E5%8F%91%E4%B9%8B%E6%97%85"><span class="toc-number">1.</span> <span class="toc-text">从0到1，RCEmap开发之旅</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%81%B5%E6%84%9F%E6%9D%A5%E6%BA%90%EF%BC%9Asqlmap"><span class="toc-number">1.1.</span> <span class="toc-text">灵感来源：sqlmap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">多个阶段</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">开发日记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%9C%88"><span class="toc-number">1.</span> <span class="toc-text">三月</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8813%E6%97%A5%E6%99%9A"><span class="toc-number">1.1.</span> <span class="toc-text">3月13日晚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8814%E6%97%A5"><span class="toc-number">1.2.</span> <span class="toc-text">3月14日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8815%E6%97%A5%E6%99%9A"><span class="toc-number">1.3.</span> <span class="toc-text">3月15日晚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8816%E6%97%A5"><span class="toc-number">1.4.</span> <span class="toc-text">3月16日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8817%E6%97%A5"><span class="toc-number">1.5.</span> <span class="toc-text">3月17日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8821%E6%97%A5"><span class="toc-number">1.6.</span> <span class="toc-text">3月21日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8827%E6%97%A5"><span class="toc-number">1.7.</span> <span class="toc-text">3月27日</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E6%9C%88"><span class="toc-number">2.</span> <span class="toc-text">四月</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%881%E6%97%A5"><span class="toc-number">2.1.</span> <span class="toc-text">4月1日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%889%E6%97%A5-%E6%B2%A1%E6%9C%89%E6%9B%B4%E6%96%B0%EF%BC%8C%E6%98%AF%E6%80%9D%E8%80%83"><span class="toc-number">2.2.</span> <span class="toc-text">4月9日(没有更新，是思考)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%8815%E6%97%A5"><span class="toc-number">2.3.</span> <span class="toc-text">4月15日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%8817%E6%97%A5"><span class="toc-number">2.4.</span> <span class="toc-text">4月17日</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">开发笔记（未完待续）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E6%AD%A5%E9%98%B6%E6%AE%B5"><span class="toc-number">2.</span> <span class="toc-text">起步阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">环境变量设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E9%97%AE%E9%A2%98"><span class="toc-number">2.2.</span> <span class="toc-text">前置问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%BB%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.3.</span> <span class="toc-text">编写主程序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GUI%E9%83%A8%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">GUI部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A4%B4%E6%9D%82%E8%B0%88"><span class="toc-number">3.1.</span> <span class="toc-text">开头杂谈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%85%E6%B5%85%E5%B9%B2%E8%B4%A7"><span class="toc-number">3.2.</span> <span class="toc-text">浅浅干货</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%A8%A1%E5%BC%8F%E5%AE%8C%E7%BB%93"><span class="toc-number">3.3.</span> <span class="toc-text">自动模式完结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.4.</span> <span class="toc-text">手动模式</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8E0%E5%88%B01%EF%BC%8CRCEmap%E5%BC%80%E5%8F%91%E4%B9%8B%E6%97%85"><span class="toc-number">1.</span> <span class="toc-text">从0到1，RCEmap开发之旅</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%81%B5%E6%84%9F%E6%9D%A5%E6%BA%90%EF%BC%9Asqlmap"><span class="toc-number">1.1.</span> <span class="toc-text">灵感来源：sqlmap</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.1.</span> <span class="toc-text">多个阶段</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">开发日记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%9C%88"><span class="toc-number">1.</span> <span class="toc-text">三月</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8813%E6%97%A5%E6%99%9A"><span class="toc-number">1.1.</span> <span class="toc-text">3月13日晚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8814%E6%97%A5"><span class="toc-number">1.2.</span> <span class="toc-text">3月14日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8815%E6%97%A5%E6%99%9A"><span class="toc-number">1.3.</span> <span class="toc-text">3月15日晚</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8816%E6%97%A5"><span class="toc-number">1.4.</span> <span class="toc-text">3月16日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8817%E6%97%A5"><span class="toc-number">1.5.</span> <span class="toc-text">3月17日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8821%E6%97%A5"><span class="toc-number">1.6.</span> <span class="toc-text">3月21日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E6%9C%8827%E6%97%A5"><span class="toc-number">1.7.</span> <span class="toc-text">3月27日</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E6%9C%88"><span class="toc-number">2.</span> <span class="toc-text">四月</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%881%E6%97%A5"><span class="toc-number">2.1.</span> <span class="toc-text">4月1日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%889%E6%97%A5-%E6%B2%A1%E6%9C%89%E6%9B%B4%E6%96%B0%EF%BC%8C%E6%98%AF%E6%80%9D%E8%80%83"><span class="toc-number">2.2.</span> <span class="toc-text">4月9日(没有更新，是思考)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%8815%E6%97%A5"><span class="toc-number">2.3.</span> <span class="toc-text">4月15日</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E6%9C%8817%E6%97%A5"><span class="toc-number">2.4.</span> <span class="toc-text">4月17日</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number"></span> <span class="toc-text">开发笔记（未完待续）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-number">1.</span> <span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E6%AD%A5%E9%98%B6%E6%AE%B5"><span class="toc-number">2.</span> <span class="toc-text">起步阶段</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E8%AE%BE%E7%BD%AE"><span class="toc-number">2.1.</span> <span class="toc-text">环境变量设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E9%97%AE%E9%A2%98"><span class="toc-number">2.2.</span> <span class="toc-text">前置问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E4%B8%BB%E7%A8%8B%E5%BA%8F"><span class="toc-number">2.3.</span> <span class="toc-text">编写主程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.3.1.</span> <span class="toc-text">自动模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">2.3.2.</span> <span class="toc-text">手动模式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GUI%E9%83%A8%E5%88%86"><span class="toc-number">3.</span> <span class="toc-text">GUI部分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%80%E5%A4%B4%E6%9D%82%E8%B0%88"><span class="toc-number">3.1.</span> <span class="toc-text">开头杂谈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%85%E6%B5%85%E5%B9%B2%E8%B4%A7"><span class="toc-number">3.2.</span> <span class="toc-text">浅浅干货</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%A8%A1%E5%BC%8F%E5%AE%8C%E7%BB%93"><span class="toc-number">3.3.</span> <span class="toc-text">自动模式完结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E6%A8%A1%E5%BC%8F-2"><span class="toc-number">3.4.</span> <span class="toc-text">手动模式</span></a></li></ol></li></ol>
                 </div>
             </button>
             
