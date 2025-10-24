@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="zh"><head>
+<title>从0到1，AKctfshow_web入门 - Pr1nt&#39;s_blog</title>
+<meta charset="UTF-8">
+<meta name="keywords" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+
+<link rel="shortcut icon" href="/images/head/oni.png" type="image/png" />
+<meta name="description" content="ctfshow-web入门全解  重新走一遍ctfshow,顺便记录下wp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从0到1，AKctfshow_web入门">
+<meta property="og:url" content="http://w0r1d-pr1nt.github.io/2025/10/24/ctfshow_web/index.html">
+<meta property="og:site_name" content="Pr1nt&#39;s_blog">
+<meta property="og:description" content="ctfshow-web入门全解  重新走一遍ctfshow,顺便记录下wp">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-10-24T08:40:00.000Z">
+<meta property="article:modified_time" content="2025-10-24T16:53:56.189Z">
+<meta property="article:author" content="Pr1nt">
+<meta property="article:tag" content="rce">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary">
+
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1761324935175">
+
+<link rel="stylesheet" href="/css/style.css?v=1761324935175">
+
+
+
+
+    
+        <link rel="stylesheet" href="/custom.css?v=1761324935175">
+    
+
+
+
+<script src="/lib/mdui_043tiny/mdui.js" async></script>
+<script src="/lib/fancybox/fancybox.umd.js" async></script>
+<script src="/lib/lax.min.js" async></script>
+
+
+<script async src="/js/app.js?v=1761324935175"></script>
+
+ 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4D4ZJ9G024"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "G-4D4ZJ9G024");
+</script>
+
+
+<link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+<meta name="generator" content="Hexo 7.3.0"></head><body class="nexmoe mdui-drawer-body-left"><div id="nexmoe-background"><div class="nexmoe-bg" style="background-image: url(/images/background/background.png)"></div><div class="mdui-appbar mdui-shadow-0"><div class="mdui-toolbar"><a class="mdui-btn mdui-btn-icon mdui-ripple" mdui-drawer="{target: &#039;#drawer&#039;, swipe: true}" title="menu"><i class="mdui-icon nexmoefont icon-menu"></i></a><div class="mdui-toolbar-spacer"></div><a class="mdui-btn mdui-btn-icon" href="/" title="Pr1nt"><img src="/images/head/onimai.png" alt="Pr1nt"></a></div></div></div><div id="nexmoe-header"><div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Pr1nt">
+            <img src="/images/head/onimai.png" alt="Pr1nt" alt="Pr1nt">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>21</div>
+        <div><span>标签</span>9</div>
+        <div><span>分类</span>5</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/archives.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于Pr1nt">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于Pr1nt
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/friend.html" title="友情链接">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                友情链接
+            </div>
+        </a>
+        
+    </div>
+    
+    
+        
+        <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="搜索" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+
+
+	<script async src="/js/search.js?v=1761324935175"></script>
+
+
+
+    
+        
+        <div class="nexmoe-widget-wrap">
+	<div class="nexmoe-widget nexmoe-social">
+		<a
+			class="mdui-ripple"
+			href="https://qm.qq.com/q/8up8m0lXc4"
+			target="_blank"
+			mdui-tooltip="{content: 'QQ'}"
+			style="
+				color: rgb(249, 174, 8);
+				background-color: rgba(249, 174, 8, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-QQ"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://space.bilibili.com/632631573"
+			target="_blank"
+			mdui-tooltip="{content: '哔哩哔哩'}"
+			style="
+				color: rgb(231, 106, 141);
+				background-color: rgba(231, 106, 141, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-bilibili"
+			></i> </a
+		><a
+			class="mdui-ripple"
+			href="https://github.com/W0r1d-Pr1nt/"
+			target="_blank"
+			mdui-tooltip="{content: 'GitHub'}"
+			style="
+				color: rgb(25, 23, 23);
+				background-color: rgba(25, 23, 23, .1);
+			"
+		>
+			<i
+				class="nexmoefont icon-github"
+			></i> </a
+		>
+	</div>
+</div>
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Life/">Life</a>
+          <span class="category-list-count">8</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Try-Hack-Me/">Try Hack Me</a>
+          <span class="category-list-count">3</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/WriteUp/">WriteUp</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/从0到1/">从0到1</a>
+          <span class="category-list-count">5</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/学习/">学习</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/CTF/" style="font-size: 10px;">CTF</a> <a href="/tags/THM/" style="font-size: 13.33px;">THM</a> <a href="/tags/WP/" style="font-size: 10px;">WP</a> <a href="/tags/rce/" style="font-size: 16.67px;">rce</a> <a href="/tags/web/" style="font-size: 13.33px;">web</a> <a href="/tags/%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">学习</a> <a href="/tags/%E5%BC%80%E5%8F%91/" style="font-size: 10px;">开发</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 13.33px;">总结</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 20px;">杂谈</a>
+    </div>
+    
+  </div>
+
+    
+        
+        
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章归档</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/">2023</a><span class="archive-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+
+
+    
+        
+   
+    <div class="nexmoe-copyright">
+        &copy; 2025 Pr1nt
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <!--
+<theme-button value="dark" id="btn" size="3"></theme-button>
+<script>
+  document.body.style.backgroundColor = "#424242";
+  btn.addEventListener("change", e => {
+    if (e.detail === 'dark') {
+      document.body.style.backgroundColor = "#424242";
+    }
+    else {
+      document.body.style.backgroundColor = "#000000";
+    }
+  });
+</script>
+<script src="js/light.js"></script>
+-->
+<br>
+<br>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<span id="busuanzi_container_site_pv">
+  本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<br>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+    </div>
+</div><!-- .nexmoe-drawer --></div><div id="nexmoe-content"><div class="nexmoe-primary"><div class="nexmoe-post">
+  <article>
+    
+        <div class="nexmoe-post-cover absolute" style="padding-top: 56.25%;"> 
+            <img src="/images/post/ctfshow_web.jpg" alt="从0到1，AKctfshow_web入门" loading="lazy">
+            <h1>从0到1，AKctfshow_web入门</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta">
+    <div class="nexmoe-rainbow">
+        <a class="nexmoefont icon-calendar-fill">2025年10月24日</a>
+        
+            <a class="nexmoefont icon-appstore-fill -link" href="/categories/%E4%BB%8E0%E5%88%B01/">从0到1</a>
+        
+        
+    <a><i class="nexmoefont icon-areachart"></i>约1.1k字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>预计需要4分钟</a>
+
+    </div>
+    
+    
+    
+    
+    
+</div>
+
+    <h1>ctfshow-web入门全解</h1>
+<blockquote>
+<p>重新走一遍ctfshow,顺便记录下wp</p>
+</blockquote>
+<span id="more"></span>
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=true} -->
+<!-- code_chunk_output -->
+<ol>
+<li><a href="#ctfshow-web%E5%85%A5%E9%97%A8%E5%85%A8%E8%A7%A3">ctfshow-web入门全解</a>
+<ol>
+<li><a href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86">信息收集</a></li>
+<li><a href="#%E7%88%86%E7%A0%B4">爆破</a>
+<ol>
+<li><a href="#web21">web21</a></li>
+<li><a href="#web22">web22</a></li>
+<li><a href="#web23">web23</a></li>
+<li><a href="#web24">web24</a></li>
+<li><a href="#web25">web25</a></li>
+<li><a href="#web26">web26</a></li>
+<li><a href="#web27">web27</a></li>
+<li><a href="#web28">web28</a></li>
+</ol>
+</li>
+<li><a href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C">命令执行</a>
+<ol>
+<li><a href="#web71">web71</a></li>
+<li><a href="#web72">web72</a></li>
+<li><a href="#web73">web73</a></li>
+<li><a href="#web74">web74</a></li>
+</ol>
+</li>
+<li><a href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB">文件包含</a></li>
+<li><a href="#php%E7%89%B9%E6%80%A7">php特性</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0">文件上传</a></li>
+<li><a href="#sql%E6%B3%A8%E5%85%A5">sql注入</a></li>
+<li><a href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96">反序列化</a></li>
+<li><a href="#java">java</a></li>
+<li><a href="#%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1">代码审计</a></li>
+<li><a href="#phpcve">phpCVE</a></li>
+<li><a href="#xss">XSS</a></li>
+<li><a href="#nodejs">nodejs</a></li>
+<li><a href="#jwt">jwt</a></li>
+<li><a href="#ssrf">SSRF</a></li>
+<li><a href="#ssti">SSTI</a></li>
+<li><a href="#xxe">XXE</a></li>
+<li><a href="#%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8">区块链安全</a></li>
+<li><a href="#%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95">黑盒测试</a></li>
+<li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
+<li><a href="#%E5%B5%8C%E5%85%A5%E5%BC%8F">嵌入式</a></li>
+<li><a href="#%E6%A1%86%E6%9E%B6%E5%A4%8D%E7%8E%B0">框架复现</a></li>
+<li><a href="#cms">CMS</a></li>
+<li><a href="#%E4%B8%AD%E6%9C%9F%E6%B5%8B%E8%AF%84">中期测评</a></li>
+<li><a href="#sqli-labs">sqli-labs</a></li>
+<li><a href="#thinkphp%E4%B8%93%E9%A2%98">thinkphp专题</a></li>
+<li><a href="#%E7%BB%84%E4%BB%B6%E6%BC%8F%E6%B4%9E">组件漏洞</a></li>
+<li><a href="#laravel%E4%B8%93%E9%A2%98">Laravel专题</a></li>
+<li><a href="#yii%E4%B8%93%E9%A2%98">Yii专题</a></li>
+<li><a href="#%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8">终极考核</a></li>
+<li><a href="#%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81">权限维持</a></li>
+<li><a href="#%E5%A4%A7%E8%B5%9B%E5%8E%9F%E9%A2%98">大赛原题</a></li>
+<li><a href="#%E5%B8%B8%E7%94%A8%E5%A7%BF%E5%8A%BF">常用姿势</a></li>
+<li><a href="#%E7%A8%8E%E5%8A%A1%E6%AF%94%E6%AD%A6">税务比武</a></li>
+<li><a href="#java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96">java反序列化</a></li>
+<li><a href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F">内网渗透</a></li>
+</ol>
+</li>
+</ol>
+<!-- /code_chunk_output -->>
+<blockquote>
+<p>由于我们是以夯实基础为主,所以我不会使用sqlmap之类的工具一把梭</p>
+</blockquote>
+<h2 id="信息收集">信息收集</h2>
+<p>不写了,这里直接点下面的hint就能看到,提一嘴如果由于js导致看不了源码可以点一下url再进行f12或者ctrl+u</p>
+<h2 id="爆破">爆破</h2>
+<h3 id="web21">web21</h3>
+<p>点开发现要输用户名和密码,抓包发现有个<code>Authorization: Basic YWRtaW46MTIzNDU2</code>,解码后面的是<code>admin:123456</code>,这里就可以直接爆破了使用burp&gt;Intruder&gt;payload处理先前缀一个<code>admin:</code>,再<code>base64-encode</code>,最后把下面的URL编码取消,就可以爆了</p>
+<h3 id="web22">web22</h3>
+<p>爆破域名,好像环境坏了,直接交flag吧</p>
+<h3 id="web23">web23</h3>
+<p>接收一个参数并进行md5,如果第2,15,18位字符相同,而且整数值的和除以第二位的整数值等于第32位的整数值,则输出flag<br>
+burp&gt;Intruder&gt;Brute forcer&gt;1-2长度,爆破出为<code>3j</code></p>
+<h3 id="web24">web24</h3>
+<p>使用372619038作为随机数的种子,生成随机数,由于种子固定,所以其实随机数也是固定的,经本地测试恒为1155388967,所以直接r=1155388967就行</p>
+<h3 id="web25">web25</h3>
+<p>先输入r=0,得到第一次的随机数,然后使用php_mt_seed工具推出seed值,然后对应一下7.3.11的版本,取第二次和第三次的和写入token中发包就可以获取到flag了</p>
+<h3 id="web26">web26</h3>
+<p>?这题好诡异啊,点进去抓包全放直到抓到checkdb.php,然后啥都不填发送就行<code>a=&amp;p=&amp;d=&amp;u=&amp;pass=</code>就返回flag了</p>
+<h3 id="web27">web27</h3>
+<p>点开莫名其妙，有个录取名单直接下，打开有个叫高先伊的直接爆破身份证号<br>
+Intruder&gt;日期&gt;从19800101爆到20201231,格式选下面的自填yyyyMMDD,直接爆就行,查询到学号直接拿身份证号登陆就行<br>
+<code>高先伊 身份证号：621022199002015237 学号：02015237 </code></p>
+<h3 id="web28">web28</h3>
+<p><code>GET /§0§/§1§/ HTTP/1.1</code>,选择(Clusterbomb)模式,从0到100爆破,最多10000次,爆出来<code>/72/20/</code>,直接返回flag了</p>
+<h2 id="命令执行">命令执行</h2>
+<blockquote>
+<p>直接看hint吧,看不懂的看我rce全解那篇文章,很全了,web118到web121看我环境变量全解那集</p>
+</blockquote>
+<p>web41这个位置肯定是放错了,应该放55-57这个位置的着重讲一下web71开始,这里与前面就不是一个难度了</p>
+<h3 id="web71">web71</h3>
+<p>源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><span class="hljs-title function_ invoke__">ini_set</span>(<span class="hljs-string">&#x27;display_errors&#x27;</span>, <span class="hljs-number">0</span>);<br><span class="hljs-comment">// 你们在炫技吗？</span><br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;c&#x27;</span>]))&#123;<br>        <span class="hljs-variable">$c</span>= <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;c&#x27;</span>];<br>        <span class="hljs-keyword">eval</span>(<span class="hljs-variable">$c</span>);<br>        <span class="hljs-variable">$s</span> = <span class="hljs-title function_ invoke__">ob_get_contents</span>();<br>        <span class="hljs-title function_ invoke__">ob_end_clean</span>();<br>        <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">preg_replace</span>(<span class="hljs-string">&quot;/[0-9]|[a-z]/i&quot;</span>,<span class="hljs-string">&quot;?&quot;</span>,<span class="hljs-variable">$s</span>);<br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+<p>这里是先执行代码,然后将返回的内容放至缓冲区,然后进行过滤,但是我们可以提前退出结束这个代码来绕过缓冲区的限制,例如<code>exit()</code>,<code>ob_flush()</code>,<code>die()</code><br>
+payload:<code>c=include('/flag.txt');exit();</code></p>
+<h3 id="web72">web72</h3>
+<p>这题源码与上题相同，但当试图用上一题的payload的时候，出现<code>include(/flag.txt): failed to open stream: No such file or directory in /var/www/html/index.php(19) : eval()'d code</code><br>
+猜测是<code>open_basedir</code>限制了访问区域,这里可以用<code>glob:///*</code>进行读取的绕过<code>c=var_export(scandir('glob:///*'));exit();</code><br>
+这里<code>var_export</code>与<code>print_r</code>的效果大致相同发现根目录下有<code>flag0.txt</code>但下一步要想读到flag,就很麻烦了这里需要扩展一下uaf的知识点</p>
+<h3 id="web73">web73</h3>
+<p>这题没有<code>open_basedir</code>的限制了用<code>c=var_export(scandir('/'));exit(0);</code>找到flag,用<code>c=require_once('/flagc.txt');exit(0);</code>读取flag</p>
+<h3 id="web74">web74</h3>
+<p><code>scandir</code>被禁了,但是<code>glob</code>还在,<code>glob</code>不仅可以是一个伪协议,也可以是一个函数,作用与<code>scandir</code>相同<br>
+<code>c=var_export(glob('/*'));exit();</code>,然后<code>include</code>即可</p>
+<h2 id="文件包含">文件包含</h2>
+<h2 id="php特性">php特性</h2>
+<h2 id="文件上传">文件上传</h2>
+<h2 id="sql注入">sql注入</h2>
+<h2 id="反序列化">反序列化</h2>
+<h2 id="java">java</h2>
+<h2 id="代码审计">代码审计</h2>
+<h2 id="phpCVE">phpCVE</h2>
+<h2 id="XSS">XSS</h2>
+<h2 id="nodejs">nodejs</h2>
+<h2 id="jwt">jwt</h2>
+<h2 id="SSRF">SSRF</h2>
+<h2 id="SSTI">SSTI</h2>
+<h2 id="XXE">XXE</h2>
+<h2 id="区块链安全">区块链安全</h2>
+<h2 id="黑盒测试">黑盒测试</h2>
+<h2 id="其他">其他</h2>
+<h2 id="嵌入式">嵌入式</h2>
+<h2 id="框架复现">框架复现</h2>
+<h2 id="CMS">CMS</h2>
+<h2 id="中期测评">中期测评</h2>
+<h2 id="sqli-labs">sqli-labs</h2>
+<h2 id="thinkphp专题">thinkphp专题</h2>
+<h2 id="组件漏洞">组件漏洞</h2>
+<h2 id="Laravel专题">Laravel专题</h2>
+<h2 id="Yii专题">Yii专题</h2>
+<h2 id="终极考核">终极考核</h2>
+<h2 id="权限维持">权限维持</h2>
+<h2 id="大赛原题">大赛原题</h2>
+<h2 id="常用姿势">常用姿势</h2>
+<h2 id="税务比武">税务比武</h2>
+<h2 id="java反序列化">java反序列化</h2>
+<h2 id="内网渗透">内网渗透</h2>
+
+    
+  </article>
+
+  
+      
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+   
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/rce/" rel="tag">rce</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/web/" rel="tag">web</a>
+    
+</div>
+  
+  
+    <script async src="/js/copy-codeblock.js?v=1761324935054"></script>
+  
+
+  
+      <div class="nexmoe-post-footer">
+          <script src="https://giscus.app/client.js"
+     data-repo="W0r1d-Pr1nt/W0r1d-Pr1nt.github.io"
+     data-repo-id="R_kgDOKUqNjA"
+     data-category="Announcements"
+     data-category-id="DIC_kwDOKUqNjM4CfSnu"
+     data-mapping="pathname"
+     data-strict="0"
+     data-reactions-enabled="1"
+     data-emit-metadata="0"
+     data-input-position="bottom"
+     data-theme="light_high_contrast"
+     data-lang="zh-CN"
+     crossorigin="anonymous"
+     async>
+ </script>
+
+      </div>
+  
+</div></div><div class="nexmoe-post-right">    <div class="nexmoe-fixed">
+        <div class="nexmoe-tool">
+
+            
+
+            
+            
+            <button class="mdui-fab catalog" style="overflow:unset;">
+                <i class="nexmoefont icon-i-catalog"></i>
+                <div class="nexmoe-toc">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">ctfshow-web入门全解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="toc-number">1.1.</span> <span class="toc-text">信息收集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%88%86%E7%A0%B4"><span class="toc-number">1.2.</span> <span class="toc-text">爆破</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web21"><span class="toc-number">1.2.1.</span> <span class="toc-text">web21</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web22"><span class="toc-number">1.2.2.</span> <span class="toc-text">web22</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web23"><span class="toc-number">1.2.3.</span> <span class="toc-text">web23</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web24"><span class="toc-number">1.2.4.</span> <span class="toc-text">web24</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web25"><span class="toc-number">1.2.5.</span> <span class="toc-text">web25</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web26"><span class="toc-number">1.2.6.</span> <span class="toc-text">web26</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web27"><span class="toc-number">1.2.7.</span> <span class="toc-text">web27</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web28"><span class="toc-number">1.2.8.</span> <span class="toc-text">web28</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-number">1.3.</span> <span class="toc-text">命令执行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#web71"><span class="toc-number">1.3.1.</span> <span class="toc-text">web71</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web72"><span class="toc-number">1.3.2.</span> <span class="toc-text">web72</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web73"><span class="toc-number">1.3.3.</span> <span class="toc-text">web73</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web74"><span class="toc-number">1.3.4.</span> <span class="toc-text">web74</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB"><span class="toc-number">1.4.</span> <span class="toc-text">文件包含</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#php%E7%89%B9%E6%80%A7"><span class="toc-number">1.5.</span> <span class="toc-text">php特性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">1.6.</span> <span class="toc-text">文件上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sql%E6%B3%A8%E5%85%A5"><span class="toc-number">1.7.</span> <span class="toc-text">sql注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.8.</span> <span class="toc-text">反序列化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java"><span class="toc-number">1.9.</span> <span class="toc-text">java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1"><span class="toc-number">1.10.</span> <span class="toc-text">代码审计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#phpCVE"><span class="toc-number">1.11.</span> <span class="toc-text">phpCVE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XSS"><span class="toc-number">1.12.</span> <span class="toc-text">XSS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nodejs"><span class="toc-number">1.13.</span> <span class="toc-text">nodejs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#jwt"><span class="toc-number">1.14.</span> <span class="toc-text">jwt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSRF"><span class="toc-number">1.15.</span> <span class="toc-text">SSRF</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SSTI"><span class="toc-number">1.16.</span> <span class="toc-text">SSTI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XXE"><span class="toc-number">1.17.</span> <span class="toc-text">XXE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%9D%97%E9%93%BE%E5%AE%89%E5%85%A8"><span class="toc-number">1.18.</span> <span class="toc-text">区块链安全</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BB%91%E7%9B%92%E6%B5%8B%E8%AF%95"><span class="toc-number">1.19.</span> <span class="toc-text">黑盒测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">1.20.</span> <span class="toc-text">其他</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B5%8C%E5%85%A5%E5%BC%8F"><span class="toc-number">1.21.</span> <span class="toc-text">嵌入式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%86%E6%9E%B6%E5%A4%8D%E7%8E%B0"><span class="toc-number">1.22.</span> <span class="toc-text">框架复现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CMS"><span class="toc-number">1.23.</span> <span class="toc-text">CMS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E6%9C%9F%E6%B5%8B%E8%AF%84"><span class="toc-number">1.24.</span> <span class="toc-text">中期测评</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sqli-labs"><span class="toc-number">1.25.</span> <span class="toc-text">sqli-labs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#thinkphp%E4%B8%93%E9%A2%98"><span class="toc-number">1.26.</span> <span class="toc-text">thinkphp专题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.27.</span> <span class="toc-text">组件漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Laravel%E4%B8%93%E9%A2%98"><span class="toc-number">1.28.</span> <span class="toc-text">Laravel专题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Yii%E4%B8%93%E9%A2%98"><span class="toc-number">1.29.</span> <span class="toc-text">Yii专题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%88%E6%9E%81%E8%80%83%E6%A0%B8"><span class="toc-number">1.30.</span> <span class="toc-text">终极考核</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81"><span class="toc-number">1.31.</span> <span class="toc-text">权限维持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A7%E8%B5%9B%E5%8E%9F%E9%A2%98"><span class="toc-number">1.32.</span> <span class="toc-text">大赛原题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%A7%BF%E5%8A%BF"><span class="toc-number">1.33.</span> <span class="toc-text">常用姿势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A8%8E%E5%8A%A1%E6%AF%94%E6%AD%A6"><span class="toc-number">1.34.</span> <span class="toc-text">税务比武</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96"><span class="toc-number">1.35.</span> <span class="toc-text">java反序列化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F"><span class="toc-number">1.36.</span> <span class="toc-text">内网渗透</span></a></li></ol></li></ol>
+                </div>
+            </button>
+            
+
+            
+
+            <a href="#nexmoe-content" class="backtop toc-link" aria-label="Back To Top" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+        </div>
+    </div>
+</div></div><div id="nexmoe-footer"><!--!--></div><div id="nexmoe-search-space"><div class="search-container"><div class="search-header"><div class="search-input-container"><input class="search-input" type="text" placeholder="搜索" onInput="sinput();"></div><a class="search-close" onclick="sclose();">×</a></div><div class="search-body"></div></div></div><div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2058306854838448" crossorigin="anonymous"></script>
+</div></body></html>
